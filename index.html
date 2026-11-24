@@ -90,6 +90,17 @@ p + p{margin-top:12px}
 .zap{display:inline-flex;align-items:center;min-height:64px;padding:0 30px;background:var(--acento);color:var(--acento-txt);text-decoration:none;font-size:20px;font-weight:600;margin:10px 0 40px}
 .assina{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--regra);font-size:15px;color:var(--tinta-2)}
 .assina img{height:30px}
+.ad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin-top:30px;justify-items:center}
+.ad figure{display:flex;flex-direction:column;align-items:center;gap:12px}
+.ad figcaption{font-family:var(--serif);font-size:19px}
+.ad figcaption small{display:block;font:400 14px var(--sans);color:var(--tinta-2);text-align:center}
+.cel-img .rola{height:100%;overflow-y:auto;background:#eceef1}
+.cel-img img{display:block;width:100%;height:auto}
+.troca{margin-top:34px;border-top:2px solid var(--tinta)}
+.troca div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;padding:14px 0;border-bottom:1px solid var(--regra);font-size:16px}
+.troca div:first-child{font-size:13px;color:var(--tinta-2);padding:10px 0}
+.troca span:first-child{color:var(--tinta-2)}
+.troca span:last-child{font-weight:500}
 .ganhos{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px;border-top:2px solid var(--tinta);padding-top:20px}
 .ganhos b{display:block;font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.3;margin-bottom:6px}
 .ganhos span{color:var(--tinta-2);font-size:16px}
@@ -117,6 +128,7 @@ p + p{margin-top:12px}
   .plano{grid-template-columns:1fr} .plano .val{text-align:left} .inclui{grid-template-columns:1fr;gap:18px}
   .enderecos div{grid-template-columns:1fr;gap:2px} .enderecos em{text-align:left}
   .ganhos{grid-template-columns:1fr;gap:18px} .calc .campos{grid-template-columns:1fr 1fr}
+  .ad{grid-template-columns:1fr;gap:34px} .troca div{grid-template-columns:1fr;gap:2px} .troca div:first-child{display:none} .troca span:first-child::before{content:'Hoje: '} .troca span:last-child::before{content:'Proposta: ';color:var(--acento)}
 }
 @media print{
   @page{size:A4;margin:0}
@@ -125,6 +137,8 @@ p + p{margin-top:12px}
   .capa{min-height:297mm;break-after:page} .capa .base{width:62%}
   .caminho{grid-template-columns:repeat(4,1fr)} .vivo{grid-template-columns:auto 1fr} .site .vivo{grid-template-columns:1fr 1fr}
   .tela{height:470px} .tela iframe{transform:scale(.48)}
+  .ad{grid-template-columns:1fr 1fr;margin-top:10px;gap:10px} .ad .cel{height:400px;width:230px} .ad .cel iframe{transform:scale(.56)} .ad figcaption{font-size:15px}
+  .troca{margin-top:14px} .troca div{grid-template-columns:1fr 1fr;gap:20px;padding:6px 0;font-size:12px} .troca div:first-child{display:grid} .troca span::before{content:none!important}
   h3{font-size:38px;margin-bottom:14px} .folha .texto.mut{font-size:14px}
   .achado{padding:11px 0;gap:24px;grid-template-columns:1fr 2.2fr} .achado b{font-size:18px} .achado p{font-size:13px;line-height:1.5}
   .miudos{margin-top:18px} .miudo{padding:5px 0;font-size:12.5px} .miudo .onde{font-size:11.5px} .elogio{font-size:13px;line-height:1.4;margin-top:10px;padding:8px 12px} .notas li{padding:9px 0} .notas b{font-size:16px} .notas span{font-size:13px} .achado .fonte{font-size:11.5px;margin-top:4px}
@@ -178,11 +192,14 @@ p + p{margin-top:12px}
 
 <section class="folha">
   <h2>Primeiro acompanhamento</h2>
-  <h3>O link da bio</h3>
-  <div class="vivo">
-    <div class="cel"><iframe src="site/links/" title="Protótipo do link da bio" loading="lazy"></iframe></div>
-    <div><ul class="notas"><li><b>料理, ryōri</b><span>O nome da casa em japonês abre a página, com a logo e as duas casas.</span></li><li><b>Um botão principal: reservar</b><span>O cliente escolhe a casa num toque, vê se está aberta (“volta às 18h” no Buganvília entre os turnos) e reserva.</span></li><li><b>Monte a sua mesa</b><span>Um atalho para a sugestão do sushiman, direto da bio.</span></li><li><b>Menu in English</b><span>O cardápio em inglês, que hoje não existe.</span></li></ul><a class="abrir" href="site/links/">Abrir o link da bio</a></div>
+  <h3>O link da bio, hoje e na proposta</h3>
+  <p class="texto mut">Quem toca no link da bio do Instagram cai aqui. Hoje são 12 botões iguais. Na proposta, a pessoa vê a Sequência, os pratos e a reserva em foto e reconhece o que quer num relance, sem precisar ler a lista.</p>
+  <div class="ad">
+    <figure><figcaption>Hoje, no Linktree<small>print de 24/11/2026, role dentro do celular</small></figcaption><div class="cel cel-img"><div class="rola" tabindex="0" aria-label="Print do Linktree atual"><img src="assets/linktree-hoje.jpg" alt="Linktree atual do Ryori: doze botões iguais, separados por casa" loading="lazy"></div></div></figure>
+    <figure><figcaption>Proposta<small>funciona: toque e role</small></figcaption><div class="cel"><iframe src="site/links/" title="Protótipo do link da bio" loading="lazy"></iframe></div></figure>
   </div>
+  <div class="troca"><div><span>Hoje</span><span>Na proposta</span></div><div><span>A Sequência Japonesa é um PDF, no nono bloco da página.</span><span>A Sequência abre a página, com o preço, as oito etapas e se tem hoje.</span></div><div><span>Doze botões iguais, metade repetida para cada casa.</span><span>A casa se escolhe num toque, já dizendo se está aberta agora.</span></div><div><span>Nenhum prato e nenhum preço.</span><span>Fish taco, Wagyu Stone, cheesecake e Ryori Box, com as fotos do próprio Instagram do Ryori.</span></div><div><span>A reserva abre em outro site, sem saber se tem lugar.</span><span>A reserva escolhe o lugar no balcão ou na mesa, dentro do endereço do Ryori.</span></div><div><span>“Crie seu Linktree” no rodapé, propaganda de outra empresa.</span><span>Rodapé limpo, com o endereço da casa.</span></div></div>
+  <a class="abrir" href="site/links/">Abrir o link da bio</a>
 </section>
 
 <section class="folha site">
