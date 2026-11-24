@@ -56,7 +56,9 @@
 .abas button[aria-selected=true]{color:var(--creme);border-bottom-color:var(--creme)}
 .prato-g{display:grid;grid-template-columns:1fr minmax(280px,44%) 1fr;gap:var(--g);align-items:center;margin-top:20px;min-height:60svh}
 .prato-g>*{min-width:0}
-.prato-g .foto{aspect-ratio:1;width:100%;object-fit:cover}
+.prato-g .quadro{position:relative;width:min(100%,440px);margin:0 auto;padding:10px;border:1px solid rgba(185,130,79,.55);border-radius:16px}
+.prato-g .quadro::after{content:'';position:absolute;inset:-7px;border:1px dashed var(--cortica);border-radius:20px;pointer-events:none}
+.prato-g .foto{display:block;aspect-ratio:4/5;width:100%;object-fit:cover;border-radius:var(--r-cartao)}
 .prato-g .titulo{margin-bottom:14px}
 .prato-g .preco{font-size:24px}
 .cardapio-todo{margin-top:56px}
@@ -70,7 +72,7 @@
 .item:last-child{border-bottom:0}
 .item .d{grid-column:1/-1;text-transform:none;font-weight:400;font-size:14px;line-height:1.4;color:var(--creme-2)}
 .item .alg{grid-column:1/-1;font-size:10px;color:var(--creme-3)}
-@media (max-width:900px){.cozinha{padding:96px 16px 80px}.cab{grid-template-columns:1fr}.prato-g{grid-template-columns:1fr;min-height:0;gap:22px}.prato-g .foto{max-width:440px;margin:0 auto}.grupo{grid-template-columns:1fr}}
+@media (max-width:900px){.cozinha{padding:96px 16px 80px}.cab{grid-template-columns:1fr}.prato-g{grid-template-columns:1fr;min-height:0;gap:22px}.prato-g .quadro{max-width:360px}.grupo{grid-template-columns:1fr}}
 
 /* sequência */
 .tempo-v{position:relative;aspect-ratio:1;width:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px dashed var(--cortica);border-radius:50%}
@@ -193,7 +195,7 @@ function cozinha(){
   document.getElementById('abas').innerHTML=PRATOS.map((p,i)=>`<button type="button" role="tab" aria-selected="${i===aba}" data-i="${i}">${p.n}</button>`).join('');
   const p=PRATOS[aba];
   document.getElementById('prato-g').innerHTML=`<div><h3 class="titulo">${p.n}</h3><p class="corrido-p">${L(...p.d)}</p></div>
-   <img class="foto no-escuro" src="fotos/${p.f}.jpg" alt="${esc(p.n)}, foto do Instagram do Ryori" width="560" height="560">
+   <figure class="quadro"><img class="foto" src="fotos/${p.f}.jpg" alt="${esc(p.n)}, foto do Instagram do Ryori" width="560" height="700"></figure>
    <div>${p.p?`<p class="preco">${brl(p.p)}</p>`:''}<div style="margin-top:22px"><a class="fantasma" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><svg class="ic"><use href="#i-sacola"/></svg>${L('Pedir no iFood','Order on iFood')}</a></div></div>`;}
 document.getElementById('abas').addEventListener('click',e=>{const b=e.target.closest('button');if(b){aba=+b.dataset.i;cozinha();}});
 const alg=i=>(i.alerg||[]).length?`${L('Alergênicos','Allergens')}: ${i.alerg.map(a=>L(...ALG[a])).join(', ')}`:L('Alergênicos: confirmar com a casa','Allergens: to be confirmed');

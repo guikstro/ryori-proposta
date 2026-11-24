@@ -80,8 +80,6 @@ svg.ic.cheio{fill:currentColor;stroke:none}
 .planta-caixa{border-radius:var(--r-cartao);overflow:hidden;overflow-x:auto;background:var(--chao)}
 .planta-caixa svg{display:block;width:100%;min-width:520px;height:auto}
 
-/* foto que se dissolve no escuro, como objeto solto na sala */
-.no-escuro{-webkit-mask:radial-gradient(closest-side,#000 34%,rgba(0,0,0,.55) 62%,transparent 98%);mask:radial-gradient(closest-side,#000 34%,rgba(0,0,0,.55) 62%,transparent 98%)}
 
 .revela{opacity:0;transform:translateY(22px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 .revela.vista{opacity:1;transform:none}
