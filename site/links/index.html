@@ -4,403 +4,316 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#14110E">
+<meta name="theme-color" content="#100904">
 <title>Ryori</title>
-<meta property="og:title" content="Ryori · cozinha japonesa contemporânea em Fortaleza">
-<meta property="og:description" content="Sequência Japonesa, reserva no balcão, cardápio e delivery.">
-<meta property="og:image" content="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_1200,h_630,al_c,q_82,enc_auto/ryori.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="description" content="Ryori, cozinha japonesa contemporânea em Fortaleza. Reserve o seu lugar no balcão, veja a Sequência Japonesa e peça no delivery.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
 <style>
-/* Ryori, link da bio. Direção: a noite no balcão.
-   O vídeo real da cozinha abre a página; uma folha cor de pedra sobe por cima, como a toalha do balcão.
-   Tudo é imagem com texto por cima. Os botões são vidro (liquid glass) sobre a imagem; o cobre é o único brilho.
-   Reserva, sushiman e pratos abrem em folhas dentro da própria bio: ninguém sai da página para decidir. */
-:root{
-  --noite:#14110E;--noite-2:#1F1A16;--pedra:#ECEAE4;--pedra-2:#E2DFD8;--sumi:#1D1A17;--sumi-2:#5C574F;
-  --cobre:#B9824F;--cobre-2:#DDB384;--branco:#F6F2EA;--linha:rgba(29,26,23,.1);
-  --mincho:'Shippori Mincho',serif;--gothic:'Zen Kaku Gothic New',system-ui,sans-serif;
-  --raio:24px;--ease:cubic-bezier(.2,.7,.1,1);
-  --chao:#221D18;--cozinha:#2C2620;--vidro:rgba(160,190,200,.25);--vidro-borda:#5d6f74;--planta:#4f5d43}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{background:var(--noite)}
-body{background:var(--noite);color:var(--sumi);font:400 15px/1.5 var(--gothic);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button,input{font:inherit;color:inherit;background:none;border:0}
-button{cursor:pointer}
-img,video{display:block;max-width:100%}
-:focus-visible{outline:2px solid var(--cobre-2);outline-offset:3px;border-radius:10px}
-.pg{max-width:440px;margin:0 auto;position:relative}
-svg.ic{width:20px;height:20px;flex:none}
+/* Bio do Ryori. Lógica do PróLINK (reconhecer em vez de ler) com a pele do ORYZO (sala escura, creme, caixa-alta).
+   1. stories no topo; 2. um cartão forte; 3. a faixa de três; 4. a grade de pratos; 5. a ajuda no fim.
+   Reserva, sushiman, prato e Sequência abrem em folhas: ninguém sai da bio para decidir. */
+.pg{max-width:460px;margin:0 auto;position:relative;padding-bottom:40px}
+@media (min-width:600px){body{background:radial-gradient(circle at 50% 0%,#24170d,var(--nogueira) 60%)}.pg{border-left:1px dashed var(--cortica);border-right:1px dashed var(--cortica)}}
+.demo{font-size:9.5px;text-align:center;padding:6px 12px;color:var(--creme-3);border-bottom:1px dashed var(--cortica)}
+.demo b{font-weight:500;color:var(--brasa)}
 
-/* ---------- vidro: o botão como uma lâmina de vidro sobre a imagem ---------- */
-.vidro{position:relative;isolation:isolate;color:var(--branco);
-  background:linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.07) 45%,rgba(255,255,255,.12));
-  backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.18),0 12px 30px -14px rgba(0,0,0,.55)}
-.vidro::after{content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
-  background:radial-gradient(120% 70% at 30% 0%,rgba(255,255,255,.35),transparent 55%)}
-.vidro.cobre{color:#24170C;background:linear-gradient(140deg,rgba(233,196,152,.92),rgba(196,140,86,.82) 55%,rgba(222,178,128,.9));
-  box-shadow:inset 0 1px 0 rgba(255,246,232,.9),inset 0 -2px 6px rgba(120,70,30,.25),inset 0 0 0 1px rgba(255,240,220,.35),0 16px 34px -14px rgba(185,130,79,.75)}
-.vidro.escuro{color:var(--sumi);background:linear-gradient(140deg,rgba(255,255,255,.75),rgba(255,255,255,.35));
-  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(29,26,23,.08),0 10px 24px -14px rgba(29,26,23,.4)}
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;height:54px;border-radius:99px;font:700 15px var(--gothic);letter-spacing:.02em;transition:transform .25s var(--ease)}
-.btn:active{transform:scale(.96)}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.redondo{width:54px;flex:none;padding:0}
+/* 1. stories */
+.stories{position:relative;height:min(76svh,640px);min-height:520px;overflow:hidden;background:var(--nogueira);touch-action:pan-y}
+.st{position:absolute;inset:0;opacity:0;transition:opacity .7s var(--ease)}
+.st.on{opacity:1}
+.st video,.st img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 6s linear}
+.st.on video,.st.on img{transform:scale(1)}
+.st::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,9,4,.6),rgba(16,9,4,0) 24%,rgba(16,9,4,0) 46%,rgba(16,9,4,.9))}
+.barras{position:absolute;z-index:3;top:10px;left:12px;right:12px;display:flex;gap:4px}
+.barras i{flex:1;height:2px;background:rgba(255,237,215,.28);overflow:hidden}
+.barras i b{display:block;height:100%;width:0;background:var(--creme)}
+.barras i.feito b{width:100%}
+.barras i.agora b{animation:corre var(--dur,5.5s) linear forwards}
+@keyframes corre{to{width:100%}}
+.topo{position:absolute;z-index:3;top:22px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.topo .marca{font-size:15px}
+.topo .dir{display:flex;gap:8px;align-items:center}
+.casa-chip{display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 14px;border-radius:var(--r-fantasma);background:rgba(16,9,4,.62);border:1px solid rgba(255,237,215,.35);font-size:10.5px}
+.casa-chip i{width:6px;height:6px;border-radius:50%;background:var(--madeira)}
+.casa-chip i.on{background:var(--creme)}
+.lang{min-height:34px;padding:0 12px;border-radius:var(--r-fantasma);background:rgba(16,9,4,.62);border:1px solid rgba(255,237,215,.35);font-size:10.5px}
+.st .txt{position:absolute;z-index:2;left:16px;right:16px;bottom:20px}
+.st .txt .rot{color:var(--creme-2)}
+.st .txt h2{font-weight:500;font-size:40px;line-height:.9;margin-top:10px}
+.etiqueta{display:inline-flex;align-items:center;gap:10px;margin-top:16px;min-height:36px;padding:0 6px 0 14px;border-radius:var(--r-fantasma);background:rgba(16,9,4,.66);border:1px solid rgba(255,237,215,.3);font-size:10.5px}
+.etiqueta small{color:var(--creme-3);font-size:10px}
+.etiqueta .seta{width:24px;height:24px;border-radius:50%;border:1px solid var(--creme);display:grid;place-items:center}
+.etiqueta .seta svg{width:12px;height:12px}
+.toque{position:absolute;z-index:1;top:0;bottom:0;width:34%}
+.toque.e{left:0}.toque.d{right:0}
 
-/* ---------- abertura: o vídeo da cozinha ---------- */
-.abre{position:relative;height:100svh;max-height:880px;min-height:620px;overflow:hidden;color:var(--branco)}
-.abre video,.abre .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 2.6s var(--ease)}
-.abre.pronto video{transform:scale(1)}
-.abre::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.18;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E")}
-.abre::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 60% at 50% 35%,transparent 40%,rgba(20,17,14,.55)),linear-gradient(180deg,rgba(20,17,14,.6) 0%,rgba(20,17,14,0) 20%,rgba(20,17,14,0) 42%,rgba(20,17,14,.88) 80%,var(--noite) 100%)}
-.topo{position:absolute;z-index:3;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 18px 0}
-.topo img{height:36px;width:auto;filter:brightness(0) invert(1);opacity:.95}
-.topo .lang{height:36px;padding:0 15px;border-radius:99px;font:700 11.5px var(--gothic);letter-spacing:.12em}
-.kanji{position:absolute;z-index:2;right:16px;top:96px;writing-mode:vertical-rl;font:700 54px/1 var(--mincho);letter-spacing:.08em;
-  background:linear-gradient(180deg,#F1CFA4,#B9824F);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 24px rgba(0,0,0,.4))}
-.capa{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 22px 64px}
-.capa .sobre{font:500 12px var(--gothic);letter-spacing:.16em;color:var(--cobre-2)}
-.capa h1{font:500 60px/.95 var(--mincho);letter-spacing:.01em;margin-top:10px}
-.capa p{font:400 15px/1.5 var(--gothic);color:rgba(246,242,234,.78);margin-top:12px;max-width:27ch}
-.acoes{display:flex;gap:10px;margin-top:24px}
-.acoes .principal{flex:1}
-.entra>*{opacity:0;transform:translateY(16px);filter:blur(6px);animation:entra 1.1s var(--ease) forwards}
-.entra>*:nth-child(2){animation-delay:.12s}.entra>*:nth-child(3){animation-delay:.24s}.entra>*:nth-child(4){animation-delay:.36s}
-@keyframes entra{to{opacity:1;transform:none;filter:none}}
-.rola{position:absolute;z-index:2;left:50%;bottom:22px;width:1px;height:26px;background:rgba(246,242,234,.25);overflow:hidden}
-.rola::after{content:'';position:absolute;left:0;top:-26px;width:1px;height:26px;background:var(--cobre-2);animation:rola 2.4s var(--ease) infinite}
-@keyframes rola{to{top:26px}}
+/* ações logo abaixo */
+.acoes{display:flex;gap:10px;padding:16px 16px 0}
+.acoes .btn{flex:1}
 
-/* ---------- a folha cor de pedra ---------- */
-.folha{position:relative;z-index:4;margin-top:-34px;background:var(--pedra);border-radius:30px 30px 0 0;padding:12px 16px 120px}
-.folha::before{content:'';display:block;width:38px;height:4px;border-radius:4px;background:rgba(29,26,23,.16);margin:0 auto 18px}
-.casas{display:grid;grid-template-columns:1fr 1fr;padding:5px;border-radius:99px;position:relative;
-  background:linear-gradient(140deg,rgba(29,26,23,.06),rgba(29,26,23,.03));box-shadow:inset 0 1px 2px rgba(29,26,23,.08),inset 0 0 0 1px rgba(29,26,23,.05)}
-.casas .sel{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:99px;transition:transform .5s var(--ease);
-  background:linear-gradient(140deg,#2A2520,#14110E);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 18px -8px rgba(20,17,14,.6)}
-.casas[data-i="1"] .sel{transform:translateX(100%)}
-.casas button{position:relative;z-index:1;height:48px;border-radius:99px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;transition:color .35s}
-.casas button b{font:600 15.5px var(--mincho)}
-.casas button small{font-size:11px;opacity:.65;display:flex;align-items:center;gap:5px;margin-top:1px}
-.casas button small i{width:6px;height:6px;border-radius:50%;background:#8b857b}
-.casas button small i.on{background:#5FA16F;box-shadow:0 0 0 3px rgba(95,161,111,.18)}
-.casas button[aria-pressed=true]{color:var(--branco)}
-h2{font:600 23px/1.15 var(--mincho)}
-.secao{margin-top:28px}
-.secao .cab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;padding:0 4px}
-.secao .cab a{font:700 12.5px var(--gothic);letter-spacing:.04em;color:var(--cobre)}
+/* 2. cartão forte */
+.cartao-seq{display:block;width:calc(100% - 32px);margin:22px 16px 0;padding:22px;border-radius:var(--r-cartao);background:var(--casca);text-align:left}
+.cartao-seq .linha{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.cartao-seq h3{font-weight:500;font-size:28px;line-height:.92}
+.cartao-seq .jp{font-size:22px;color:var(--creme-3);writing-mode:vertical-rl;line-height:1}
+.cartao-seq .corrido-p{color:var(--creme-2);margin-top:12px;font-size:15px}
+.cartao-seq hr{margin:16px 0 14px;border-top-color:var(--madeira)}
+.cartao-seq .preco{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cartao-seq .preco b{font-weight:500;font-size:30px;line-height:1}
+.cartao-seq .preco small{display:block;font-size:10px;color:var(--creme-2);margin-top:4px}
+.tempos{display:flex;gap:4px;margin-top:14px}
+.tempos i{flex:1;height:2px;background:rgba(255,237,215,.2)}
+.tempos i.on{background:var(--creme)}
 
-/* cartão de imagem */
-.cartao{position:relative;display:block;width:100%;text-align:left;overflow:hidden;border-radius:var(--raio);background:var(--noite-2);color:var(--branco);isolation:isolate;transition:transform .6s var(--ease)}
-.cartao>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.4s var(--ease)}
-.cartao::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,17,14,0) 40%,rgba(20,17,14,.85))}
-.cartao:hover>img{transform:scale(1.05)}
-.cartao .t{position:absolute;left:18px;right:18px;bottom:16px}
-.cartao .t b{display:block;font:600 21px/1.15 var(--mincho)}
-.cartao .t span{display:block;font-size:12.5px;color:rgba(246,242,234,.78);margin-top:4px}
-.cartao .ico{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
-.cartao .ico svg{width:16px;height:16px}
-.revela{opacity:0;transform:translateY(24px) scale(.98);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.revela.vista{opacity:1;transform:none}
+/* 3. faixa de três */
+.tres{display:grid;grid-template-columns:repeat(3,1fr);margin:22px 16px 0;border-top:1px dashed var(--cortica);border-bottom:1px dashed var(--cortica)}
+.tres a,.tres button{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 4px;font-size:10px;text-align:center;line-height:1.25}
+.tres a+a,.tres a+button,.tres button+a{border-left:1px dashed var(--cortica)}
+.tres svg.ic{width:22px;height:22px}
 
-.seq{height:460px}
-.seq .t b{font-size:33px}
-.seq .tempos{display:flex;gap:6px;margin-top:14px;max-width:250px}
-.seq .tempos i{display:block;flex:1;height:2px;background:rgba(246,242,234,.25);border-radius:2px;overflow:hidden;position:relative}
-.seq .tempos i::after{content:'';position:absolute;inset:0;background:var(--cobre-2);transform:scaleX(0);transform-origin:left;animation:tempo 8s linear infinite}
-.seq .tempos i:nth-child(2)::after{animation-delay:1s}.seq .tempos i:nth-child(3)::after{animation-delay:2s}.seq .tempos i:nth-child(4)::after{animation-delay:3s}
-.seq .tempos i:nth-child(5)::after{animation-delay:4s}.seq .tempos i:nth-child(6)::after{animation-delay:5s}.seq .tempos i:nth-child(7)::after{animation-delay:6s}.seq .tempos i:nth-child(8)::after{animation-delay:7s}
-@keyframes tempo{0%{transform:scaleX(0)}12%{transform:scaleX(1)}100%{transform:scaleX(1)}}
-.seq .preco{display:flex;align-items:baseline;gap:8px;margin-top:12px}
-.seq .preco strong{font:600 28px var(--mincho);color:var(--cobre-2)}
-.seq .preco small{font-size:12.5px;color:rgba(246,242,234,.75)}
+/* 4. grade de pratos */
+.cab{display:flex;justify-content:space-between;align-items:baseline;margin:34px 16px 14px}
+.cab h3{font-weight:500;font-size:18px}
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.prato{display:block;text-align:left}
+.prato .f{display:block;aspect-ratio:4/5;border-radius:var(--r-cartao);overflow:hidden;background:#1b120b}
+.prato .f img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.prato:hover .f img{transform:scale(1.04)}
+.prato .n{display:block;font-size:13px;margin-top:10px}
+.prato .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.prato .tags span{font-size:9px;padding:4px 8px;border:1px solid var(--cortica);border-radius:var(--r-fantasma);color:var(--creme-2)}
+.prato .pe{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:12px}
+.prato .pe span:last-child{text-decoration:underline;text-decoration-style:dashed;text-underline-offset:4px}
 
-.grade{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grade .cartao{height:212px}
-.grade .alto{grid-row:span 2;height:auto}
-.grade .t b{font-size:18.5px}
-.tres-d{background:radial-gradient(circle at 50% 40%,#3a312a,#14110E 72%)}
-.tres-d canvas{position:absolute;inset:0;width:100%!important;height:100%!important;z-index:-2}
-.tres-d::after{background:linear-gradient(180deg,rgba(20,17,14,0) 55%,rgba(20,17,14,.8))}
+/* balcão e sushiman: dois cartões de entrada */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.entrada{position:relative;display:block;height:230px;border-radius:var(--r-cartao);overflow:hidden;background:#1b120b;text-align:left}
+.entrada>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.entrada::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,9,4,0) 35%,rgba(16,9,4,.92))}
+.entrada .t{position:absolute;z-index:2;left:14px;right:14px;bottom:14px;font-size:13px;line-height:1.05}
+.entrada .t small{display:block;font-size:9.5px;color:var(--creme-2);margin-top:6px;line-height:1.3}
+.entrada canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
 
-.pratos{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px;scroll-padding:0 16px;scrollbar-width:none}
-.pratos::-webkit-scrollbar{display:none}
-.pratos .cartao{flex:0 0 74%;height:350px;scroll-snap-align:start}
-.pratos .preco{display:inline-block;margin-top:8px;font:600 17px var(--mincho);color:var(--cobre-2)}
+/* 5. ajuda */
+.ajuda{display:flex;align-items:center;gap:14px;margin:22px 16px 0;padding:18px;border:1px dashed var(--madeira);border-radius:var(--r-cartao)}
+.ajuda div{flex:1}
+.ajuda b{display:block;font-weight:500;font-size:15px}
+.ajuda p{margin-top:6px;font-size:13.5px}
 
-.fale{margin-top:28px;border-radius:var(--raio);overflow:hidden;position:relative;color:var(--branco);background:var(--noite) url(../fotos/washi.jpg) center/cover;padding:24px 18px 18px}
-.fale h2{color:var(--branco)}
-.fale p{color:rgba(246,242,234,.72);font-size:13.5px;margin-top:6px;max-width:30ch}
-.fale .acoes{margin-top:18px}
-.redes{display:flex;justify-content:center;gap:14px;margin-top:28px}
-.redes a{width:50px;height:50px;border-radius:50%;display:grid;place-items:center}
-.rodape{text-align:center;font-size:11.5px;color:var(--sumi-2);margin-top:22px;line-height:1.6}
+/* casas e rodapé */
+.casas-l{margin:30px 16px 0}
+.casa-l{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:16px 0;border-top:1px dashed var(--cortica);align-items:center}
+.casa-l:last-child{border-bottom:1px dashed var(--cortica)}
+.casa-l b{font-weight:500;font-size:20px;line-height:1}
+.casa-l span{font-size:10px;color:var(--creme-2)}
+.casa-l .corrido-p{grid-column:1;font-size:13px}
+.casa-l .acts{grid-row:1/span 3;grid-column:2;display:flex;gap:8px}
+.rodape{display:flex;justify-content:space-between;gap:12px;margin:24px 16px 0;font-size:10px;color:var(--creme-3)}
+.rodape a{text-decoration:underline;text-decoration-style:dashed;text-underline-offset:4px;color:var(--creme-2)}
 
-.doca{position:fixed;z-index:30;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(408px,calc(100% - 24px));transform:translate(-50%,150%);display:flex;gap:8px;padding:6px;border-radius:99px;transition:transform .55s var(--ease)}
-.doca.on{transform:translate(-50%,0)}
-.doca .btn{height:48px}.doca .btn.redondo{width:48px}
-.doca.vidro{background:linear-gradient(140deg,rgba(40,34,28,.72),rgba(20,17,14,.62))}
-
-/* ---------- folhas que sobem: reserva, sushiman, prato, Sequência ---------- */
-.folha-m{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(10,8,6,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .35s}
+/* folhas */
+.folha-m{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(16,9,4,.7);opacity:0;pointer-events:none;transition:opacity .35s}
 .folha-m.on{opacity:1;pointer-events:auto}
-.folha-m .caixa{width:min(440px,100%);height:94svh;border-radius:30px 30px 0 0;overflow:hidden;background:var(--noite) url(../fotos/washi.jpg) center/cover;color:var(--branco);transform:translateY(100%);transition:transform .6s var(--ease);display:flex;flex-direction:column}
+.folha-m .caixa{width:min(460px,100%);height:94svh;border-radius:var(--r-cartao) var(--r-cartao) 0 0;overflow:hidden;background:var(--nogueira);border:1px dashed var(--cortica);border-bottom:0;transform:translateY(100%);transition:transform .55s var(--ease);display:flex;flex-direction:column}
 .folha-m.on .caixa{transform:none}
-.cab-m{display:flex;justify-content:space-between;align-items:center;padding:16px 18px 10px;flex:none}
-.cab-m b{font:600 19px var(--mincho)}
-.cab-m .fechar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center}
-.corpo-m{flex:1;overflow-y:auto;padding:4px 18px 20px;overscroll-behavior:contain}
-.pe-m{flex:none;display:flex;gap:10px;padding:12px 18px calc(16px + env(safe-area-inset-bottom,0px))}
+.cab-m{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px dashed var(--cortica);flex:none}
+.cab-m b{flex:1;font-weight:500;font-size:15px}
+.corpo-m{flex:1;overflow-y:auto;padding:4px 16px 20px;overscroll-behavior:contain}
+.pe-m{flex:none;display:flex;gap:10px;padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px dashed var(--cortica)}
 .pe-m .btn{flex:1}
-[hidden]{display:none!important}
-.rotulo{font:500 12px var(--gothic);letter-spacing:.14em;color:var(--cobre-2);margin:18px 0 10px}
-.fichas{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px 6px}
-.fichas::-webkit-scrollbar{display:none}
-.fichas button{flex:none;min-width:54px;height:46px;padding:0 15px;border-radius:99px;font:700 14px var(--gothic);line-height:1.1;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.fichas button small{font-weight:400;font-size:10.5px;opacity:.75}
-.fichas button[aria-pressed=true]{color:#24170C;background:linear-gradient(140deg,rgba(233,196,152,.95),rgba(196,140,86,.85));box-shadow:inset 0 1px 0 rgba(255,246,232,.9),0 10px 22px -12px rgba(185,130,79,.8)}
-.fichas button:disabled{opacity:.3;cursor:not-allowed}
-.planta-m{--sumi:#9C9184;margin-top:6px;border-radius:18px;overflow:hidden;overflow-x:auto;background:var(--chao)}
-.planta-m svg{display:block;width:100%;min-width:520px;height:auto}
-.pl-rot{font:500 13px var(--gothic);fill:rgba(246,242,234,.55)}
-.pl-assento{fill:#3A332C;stroke:rgba(246,242,234,.55);stroke-width:1.4}
-.pl-cadeira{fill:#3A332C;stroke:rgba(246,242,234,.3);stroke-width:1}
-.pl-num{font:500 12px var(--gothic);fill:rgba(246,242,234,.85);pointer-events:none}
-.pl-lugar.livre{cursor:pointer}
-.pl-lugar.livre:hover .pl-assento{fill:#5a4a39}
-.pl-lugar:focus-visible .pl-assento{stroke:var(--cobre-2);stroke-width:3}
-.pl-lugar.ocupado .pl-assento,.pl-lugar.ocupado .pl-cadeira{fill:#26211c;stroke:rgba(246,242,234,.12)}
-.pl-lugar.ocupado .pl-num{fill:rgba(246,242,234,.25)}
-.pl-lugar.fora{opacity:.25}
-.pl-lugar.meu .pl-assento,.pl-lugar.meu .pl-cadeira{fill:var(--cobre-2);stroke:#fff}
-.pl-lugar.meu .pl-num{fill:#24170C;font-weight:700}
-.escolha{font:500 17px/1.4 var(--mincho);margin-top:12px;min-height:2.8em;color:rgba(246,242,234,.9)}
-.campo{display:block;margin-top:10px;border-radius:16px;padding:10px 16px 8px}
-.campo span{display:block;font-size:11px;letter-spacing:.1em;color:rgba(246,242,234,.6)}
-.campo input{width:100%;font:500 17px var(--gothic);color:var(--branco);padding:4px 0;outline:none}
-.campo input::placeholder{color:rgba(246,242,234,.35)}
-.campo:focus-within{box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 0 0 1.5px var(--cobre-2)}
-.erro{font-size:12.5px;color:#F0B48A;min-height:1.3em;margin-top:6px}
-.nota-m{font-size:12px;color:rgba(246,242,234,.5);margin-top:12px;line-height:1.5}
-.placa{width:100px;min-height:224px;margin:46px auto 0;position:relative;padding:32px 0 14px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#1D1A17;
-  background:repeating-linear-gradient(90deg,rgba(120,80,40,.07) 0 2px,transparent 2px 8px),linear-gradient(180deg,#E2CBA4,#C9AA7C);
-  box-shadow:0 18px 28px -16px rgba(0,0,0,.7);animation:pendura .9s cubic-bezier(.3,1.5,.5,1) both;transform-origin:50% -24px}
-.placa::before{content:'';position:absolute;top:12px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#14110E}
-.placa::after{content:'';position:absolute;top:-34px;left:50%;width:2px;height:46px;background:var(--cobre-2)}
-.placa b{font:700 46px/1 var(--mincho)}
-.placa span{writing-mode:vertical-rl;font:600 16px var(--mincho)}
-.placa small{font-size:10.5px;color:#5a4630}
-@keyframes pendura{0%{transform:rotate(-16deg)}60%{transform:rotate(6deg)}100%{transform:rotate(0)}}
-.feito h3{font:600 26px/1.2 var(--mincho);text-align:center;margin-top:22px}
-.feito p{text-align:center;color:rgba(246,242,234,.75);margin-top:6px}
-.feito .msg{white-space:pre-line;text-align:left;font-size:12.5px;color:rgba(246,242,234,.6);border-top:1px solid rgba(246,242,234,.12);margin-top:18px;padding-top:12px}
-.palco{height:340px;border-radius:22px;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 45%,#3a312a,#14110E 72%);touch-action:pan-y;cursor:grab}
-.palco canvas{width:100%!important;height:100%!important;display:block}
-.palco p{position:absolute;left:14px;right:14px;bottom:10px;font-size:11.5px;color:rgba(246,242,234,.5)}
-.lista-m{margin-top:14px}
-.lista-m div{display:grid;grid-template-columns:30px 1fr auto;gap:10px;padding:11px 0;border-top:1px solid rgba(246,242,234,.1);align-items:baseline}
-.lista-m em{font:700 16px var(--mincho);color:var(--cobre-2);font-style:normal}
-.lista-m b{font:600 16px var(--mincho);display:block}
-.lista-m small{display:block;font-size:12px;color:rgba(246,242,234,.55)}
-.total-m{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1px solid rgba(246,242,234,.2)}
-.total-m b{font:600 30px var(--mincho);color:var(--cobre-2)}
-.total-m span{font-size:12.5px;color:rgba(246,242,234,.65)}
-.prato-m img{width:100%;height:380px;object-fit:cover;border-radius:22px}
-.prato-m h3{font:600 30px/1.1 var(--mincho);margin-top:18px}
-.prato-m p{color:rgba(246,242,234,.78);margin-top:8px}
-.prato-m .pr{font:600 24px var(--mincho);color:var(--cobre-2);margin-top:12px}
+.etapas{display:flex;gap:6px;padding:12px 16px 0;flex:none}
+.etapas span{flex:1;font-size:10px;color:var(--creme-3);padding-top:8px;border-top:1px dashed var(--cortica)}
+.etapas span.ok{color:var(--creme);border-top:1px solid var(--creme)}
+.passo{display:none}.passo.on{display:block}
+.rotulo{font-size:10.5px;color:var(--creme-2);margin:20px 0 10px}
+.escolha{font-size:14px;line-height:1.3;margin-top:12px;min-height:2.6em}
+.resumo{margin-top:16px;padding:16px;border-radius:var(--r-cartao);background:var(--casca);font-size:13px;line-height:1.5}
+.resumo b{display:block;font-weight:500;font-size:20px;margin-bottom:4px}
+.feito h3{font-weight:500;font-size:34px;line-height:.92;margin-top:26px}
+.feito .num{font-size:110px;line-height:.8;margin-top:30px}
+.feito .msg{text-transform:none;white-space:pre-line;margin-top:18px;padding-top:14px;border-top:1px dashed var(--cortica);font-size:12px;color:var(--creme-3)}
+#palco{height:330px;cursor:grab;touch-action:pan-y;border-radius:var(--r-cartao);background:#150d07}
+.lista-s div{display:grid;grid-template-columns:30px 1fr auto;gap:10px;padding:10px 0;border-top:1px dashed var(--cortica);font-size:12px;align-items:baseline}
+.lista-s small{display:block;text-transform:none;font-weight:400;font-size:12.5px;color:var(--creme-3);margin-top:3px}
+.total-s{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px solid var(--madeira);margin-top:4px}
+.total-s b{font-weight:500;font-size:28px}
+.total-s span{font-size:10px;color:var(--creme-2);text-align:right}
+.prato-m img{width:calc(100% + 32px);margin:0 -16px;height:380px;object-fit:cover}
+.prato-m h3{font-weight:500;font-size:34px;line-height:.92;margin-top:20px}
+.prato-m p{margin-top:12px}
+.prato-m .pr{font-size:24px;margin-top:16px}
 .tempos-m{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;height:100%}
 .tempos-m::-webkit-scrollbar{display:none}
-.tempo{flex:0 0 100%;scroll-snap-align:start;padding:20px 6px;display:flex;flex-direction:column;justify-content:center}
-.tempo .n{font:800 118px/.9 var(--mincho);background:linear-gradient(180deg,#F1CFA4,#B9824F);-webkit-background-clip:text;background-clip:text;color:transparent}
-.tempo h3{font:600 34px/1.1 var(--mincho);margin-top:6px}
-.tempo .jp{font:500 15px var(--mincho);color:rgba(246,242,234,.5);margin-top:4px}
-.tempo ul{list-style:none;margin-top:22px}
-.tempo li{font-size:15.5px;padding:9px 0;border-top:1px solid rgba(246,242,234,.12);color:rgba(246,242,234,.9)}
-.tempo .q{font-size:12.5px;color:rgba(246,242,234,.55);margin-top:12px}
-.tempo.fim .precos{margin-top:20px;display:grid;gap:14px}
-.tempo.fim .precos div{padding-top:12px;border-top:1px solid rgba(246,242,234,.14)}
-.tempo.fim .precos b{font:600 19px var(--mincho)}
-.tempo.fim .precos span{display:block;font-size:13.5px;color:rgba(246,242,234,.75);margin-top:4px}
-.tempo.fim .precos strong{font:600 22px var(--mincho);color:var(--cobre-2)}
-.barra-t{display:flex;gap:5px;padding:0 18px;flex:none}
-.barra-t i{flex:1;height:2px;border-radius:2px;background:rgba(246,242,234,.2);transition:background .3s}
-.barra-t i.feito{background:var(--cobre-2)}
-#seq-m .corpo-m{overflow:hidden;padding:0 18px}
-/* noren: a cortina da porta se abre na primeira visita */
-.noren{position:fixed;inset:0;z-index:80;display:grid;grid-template-columns:1fr 1fr;pointer-events:none}
-.noren span{position:relative;background:linear-gradient(180deg,#1A1714,#100E0C);display:grid;place-items:center;transition:transform 1.5s cubic-bezier(.7,0,.2,1)}
-.noren span::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 5px)}
-.noren span:first-child{border-right:1px solid rgba(221,179,132,.25);justify-items:end;padding-right:14px}
-.noren span:last-child{justify-items:start;padding-left:14px}
-.noren i{font:700 clamp(84px,24vw,140px)/1 var(--mincho);font-style:normal;background:linear-gradient(180deg,#F1CFA4,#9E6C3E);-webkit-background-clip:text;background-clip:text;color:transparent}
-.noren.abre-se span:first-child{transform:translateX(-101%)}
-.noren.abre-se span:last-child{transform:translateX(101%)}
-.noren.fim{display:none}
-/* refração (liquid glass de verdade) onde o navegador aceita SVG no backdrop-filter */
-.refrata .abre .vidro,.refrata .doca{backdrop-filter:url(#lg) blur(5px) saturate(175%);-webkit-backdrop-filter:blur(14px) saturate(175%)}
-/* reserva em três etapas */
-.etapas-r{display:flex;gap:6px;padding:0 18px 4px;flex:none}
-.etapas-r span{flex:1;font:500 11.5px var(--gothic);letter-spacing:.08em;color:rgba(246,242,234,.45);padding-top:8px;border-top:2px solid rgba(246,242,234,.15);transition:color .3s,border-color .3s}
-.etapas-r span.ok{color:var(--cobre-2);border-color:var(--cobre-2)}
-.passo{display:none;animation:passo .55s var(--ease)}
-.passo.on{display:block}
-@keyframes passo{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
-.voltar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;margin-right:12px;flex:none}
-.cab-m b{flex:1}
-.voltar[hidden]{display:none}
-.resumo-r{margin-top:14px;font:500 15px/1.6 var(--gothic);color:rgba(246,242,234,.8);border-top:1px solid rgba(246,242,234,.12);padding-top:12px}
-.resumo-r b{font:600 18px var(--mincho);color:var(--branco);display:block}
-.demo{position:fixed;z-index:60;top:0;left:0;right:0;font:500 10px var(--gothic);letter-spacing:.03em;text-align:center;padding:4px 10px;background:rgba(20,17,14,.7);color:rgba(246,242,234,.7);pointer-events:none}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.entra>*,.revela{opacity:1;transform:none;filter:none}}
-@media (min-width:600px){body{background:radial-gradient(circle at 50% 0%,#2a221b,var(--noite) 60%)}.pg{box-shadow:0 0 0 1px rgba(246,242,234,.06),0 40px 120px -40px #000}}
+.tempo{flex:0 0 100%;scroll-snap-align:start;padding:18px 4px;display:flex;flex-direction:column;justify-content:center}
+.tempo .n{font-size:150px;line-height:.8}
+.tempo h3{font-weight:500;font-size:30px;line-height:.92;margin-top:14px}
+.tempo .jp{font-size:16px;color:var(--creme-3);margin-top:8px}
+.tempo ul{list-style:none;margin-top:20px}
+.tempo li{text-transform:none;font-weight:400;font-size:15.5px;padding:10px 0;border-top:1px dashed var(--cortica);color:var(--creme-2)}
+.tempo .q{font-size:10.5px;color:var(--creme-3);margin-top:12px}
+.tempo.fim .precos div{padding:14px 0;border-top:1px dashed var(--cortica)}
+.tempo.fim .precos b{font-weight:500;font-size:18px}
+.tempo.fim .precos span{display:flex;justify-content:space-between;font-size:11.5px;color:var(--creme-2);margin-top:6px}
+.barra-t{display:flex;gap:4px;padding:12px 16px 0;flex:none}
+.barra-t i{flex:1;height:2px;background:rgba(255,237,215,.2)}
+.barra-t i.feito{background:var(--creme)}
+#seq-m .corpo-m{overflow:hidden}
+.doca{position:fixed;z-index:30;left:50%;bottom:calc(10px + env(safe-area-inset-bottom,0px));width:min(436px,calc(100% - 20px));transform:translate(-50%,160%);display:flex;gap:8px;padding:6px;border-radius:var(--r-pill);background:var(--nogueira);border:1px dashed var(--madeira);transition:transform .5s var(--ease)}
+.doca.on{transform:translate(-50%,0)}
+.doca .btn{flex:1;min-height:44px}.doca .fantasma.redondo{width:44px;height:44px}
 </style>
 </head>
 <body>
-<div class="noren" id="noren" aria-hidden="true"><span><i>料</i></span><span><i>理</i></span></div>
-<div class="demo">Protótipo da Timeless para o Ryori. Vídeo e fotos do Instagram do Ryori.</div>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="lg" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".012 .03" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-zap" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></symbol>
-  <symbol id="i-sacola" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8Zm4 0V6.5a3 3 0 0 1 6 0V8"/></symbol>
-  <symbol id="i-pino" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Zm0-9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></symbol>
-  <symbol id="i-seta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/></symbol>
-  <symbol id="i-volta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
-  <symbol id="i-insta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm4.5 13.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4ZM17.4 6.7h.01"/></symbol>
-  <symbol id="i-livro" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13Zm16 0A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2Z"/><path d="M9.2 8.6c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.7l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.5 2.4.2.1.4.1.5 0l.6-.7c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.4.4.6 0 .9-.7 1.8-1.7 1.9-1.3.2-3-.4-4.7-2-1.6-1.6-2.4-3.3-2.3-4.6 0-.5.2-.9.5-1.2Z"/></symbol>
+  <symbol id="i-sacola" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8Zm4 0V6.5a3 3 0 0 1 6 0V8"/></symbol>
+  <symbol id="i-pino" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Zm0-9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-volta" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-casas" viewBox="0 0 24 24"><path d="M3 20h18M5 20V9l5-4 5 4v11M15 20v-7l3-2 3 2v7M9 20v-4h2v4"/></symbol>
+  <symbol id="i-livro" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13Zm16 0A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24"><path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm4.5 13.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4ZM17.4 6.7h.01"/></symbol>
 </svg>
 
 <div class="pg">
-  <header class="abre" id="abre">
-    <img class="poster" src="../fotos/abertura.jpg" alt="" aria-hidden="true">
-    <video id="vid" autoplay muted loop playsinline preload="metadata" poster="../fotos/abertura.jpg" aria-label="O chef do Ryori servindo o ramen"><source src="../fotos/abertura.mp4" type="video/mp4"></video>
-    <div class="topo"><img src="https://static.wixstatic.com/media/404bb8_7d5670b5bc4c471db1008a3949596d86~mv2.png/v1/fill/w_600,h_440,al_c,q_85/ryori.png" alt="Ryori" width="49" height="36"><button type="button" class="lang vidro" id="lang" aria-label="Ver em inglês">EN</button></div>
-    <div class="kanji" lang="ja" aria-hidden="true">料理</div>
-    <div class="capa entra">
-      <span class="sobre" data-t="sobre">Buganvília e Iguatemi</span>
-      <h1>Ryori</h1>
-      <p data-t="sub">Cozinha japonesa contemporânea, em Fortaleza.</p>
-      <div class="acoes">
-        <button type="button" class="btn vidro cobre principal" data-abre="reserva"><span data-t="res">Reservar lugar</span></button>
-        <a class="btn vidro redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a>
-        <a class="btn vidro redondo" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener" aria-label="Pedir delivery no iFood"><svg class="ic"><use href="#i-sacola"/></svg></a>
-      </div>
+  <div class="demo">Protótipo da <b>Timeless</b>. Vídeo e fotos do Instagram do Ryori.</div>
+
+  <!-- 1. stories -->
+  <section class="stories" id="stories" aria-roledescription="carrossel" aria-label="Destaques do Ryori">
+    <div class="barras" id="barras" aria-hidden="true"></div>
+    <div class="topo">
+      <span class="marca">Ryori</span>
+      <div class="dir"><button type="button" class="casa-chip" id="casa-chip" aria-label="Trocar de casa"></button><button type="button" class="lang" id="lang" aria-label="Ver em inglês">EN</button></div>
     </div>
-    <span class="rola" aria-hidden="true"></span>
-  </header>
+    <div class="st on" data-i="0">
+      <video id="vid" autoplay muted loop playsinline preload="metadata" poster="../fotos/abertura.jpg" aria-label="O chef do Ryori servindo o ramen"><source src="../fotos/abertura.mp4" type="video/mp4"></video>
+      <div class="txt"><p class="rot" data-t="s1r">Buganvília e Iguatemi</p><h2 data-t="s1h">Cozinha japonesa, em Fortaleza.</h2>
+        <button type="button" class="etiqueta" data-abre="reserva"><span data-t="s1e">O seu lugar no balcão</span><span class="seta"><svg class="ic"><use href="#i-seta"/></svg></span></button></div>
+    </div>
+    <div class="st" data-i="1">
+      <img src="../fotos/wagyu.jpg" alt="Wagyu Stone do Ryori, finalizado na pedra quente" loading="lazy">
+      <div class="txt"><p class="rot" data-t="s2r">Da cozinha quente</p><h2 data-t="s2h">Finalizado na pedra, na mesa.</h2>
+        <button type="button" class="etiqueta" data-prato="0"><small data-t="naMesa">Na mesa</small><span>Wagyu Stone · R$ 98</span><span class="seta"><svg class="ic"><use href="#i-seta"/></svg></span></button></div>
+    </div>
+    <div class="st" data-i="2">
+      <img src="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_900,h_1200,al_c,q_80,enc_auto/ryori.jpg" alt="Barco de sashimi do Ryori" loading="lazy">
+      <div class="txt"><p class="rot" data-t="s3r">Oito tempos</p><h2 data-t="s3h">Sequência Japonesa.</h2>
+        <button type="button" class="etiqueta" data-abre="seq-m"><small data-t="porPes">Por pessoa</small><span>R$ 159</span><span class="seta"><svg class="ic"><use href="#i-seta"/></svg></span></button></div>
+    </div>
+    <div class="st" data-i="3">
+      <img src="../fotos/box.jpg" alt="Ryori Box com arroz e ingredientes para montar em casa" loading="lazy">
+      <div class="txt"><p class="rot" data-t="s4r">Delivery</p><h2 data-t="s4h">O Ryori em casa.</h2>
+        <a class="etiqueta" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><small>iFood</small><span>Ryori Box</span><span class="seta"><svg class="ic"><use href="#i-seta"/></svg></span></a></div>
+    </div>
+    <button type="button" class="toque e" data-ir="-1" aria-label="Destaque anterior"></button><button type="button" class="toque d" data-ir="1" aria-label="Próximo destaque"></button>
+  </section>
 
-  <main class="folha">
-    <div class="casas" id="casas" role="group" aria-label="Escolha a casa"><span class="sel" aria-hidden="true"></span></div>
+  <div class="acoes" id="acoes">
+    <button type="button" class="btn" data-abre="reserva"><span data-t="res">Reservar lugar</span></button>
+    <a class="fantasma redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a>
+    <a class="fantasma redondo" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener" aria-label="Pedir no iFood"><svg class="ic"><use href="#i-sacola"/></svg></a>
+  </div>
 
-    <section class="secao revela">
-      <button type="button" class="cartao seq" data-abre="seq-m">
-        <img src="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_900,h_1000,al_c,q_80,enc_auto/ryori.jpg" alt="Barco de sashimi do Ryori" width="440" height="460">
-        <span class="ico vidro" aria-hidden="true"><svg><use href="#i-seta"/></svg></span>
-        <span class="t"><b data-t="seqT">Sequência Japonesa</b><span data-t="seqL">Oito tempos servidos à mesa, do sunomono à sobremesa.</span>
-          <span class="tempos" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          <span class="preco"><strong>R$ 159</strong><small data-t="seqP">por pessoa, no jantar</small></span></span>
-      </button>
-    </section>
+  <!-- 2. cartão forte -->
+  <button type="button" class="cartao-seq" data-abre="seq-m">
+    <span class="linha"><span><span class="rot" style="color:var(--creme-2)" data-t="cR">No jantar, de domingo a quarta</span><h3 style="margin-top:10px" data-t="cT">Sequência Japonesa</h3></span><span class="jp" lang="ja">献立</span></span>
+    <span class="tempos" aria-hidden="true" id="tempos-mini"></span>
+    <p class="corrido-p" data-t="cL">Oito tempos servidos à mesa, do sunomono à sobremesa.</p>
+    <hr class="traco">
+    <span class="preco"><span><b>R$ 159</b><small data-t="cP">por pessoa, com sashimi</small></span><span class="fantasma" data-t="cB">Ver os 8 tempos</span></span>
+  </button>
 
-    <section class="secao revela">
-      <div class="grade">
-        <a class="cartao alto" href="../#cardapio"><img style="object-position:62% 62%" src="../fotos/fishtaco.jpg" alt="Fish taco do Ryori" loading="lazy" width="215" height="434"><span class="ico vidro" aria-hidden="true"><svg><use href="#i-seta"/></svg></span><span class="t"><b data-t="g1">Cardápio</b><span data-t="g1s">Sushibar, cozinha quente, executivo</span></span></a>
-        <button type="button" class="cartao tres-d" id="tile-3d" data-abre="sushiman"><span class="ico vidro" aria-hidden="true"><svg><use href="#i-seta"/></svg></span><span class="t"><b data-t="g2">O sushiman sugere</b><span data-t="g2s">Monte a mesa e veja em 3D</span></span></button>
-        <a class="cartao" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><img src="../fotos/box.jpg" alt="Ryori Box com arroz e ingredientes" loading="lazy" width="215" height="212"><span class="ico vidro" aria-hidden="true"><svg><use href="#i-sacola"/></svg></span><span class="t"><b>Delivery</b><span data-t="g3s">Pelo iFood</span></span></a>
-      </div>
-    </section>
+  <!-- 3. faixa de três -->
+  <nav class="tres" aria-label="Atalhos">
+    <button type="button" data-ir-casas><svg class="ic"><use href="#i-casas"/></svg><span data-t="t1">2 casas</span></button>
+    <a href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><svg class="ic"><use href="#i-sacola"/></svg><span data-t="t2">Delivery iFood</span></a>
+    <a href="../?lang=en#cozinha" lang="en"><svg class="ic"><use href="#i-livro"/></svg><span>Menu in English</span></a>
+  </nav>
 
-    <section class="secao revela">
-      <div class="cab"><h2 data-t="cozT">Da cozinha</h2><a href="../#cardapio" data-t="verTudo">Ver tudo</a></div>
-      <div class="pratos" id="pratos"></div>
-    </section>
+  <!-- 4. grade de pratos -->
+  <div class="cab"><h3 data-t="gT">Da cozinha</h3><a class="sub" href="../#cozinha" data-t="gV">Cardápio completo</a></div>
+  <div class="grade" id="grade"></div>
 
-    <section class="secao revela">
-      <a class="cartao" id="cartao-casa" href="#" target="_blank" rel="noopener" style="height:210px"><img src="../fotos/experiencia.jpg" alt="Salão do Ryori" loading="lazy" width="408" height="210"><span class="ico vidro" aria-hidden="true"><svg><use href="#i-pino"/></svg></span><span class="t"><b id="casa-nome">Ryori</b><span id="casa-end"></span></span></a>
-    </section>
+  <div class="cab"><h3 data-t="dT">Na casa</h3></div>
+  <div class="duo">
+    <button type="button" class="entrada" data-abre="reserva"><img src="../fotos/experiencia.jpg" alt="Salão do Ryori" loading="lazy"><span class="t"><span data-t="d1">O seu lugar no balcão</span><small data-t="d1s">Escolha na planta da casa</small></span></button>
+    <button type="button" class="entrada" id="tile-3d" data-abre="sushiman"><span class="t"><span data-t="d2">O sushiman sugere</span><small data-t="d2s">Monte a mesa em 3D</small></span></button>
+  </div>
 
-    <section class="fale revela">
-      <h2 data-t="faleT">Fale com a casa</h2>
-      <p data-t="faleL">Eventos, grupos, aniversários ou uma dúvida sobre o cardápio. A equipe responde no WhatsApp.</p>
-      <div class="acoes"><a class="btn vidro principal" data-zap href="#" target="_blank" rel="noopener" style="flex:1"><svg class="ic"><use href="#i-zap"/></svg><span data-t="faleB">Conversar no WhatsApp</span></a></div>
-    </section>
+  <!-- 5. ajuda -->
+  <div class="ajuda"><div><b data-t="aT">Não sabe o que pedir?</b><p class="corrido-p" data-t="aL">Diga quantos vão e a fome. A casa responde no WhatsApp.</p></div><a class="fantasma redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="Perguntar no WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a></div>
 
-    <nav class="redes" aria-label="Mais">
-      <a class="vidro escuro" href="https://www.instagram.com/restauranteryori/" target="_blank" rel="noopener" aria-label="Instagram do Ryori"><svg class="ic"><use href="#i-insta"/></svg></a>
-      <a class="vidro escuro" href="../?lang=en#cardapio" aria-label="English menu"><svg class="ic"><use href="#i-livro"/></svg></a>
-      <a class="vidro escuro" data-mapa href="#" target="_blank" rel="noopener" aria-label="Como chegar"><svg class="ic"><use href="#i-pino"/></svg></a>
-      <a class="vidro escuro" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener" aria-label="Delivery no iFood"><svg class="ic"><use href="#i-sacola"/></svg></a>
-    </nav>
-    <p class="rodape">Ryori, do Grupo Social Clube<br><span id="rod-casa"></span></p>
-  </main>
+  <div class="casas-l" id="casas-l"></div>
+  <div class="rodape"><span>Ryori · Grupo Social Clube</span><span><a href="../" data-t="site">Site</a> · <a href="https://www.instagram.com/restauranteryori/" target="_blank" rel="noopener">Instagram</a></span></div>
 </div>
 
-<div class="doca vidro" id="doca"><button type="button" class="btn vidro cobre" data-abre="reserva" style="flex:1"><span data-t="res">Reservar lugar</span></button><a class="btn vidro redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a></div>
+<div class="doca" id="doca"><button type="button" class="btn" data-abre="reserva"><span data-t="res">Reservar lugar</span></button><a class="fantasma redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a></div>
 
+<!-- folhas -->
 <div class="folha-m" id="reserva" role="dialog" aria-modal="true" aria-labelledby="res-t" aria-hidden="true">
   <div class="caixa">
-    <div class="cab-m"><button type="button" class="voltar vidro" id="r-volta" hidden aria-label="Voltar"><svg class="ic"><use href="#i-volta"/></svg></button><b id="res-t" data-t="resT">Reservar lugar</b><button type="button" class="fechar vidro" data-fecha aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
-    <div class="etapas-r" id="r-etapas" aria-hidden="true"><span data-t="eQuando">Quando</span><span data-t="eOnde">Onde</span><span data-t="eQuem">Quem</span></div>
+    <div class="cab-m"><button type="button" class="fantasma redondo" id="r-volta" hidden aria-label="Voltar" style="width:36px;height:36px"><svg class="ic"><use href="#i-volta"/></svg></button><b id="res-t" data-t="res">Reservar lugar</b><button type="button" class="fantasma redondo" data-fecha aria-label="Fechar" style="width:36px;height:36px"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="etapas" id="r-etapas" aria-hidden="true"><span data-t="eQuando">Quando</span><span data-t="eOnde">Onde</span><span data-t="eQuem">Quem</span></div>
     <div class="corpo-m" id="res-corpo">
       <div id="res-form">
         <section class="passo on" data-p="1">
           <p class="rotulo" data-t="rCasa">Casa</p><div class="fichas" id="r-casa"></div>
-          <p class="rotulo" data-t="rDia">Dia</p><div class="fichas" id="r-dia"></div>
+          <p class="rotulo" data-t="rDia">Dia</p><div class="fichas rola" id="r-dia"></div>
           <p class="rotulo" data-t="rHora">Horário</p><div class="fichas" id="r-hora"></div>
           <p class="rotulo" data-t="rPes">Pessoas</p><div class="fichas" id="r-pes"></div>
         </section>
         <section class="passo" data-p="2">
           <p class="rotulo" data-t="rLugar">Seu lugar</p>
-          <div class="planta-m"><svg id="r-planta" role="group" aria-label="Planta do Ryori: balcão, salão e varanda"></svg></div>
+          <div class="planta-caixa"><svg id="r-planta" role="group" aria-label="Planta do Ryori: balcão, salão e varanda"></svg></div>
           <p class="escolha" id="r-escolha" aria-live="polite"></p>
-          <p class="nota-m" data-t="rNota">Planta ilustrativa: na versão final, os lugares livres vêm da agenda da casa.</p>
+          <p class="micro" data-t="rNota">Planta ilustrativa: na versão final, os lugares livres vêm da agenda da casa.</p>
         </section>
         <section class="passo" data-p="3">
-          <div class="resumo-r" id="r-resumo"></div>
-          <label class="campo vidro"><span data-t="rNome">Nome</span><input id="r-nome" autocomplete="name"></label>
-          <label class="campo vidro"><span>WhatsApp</span><input id="r-zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 9 0000-0000" aria-describedby="r-erro"></label>
+          <div class="resumo" id="r-resumo"></div>
+          <label class="campo"><span data-t="rNome">Nome</span><input id="r-nome" autocomplete="name"></label>
+          <label class="campo"><span>WhatsApp</span><input id="r-zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 9 0000-0000" aria-describedby="r-erro"></label>
           <p class="erro" id="r-erro"></p>
         </section>
       </div>
       <div class="feito" id="res-feito" hidden></div>
     </div>
-    <div class="pe-m" id="res-pe"><button type="button" class="btn vidro cobre" id="r-ok" disabled><span id="r-ok-t">Escolher o lugar</span></button></div>
+    <div class="pe-m" id="res-pe"><button type="button" class="btn" id="r-ok" disabled><span id="r-ok-t">Escolher o lugar</span></button></div>
   </div>
 </div>
 
 <div class="folha-m" id="sushiman" role="dialog" aria-modal="true" aria-labelledby="su-t" aria-hidden="true">
   <div class="caixa">
-    <div class="cab-m"><b id="su-t" data-t="g2">O sushiman sugere</b><button type="button" class="fechar vidro" data-fecha aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="cab-m"><b id="su-t" data-t="d2">O sushiman sugere</b><button type="button" class="fantasma redondo" data-fecha aria-label="Fechar" style="width:36px;height:36px"><svg class="ic"><use href="#i-x"/></svg></button></div>
     <div class="corpo-m">
-      <div class="palco" id="palco"><p data-t="palco">Arraste para girar. Prévia ilustrativa: os pratos da casa entram escaneados.</p></div>
+      <div id="palco" style="margin-top:12px"></div><p class="micro" style="margin-top:8px" data-t="palco">Arraste para girar. Prévia ilustrativa: os pratos reais entram escaneados.</p>
       <p class="rotulo" data-t="rPes">Pessoas</p><div class="fichas" id="s-pes"></div>
       <p class="rotulo" data-t="sFome">Fome</p><div class="fichas" id="s-fome"></div>
-      <div class="lista-m" id="s-lista" aria-live="polite"></div>
-      <div class="total-m" id="s-total"></div>
+      <div class="lista-s" id="s-lista" style="margin-top:18px" aria-live="polite"></div>
+      <div class="total-s" id="s-total"></div>
     </div>
-    <div class="pe-m"><button type="button" class="btn vidro cobre" id="s-reservar"><span data-t="sRes">Reservar com essa mesa</span></button></div>
+    <div class="pe-m"><button type="button" class="btn" id="s-reservar"><span data-t="sRes">Reservar com essa mesa</span></button></div>
   </div>
 </div>
 
 <div class="folha-m" id="prato" role="dialog" aria-modal="true" aria-labelledby="pr-t" aria-hidden="true">
   <div class="caixa">
-    <div class="cab-m"><b data-t="cozT">Da cozinha</b><button type="button" class="fechar vidro" data-fecha aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="cab-m"><b data-t="gT">Da cozinha</b><button type="button" class="fantasma redondo" data-fecha aria-label="Fechar" style="width:36px;height:36px"><svg class="ic"><use href="#i-x"/></svg></button></div>
     <div class="corpo-m prato-m" id="pr-corpo"></div>
-    <div class="pe-m"><a class="btn vidro cobre" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><svg class="ic"><use href="#i-sacola"/></svg><span data-t="pDel">Pedir no delivery</span></a><button type="button" class="btn vidro" data-abre="reserva"><span data-t="res">Reservar lugar</span></button></div>
+    <div class="pe-m"><button type="button" class="btn" data-abre="reserva"><span data-t="res">Reservar lugar</span></button><a class="fantasma" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><svg class="ic"><use href="#i-sacola"/></svg>iFood</a></div>
   </div>
 </div>
 
 <div class="folha-m" id="seq-m" role="dialog" aria-modal="true" aria-labelledby="sq-t" aria-hidden="true">
   <div class="caixa">
-    <div class="cab-m"><b id="sq-t" data-t="seqT">Sequência Japonesa</b><button type="button" class="fechar vidro" data-fecha aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="cab-m"><b id="sq-t" data-t="cT">Sequência Japonesa</b><button type="button" class="fantasma redondo" data-fecha aria-label="Fechar" style="width:36px;height:36px"><svg class="ic"><use href="#i-x"/></svg></button></div>
     <div class="barra-t" id="barra" aria-hidden="true"></div>
     <div class="corpo-m"><div class="tempos-m" id="tempos" tabindex="0" aria-label="Os tempos da Sequência, deslize para o lado"></div></div>
-    <div class="pe-m"><button type="button" class="btn vidro cobre" data-abre="reserva"><span data-t="resSeq">Reservar para a Sequência</span></button><a class="btn vidro redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="Tirar dúvida no WhatsApp" style="flex:none"><svg class="ic"><use href="#i-zap"/></svg></a></div>
+    <div class="pe-m"><button type="button" class="btn" data-abre="reserva"><span data-t="resSeq">Reservar para a Sequência</span></button></div>
   </div>
 </div>
 
@@ -408,78 +321,71 @@ h2{font:600 23px/1.15 var(--mincho)}
 <script src="../comum.js"></script>
 <script src="../cardapio.js"></script>
 <script src="../planta.js"></script>
+<script src="../dados.js"></script>
 <script>
-// WhatsApp de cada casa: os links que o próprio Ryori publica no Linktree (24/11/2026). Confirmar com a casa antes de publicar.
-const ZAP={buganvilia:'5585996032405',iguatemi:'558532414683'};
-const PRATOS=[
- {f:'wagyu',n:'Wagyu Stone',d:['Wagyu com molho de gergelim e ponzu, finalizado na pedra quente, na mesa.','Wagyu with sesame sauce and ponzu, finished on a hot stone at the table.'],p:98},
- {f:'fishtaco',n:'Fish taco',d:['Massa gyoza crocante, salmão ao molho de wasabi, ovas, furikake e cebolinha. Duas unidades.','Crispy gyoza shell, salmon in wasabi sauce, roe, furikake and scallion. Two pieces.'],p:44},
- {f:'cheesecake',n:'Cheesecake gelado',d:['Cheesecake gelado com caramelo de missô, geleia de frutas vermelhas e de maracujá.','Chilled cheesecake with miso caramel, red berry and passion fruit jams.']},
- {f:'box',n:'Ryori Box',d:['Ingredientes do Ryori para montar as suas combinações em casa. Pedidos limitados.','Ryori ingredients to build your own combinations at home. Limited orders.']}];
-const SEQ=[
- ['Entradas','前菜',['Sunomono','Missoshiro','Ceviche e orange fish','Ebishin e lula crok','Harumaki, tartar de atum, korokke'],'1 porção por pessoa'],
- ['Carpaccio','カルパッチョ',['Ussuzukuri shiromi, leche de tigre','Salmão truffle','Tuna tatak missô spicy'],'1 porção por pessoa'],
- ['Hand roll e onigiri','手巻き',['Hand roll de salmão','Hand roll de atum','Onigiri'],'1 porção por pessoa'],
- ['Cozinha asiática','厨房',['KFC, frango frito coreano','Camarão Hong Kong','Chow fun com filé'],'1 porção por pessoa'],
- ['Sushis tradicionais','寿司',['Hossomaki e uramaki','Temaki','Sashimi de salmão, atum e peixe branco'],'no jantar, com sashimi'],
- ['Duplas especiais','二貫',['Jou e jou ebiten','Sushi salmão scallops','Maguro tartufo','Sushi peixe branco ponzu'],'3 porções por pessoa'],
- ['Makis especiais','巻物',['Hot pepper e hot sukimaki','Cold and hot','Uramaki shakê brie','Tuna tost'],'3 porções por pessoa'],
- ['Sobremesa','甘味',['Mousse de chocolate com yuzu','Cheesecake'],'1 porção por pessoa']];
-const EN={sobre:'Buganvília and Iguatemi',sub:'Contemporary Japanese cooking, in Fortaleza.',res:'Book a seat',seqT:'Japanese tasting sequence',seqL:'Eight courses served to the table, from sunomono to dessert.',seqP:'per person, at dinner',
- g1:'Menu',g1s:'Sushi bar, hot kitchen, lunch',g2:'Chef’s suggestion',g2s:'Build your table, see it in 3D',g3s:'On iFood',cozT:'From the kitchen',verTudo:'See all',
- faleT:'Talk to the restaurant',faleL:'Events, groups, birthdays or a question about the menu. The team answers on WhatsApp.',faleB:'Chat on WhatsApp',resSeq:'Book for the sequence',
- resT:'Book a seat',eQuando:'When',eOnde:'Where',eQuem:'Who',rCasa:'House',rDia:'Day',rHora:'Time',rPes:'Guests',rLugar:'Your seat',rNome:'Name',rOk:'Confirm booking',rNota:'Illustrative floor plan: in the final version, free seats come from the restaurant’s book.',
- palco:'Drag to rotate. Illustrative preview: the house dishes will be scanned.',sFome:'Appetite',sRes:'Book with this table',pDel:'Order delivery'};
+const TAGS=[[['Quente','Hot'],['Na pedra','On the stone']],[['Sushibar','Sushi bar'],['2 unidades','2 pieces']],[['Sobremesa','Dessert'],['Gelado','Chilled']],[['Delivery','Delivery'],['Pedidos limitados','Limited']]];
+const EN={s1r:'Buganvília and Iguatemi',s1h:'Japanese cooking, in Fortaleza.',s1e:'Your seat at the counter',s2r:'From the hot kitchen',s2h:'Finished on the stone, at the table.',naMesa:'At the table',s3r:'Eight courses',s3h:'Japanese Sequence.',porPes:'Per person',s4r:'Delivery',s4h:'Ryori at home.',
+ res:'Book a seat',cR:'At dinner, Sunday to Wednesday',cT:'Japanese Sequence',cL:'Eight courses served to the table, from sunomono to dessert.',cP:'per person, with sashimi',cB:'See the 8 courses',t1:'2 houses',t2:'iFood delivery',
+ gT:'From the kitchen',gV:'Full menu',dT:'At the house',d1:'Your seat at the counter',d1s:'Pick it on the floor plan',d2:'The sushi chef suggests',d2s:'Build the table in 3D',aT:'Can’t decide?',aL:'Tell us how many and how hungry. The house replies on WhatsApp.',site:'Website',
+ eQuando:'When',eOnde:'Where',eQuem:'Who',rCasa:'House',rDia:'Day',rHora:'Time',rPes:'Guests',rLugar:'Your seat',rNota:'Illustrative plan: in the final version, free seats come from the house’s book.',rNome:'Name',
+ palco:'Drag to rotate. Illustrative preview: the real dishes will be scanned.',sFome:'Appetite',sRes:'Book with this table',resSeq:'Book for the Sequence'};
 const PT={};document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
 const brl=n=>'R$ '+n.toLocaleString('pt-BR');
 const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const CH=MARCA.id+'-casa';
-let casa=(()=>{try{return localStorage.getItem(CH)}catch(e){return null}})();
-if(!unidade(casa))casa=MARCA.unidades[0].id;
+let casa=(()=>{try{return localStorage.getItem(CH)}catch(e){return null}})();if(!unidade(casa))casa=MARCA.unidades[0].id;
 const zapUrl=u=>`https://wa.me/${ZAP[u.id]}?text=${encodeURIComponent(L(`Olá! Vim pelo link da bio e queria falar com o Ryori ${u.nome}.`,`Hello! I came from the bio link and would like to talk to Ryori ${u.nome}.`))}`;
+const estTxt=u=>{const s=estadoUnidade(u);return s.k==='aberta'?L(`aberta até ${hm(s.ate)}`,`open until ${hm(s.ate)}`):s.k==='pausa'?L(`volta às ${hm(s.abre)}`,`back at ${hm(s.abre)}`):s.k==='antes'?L(`abre às ${hm(s.abre)}`,`opens at ${hm(s.abre)}`):L(`abre amanhã, ${hm(s.abre)}`,`opens tomorrow, ${hm(s.abre)}`);};
 
-/* ---------- página ---------- */
 function pinta(){
-  const u=unidade(casa),c=document.getElementById('casas');c.dataset.i=MARCA.unidades.indexOf(u);
-  c.querySelectorAll('button').forEach(b=>b.remove());
-  MARCA.unidades.forEach(x=>{const s=estadoUnidade(x),on=s.k==='aberta',b=document.createElement('button');b.type='button';b.dataset.c=x.id;b.setAttribute('aria-pressed',x.id===casa);
-    b.innerHTML=`<b>${x.nome}</b><small><i class="${on?'on':''}"></i>${on?L(`até ${hm(s.ate)}`,`until ${hm(s.ate)}`):L(`abre ${hm(s.abre)}`,`opens ${hm(s.abre)}`)}</small>`;c.appendChild(b);});
+  const u=unidade(casa),on=estadoUnidade(u).k==='aberta';
+  document.getElementById('casa-chip').innerHTML=`<i class="${on?'on':''}"></i>${u.nome} · ${estTxt(u)}`;
   document.querySelectorAll('[data-zap]').forEach(a=>a.href=zapUrl(u));
-  document.querySelectorAll('[data-mapa]').forEach(a=>a.href=u.mapa);
-  document.getElementById('cartao-casa').href=u.mapa;
-  document.getElementById('casa-nome').textContent=`Ryori ${u.nome}`;document.getElementById('casa-end').textContent=u.end;
-  document.getElementById('rod-casa').textContent=`${u.nome}: ${u.end}`;
-  document.getElementById('pratos').innerHTML=PRATOS.map((p,i)=>`<button type="button" class="cartao" data-prato="${i}"><img src="../fotos/${p.f}.jpg" alt="${p.n}" loading="lazy" width="326" height="350"><span class="t"><b>${p.n}</b><span>${L(...p.d).split('.')[0]}</span>${p.p?`<span class="preco">${brl(p.p)}</span>`:''}</span></button>`).join('');
+  document.getElementById('grade').innerHTML=PRATOS.map((p,i)=>`<button type="button" class="prato" data-prato="${i}"><span class="f"><img src="../fotos/${p.f}.jpg" alt="${esc(p.n)}" loading="lazy" width="214" height="268"></span><span class="n">${p.n}</span><span class="tags">${TAGS[i].map(t=>`<span>${L(...t)}</span>`).join('')}</span><span class="pe"><span>${p.p?brl(p.p):`<small style="font-size:9.5px;color:var(--creme-3)">${L('Preço com a casa','Price on request')}</small>`}</span><span>${L('Ver','See')}</span></span></button>`).join('');
+  document.getElementById('casas-l').innerHTML=MARCA.unidades.map(x=>`<div class="casa-l"><b>${x.nome}</b><span>${estTxt(x)}</span><p class="corrido-p">${x.end}</p><div class="acts"><a class="fantasma redondo" href="${x.mapa}" target="_blank" rel="noopener" aria-label="${L('Como chegar ao','Directions to')} ${x.nome}"><svg class="ic"><use href="#i-pino"/></svg></a><a class="fantasma redondo" href="${zapUrl(x)}" target="_blank" rel="noopener" aria-label="WhatsApp ${x.nome}"><svg class="ic"><use href="#i-zap"/></svg></a></div></div>`).join('');
+  document.getElementById('tempos-mini').innerHTML=SEQ.map(()=>'<i></i>').join('');
 }
-document.getElementById('casas').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;casa=b.dataset.c;R.casa=casa;try{localStorage.setItem(CH,casa)}catch(e){}pinta();});
+document.getElementById('casa-chip').addEventListener('click',()=>{const l=MARCA.unidades,i=l.findIndex(u=>u.id===casa);casa=l[(i+1)%l.length].id;try{localStorage.setItem(CH,casa)}catch(e){}pinta();});
+document.querySelector('[data-ir-casas]').addEventListener('click',()=>document.getElementById('casas-l').scrollIntoView({behavior:'smooth',block:'center'}));
+
+/* ---------- stories ---------- */
+const ST=[...document.querySelectorAll('.st')],DUR=[7000,5500,5500,5500];let si=0,sTimer=null;
+const calmo=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.getElementById('barras').innerHTML=ST.map(()=>'<i><b></b></i>').join('');
+function story(n){si=(n+ST.length)%ST.length;ST.forEach((s,k)=>s.classList.toggle('on',k===si));
+  document.querySelectorAll('#barras i').forEach((b,k)=>{b.className=k<si?'feito':k===si?'agora':'';b.style.setProperty('--dur',DUR[k]+'ms');const x=b.firstChild;x.style.animation='none';void x.offsetWidth;x.style.animation='';});
+  clearTimeout(sTimer);if(!calmo)sTimer=setTimeout(()=>story(si+1),DUR[si]);}
+document.getElementById('stories').addEventListener('click',e=>{const t=e.target.closest('[data-ir]');if(t)story(si+ +t.dataset.ir);});
+let sx=null;const stEl=document.getElementById('stories');
+stEl.addEventListener('pointerdown',e=>sx=e.clientX);stEl.addEventListener('pointerup',e=>{if(sx!==null&&Math.abs(e.clientX-sx)>40)story(si+(e.clientX<sx?1:-1));sx=null;});
 
 /* ---------- folhas ---------- */
 let ultimoFoco=null;
 function abre(id){const m=document.getElementById(id);if(!m.classList.contains('on'))ultimoFoco=document.activeElement;
   document.querySelectorAll('.folha-m.on').forEach(x=>{if(x!==m){x.classList.remove('on');x.setAttribute('aria-hidden','true');}});
-  m.classList.add('on');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>m.querySelector('[data-fecha]').focus(),60);
+  m.classList.add('on');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';clearTimeout(sTimer);setTimeout(()=>m.querySelector('[data-fecha]').focus(),60);
   if(id==='reserva')reservaAbre();
   if(id==='seq-m'){const T=document.getElementById('tempos');T.scrollLeft=0;T.dispatchEvent(new Event('scroll'));}
-  if(id==='sushiman')Nigiri.liga('palco');}
-function fecha(m){m.classList.remove('on');m.setAttribute('aria-hidden','true');document.body.style.overflow='';if(ultimoFoco&&ultimoFoco.focus)ultimoFoco.focus();}
+  if(id==='sushiman'&&window.Nigiri){Nigiri.liga('palco');setTimeout(sugere,250);}}
+function fecha(m){m.classList.remove('on');m.setAttribute('aria-hidden','true');document.body.style.overflow='';if(ultimoFoco&&ultimoFoco.focus)ultimoFoco.focus();story(si);}
 document.addEventListener('click',e=>{const a=e.target.closest('[data-abre]');if(a){e.preventDefault();abre(a.dataset.abre);return;}
   const f=e.target.closest('[data-fecha]');if(f){fecha(f.closest('.folha-m'));return;}
   const p=e.target.closest('[data-prato]');if(p){mostraPrato(+p.dataset.prato);return;}
   if(e.target.classList&&e.target.classList.contains('folha-m'))fecha(e.target);});
 addEventListener('keydown',e=>{const m=document.querySelector('.folha-m.on');if(m&&e.key==='Escape')fecha(m);});
-function mostraPrato(i){const p=PRATOS[i];document.getElementById('pr-corpo').innerHTML=`<img src="../fotos/${p.f}.jpg" alt="${p.n}"><h3 id="pr-t">${p.n}</h3><p>${L(...p.d)}</p>${p.p?`<p class="pr">${brl(p.p)}</p>`:''}`;abre('prato');}
+function mostraPrato(i){const p=PRATOS[i];document.getElementById('pr-corpo').innerHTML=`<img src="../fotos/${p.f}.jpg" alt="${esc(p.n)}"><h3 id="pr-t">${p.n}</h3><p class="corrido-p">${L(...p.d)}</p>${p.p?`<p class="pr">${brl(p.p)}</p>`:''}`;abre('prato');}
 
-/* ---------- a Sequência ---------- */
+/* ---------- Sequência ---------- */
 function tempos(){
-  const pre=[['Buganvília',L('Jantar, domingo a quarta','Dinner, Sunday to Wednesday'),159,L('Almoço, todos os dias, sem sashimi','Lunch, every day, no sashimi'),129],['Iguatemi',L('Jantar, domingo a quarta','Dinner, Sunday to Wednesday'),159]];
+  const pre=[['Buganvília',[[L('Jantar, domingo a quarta, com sashimi','Dinner, Sun to Wed, with sashimi'),159],[L('Almoço, todos os dias, sem sashimi','Lunch, every day, no sashimi'),129]]],['Iguatemi',[[L('Jantar, domingo a quarta, com sashimi','Dinner, Sun to Wed, with sashimi'),159]]]];
   document.getElementById('tempos').innerHTML=SEQ.map(([n,jp,it,q],k)=>`<section class="tempo"><span class="n">${k+1}</span><h3>${n}</h3><span class="jp" lang="ja">${jp}</span><ul>${it.map(x=>`<li>${x}</li>`).join('')}</ul><p class="q">${q}</p></section>`).join('')+
-   `<section class="tempo fim"><h3>${L('O valor, por pessoa','The price, per person')}</h3><div class="precos">${pre.map(p=>`<div><b>${p[0]}</b><span>${p[1]}: <strong>R$ ${p[2]}</strong></span>${p[3]?`<span>${p[3]}: <strong>R$ ${p[4]}</strong></span>`:''}</div>`).join('')}</div><p class="q">${L('Do cardápio da Sequência publicado pela casa, conferido em 24/11/2026.','From the sequence menu published by the restaurant, checked on 24 Nov 2026.')}</p></section>`;
-  document.getElementById('barra').innerHTML=SEQ.map(()=>'<i></i>').join('')+'<i></i>';
-}
+   `<section class="tempo fim"><h3>${L('O valor, por pessoa','The price, per person')}</h3><div class="precos" style="margin-top:20px">${pre.map(([c,l])=>`<div><b>${c}</b>${l.map(([t,v])=>`<span><span>${t}</span><span>R$ ${v}</span></span>`).join('')}</div>`).join('')}</div><p class="q">${L('Do cardápio da Sequência publicado pela casa, conferido em 24/11/2026.','From the sequence menu published by the restaurant, 24 Nov 2026.')}</p></section>`;
+  document.getElementById('barra').innerHTML=SEQ.map(()=>'<i></i>').join('')+'<i></i>';}
 const TM=document.getElementById('tempos');
 TM.addEventListener('scroll',()=>{const k=Math.round(TM.scrollLeft/TM.clientWidth);document.querySelectorAll('#barra i').forEach((x,j)=>x.classList.toggle('feito',j<=k));},{passive:true});
+let mini=0;if(!calmo)setInterval(()=>{mini=(mini+1)%9;document.querySelectorAll('#tempos-mini i').forEach((x,j)=>x.classList.toggle('on',j<mini));},700);
 
-/* ---------- reservar lugar: casa, dia, horário, pessoas e o lugar na planta ---------- */
+/* ---------- reservar lugar ---------- */
 const R={casa,dia:null,hora:null,pessoas:2,lugar:null,mesa:'',mesaSug:'',passo:1};
 function dias(){const {d}=agoraFortaleza(),h=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Fortaleza'}));return [...Array(10)].map((_,k)=>{const dt=new Date(h);dt.setDate(h.getDate()+k);return {k,wd:(d+k)%7,dt};});}
 const fmtDia=x=>`${(lang==='en'?DAYS:DIAS)[x.wd]}, ${x.dt.getDate()}/${x.dt.getMonth()+1}`;
@@ -494,23 +400,22 @@ function est(id){const pronto=R.dia!==null&&R.hora!==null,n=R.pessoas;
 const zapOk=()=>{const d=document.getElementById('r-zap').value.replace(/\D/g,'').replace(/^55(?=\d{11}$)/,'');return d.length===11&&d[2]==='9';};
 function reservaPinta(){
   const ds=dias(),pronto=R.dia!==null&&R.hora!==null;
-  document.getElementById('r-casa').innerHTML=MARCA.unidades.map(u=>`<button type="button" class="vidro" data-v="${u.id}" aria-pressed="${R.casa===u.id}">${u.nome}</button>`).join('');
-  document.getElementById('r-dia').innerHTML=ds.map(x=>{const v=!horas(x).length;return `<button type="button" class="vidro" data-v="${x.k}" aria-pressed="${R.dia===x.k}" ${v?'disabled':''}>${x.k===0?L('Hoje','Today'):(lang==='en'?DAYS:DIAS)[x.wd].slice(0,3)}<small>${x.dt.getDate()}/${x.dt.getMonth()+1}</small></button>`;}).join('');
-  document.getElementById('r-hora').innerHTML=R.dia===null?`<span class="nota-m" style="margin:0">${L('Escolha o dia','Pick a day')}</span>`:horas(ds[R.dia]).map(h=>`<button type="button" class="vidro" data-v="${h}" aria-pressed="${R.hora===h}">${hm(h)}</button>`).join('');
-  document.getElementById('r-pes').innerHTML=[1,2,3,4,5,6,7,8].map(n=>`<button type="button" class="vidro" data-v="${n}" aria-pressed="${R.pessoas===n}">${n}</button>`).join('');
+  document.getElementById('r-casa').innerHTML=MARCA.unidades.map(u=>`<button type="button" class="fantasma" data-v="${u.id}" aria-pressed="${R.casa===u.id}">${u.nome}</button>`).join('');
+  document.getElementById('r-dia').innerHTML=ds.map(x=>{const v=!horas(x).length;return `<button type="button" class="fantasma" data-v="${x.k}" aria-pressed="${R.dia===x.k}" ${v?'disabled':''}>${x.k===0?L('Hoje','Today'):(lang==='en'?DAYS:DIAS)[x.wd].slice(0,3)}<small>${x.dt.getDate()}/${x.dt.getMonth()+1}</small></button>`;}).join('');
+  document.getElementById('r-hora').innerHTML=R.dia===null?`<span class="micro">${L('Escolha o dia','Pick a day')}</span>`:horas(ds[R.dia]).map(h=>`<button type="button" class="fantasma" data-v="${h}" aria-pressed="${R.hora===h}">${hm(h)}</button>`).join('');
+  document.getElementById('r-pes').innerHTML=[1,2,3,4,5,6,7,8].map(n=>`<button type="button" class="fantasma" data-v="${n}" aria-pressed="${R.pessoas===n}">${n}</button>`).join('');
   Planta.desenha(document.getElementById('r-planta'),{varanda:R.casa==='buganvilia',L,estado:est,aoTocar:id=>{if(est(id).k==='livre'){R.lugar=id;reservaPinta();}}});
-  document.getElementById('r-escolha').textContent=!pronto?L('Escolha o dia e o horário para ver os lugares livres.','Pick a day and time to see the free seats.'):R.lugar?(Planta.nome(R.lugar,L)+(par()?L(' e o vizinho',' and the next one'):'')):R.pessoas>2?L(`Para ${R.pessoas}, toque numa mesa.`,`For ${R.pessoas}, tap a table.`):L('Toque num banquinho do balcão ou numa mesa.','Tap a counter stool or a table.');
-  pode();
-}
+  document.getElementById('r-escolha').textContent=!pronto?L('Escolha o dia e o horário para ver os lugares livres.','Pick a day and time to see the free seats.'):R.lugar?(Planta.nome(R.lugar,L)+(par()?L(', com o vizinho',', with the next one'):'')):R.pessoas>2?L(`Para ${R.pessoas}, toque numa mesa.`,`For ${R.pessoas}, tap a table.`):L('Toque num banquinho do balcão ou numa mesa.','Tap a counter stool or a table.');
+  pode();}
 function pode(){const ok=document.getElementById('r-ok'),t=document.getElementById('r-ok-t');
   ok.disabled=R.passo===1?!(R.dia!==null&&R.hora!==null):R.passo===2?!R.lugar:!(document.getElementById('r-nome').value.trim().length>1&&zapOk());
   t.textContent=R.passo===1?L('Escolher o lugar','Choose the seat'):R.passo===2?L('Continuar','Continue'):L('Confirmar reserva','Confirm booking');}
 function vaiPasso(n){R.passo=n;document.querySelectorAll('#res-form .passo').forEach(x=>x.classList.toggle('on',+x.dataset.p===n));
   document.querySelectorAll('#r-etapas span').forEach((x,i)=>x.classList.toggle('ok',i<n));document.getElementById('r-volta').hidden=n===1;
-  if(n===3){const x=dias()[R.dia],u=unidade(R.casa);document.getElementById('r-resumo').innerHTML=`<b>Ryori ${esc(u.nome)}</b>${fmtDia(x)}, ${hm(R.hora)}<br>${R.pessoas} ${L(R.pessoas>1?'pessoas':'pessoa',R.pessoas>1?'guests':'guest')}, ${Planta.nome(R.lugar,L)}${par()?L(' e o vizinho',' and the next one'):''}`;}
+  if(n===3){const x=dias()[R.dia],u=unidade(R.casa);document.getElementById('r-resumo').innerHTML=`<b>Ryori ${esc(u.nome)}</b>${fmtDia(x)}, ${hm(R.hora)}<br>${R.pessoas} ${L(R.pessoas>1?'pessoas':'pessoa',R.pessoas>1?'guests':'guest')} · ${Planta.nome(R.lugar,L)}${par()?L(', com o vizinho',', with the next one'):''}${R.mesa?`<br>${L('Com a mesa do sushiman','With the chef’s table')}`:''}`;}
   document.getElementById('res-corpo').scrollTop=0;pode();}
 document.getElementById('r-volta').addEventListener('click',()=>vaiPasso(Math.max(1,R.passo-1)));
-function reservaAbre(){R.casa=casa;if(R.dia===null&&horas(dias()[0]).length)R.dia=0;document.getElementById('res-form').hidden=false;document.getElementById('res-feito').hidden=true;document.getElementById('res-pe').hidden=false;document.getElementById('r-etapas').hidden=false;reservaPinta();vaiPasso(1);}
+function reservaAbre(){R.casa=casa;if(R.dia===null)R.dia=horas(dias()[0]).length?0:1;document.getElementById('res-form').hidden=false;document.getElementById('res-feito').hidden=true;document.getElementById('res-pe').hidden=false;document.getElementById('r-etapas').hidden=false;reservaPinta();vaiPasso(1);}
 document.getElementById('res-form').addEventListener('click',e=>{const b=e.target.closest('.fichas button');if(!b||b.disabled)return;const g=b.parentNode.id,v=b.dataset.v;
   if(g==='r-casa'){R.casa=v;R.hora=null;R.lugar=null;if(R.dia!==null&&!horas(dias()[R.dia]).length)R.dia=null;}
   if(g==='r-dia'){R.dia=+v;R.hora=null;R.lugar=null;}if(g==='r-hora'){R.hora=+v;R.lugar=null;}if(g==='r-pes'){R.pessoas=+v;R.lugar=null;}
@@ -522,17 +427,16 @@ document.getElementById('r-ok').addEventListener('click',()=>{
   const codigo=MARCA.prefixo+'-'+u.sigla+String(x.dt.getDate()).padStart(2,'0')+String(R.hora/30|0).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,5).toUpperCase();
   const ini=new Date(x.dt);ini.setHours(R.hora/60|0,R.hora%60,0,0);
   const lugar=Planta.nome(R.lugar),motivos=[];if(balcao)motivos.push('lugar no balcão do sushiman');if(R.pessoas>=6)motivos.push(`grupo de ${R.pessoas}`);
-  Reservas.nova({codigo,casa:u.id,criada:new Date().toISOString(),inicio:ini.toISOString(),dia:fmtDia(x),hora:hm(R.hora),pessoas:R.pessoas,ocasiao:'',pedidos:[lugar],lugar:R.lugar,lugarPar:par(),mesa:R.mesa,obs:'',nome,zap,status:motivos.length?'aguardando':'confirmada',motivos});
-  const num=R.lugar.slice(1)+(par()?'·'+par().slice(1):''),tipo=R.lugar[0]==='b'?L('balcão','counter'):R.lugar[0]==='v'?L('varanda','deck'):L('mesa','table');
+  Reservas.nova({codigo,casa:u.id,criada:new Date().toISOString(),inicio:ini.toISOString(),dia:fmtDia(x),hora:hm(R.hora),pessoas:R.pessoas,ocasiao:'',pedidos:[lugar],lugar:R.lugar,lugarPar:par(),mesa:R.mesa,obs:'',nome,zap,status:motivos.length?'aguardando':'confirmada',motivos,origem:'link da bio'});
+  const num=R.lugar.slice(1)+(par()?'·'+par().slice(1):''),tipo=R.lugar[0]==='b'?L('Balcão','Counter'):R.lugar[0]==='v'?L('Varanda','Deck'):L('Mesa','Table');
   const msg=[`Olá! Reserva no Ryori ${u.nome}.`,`Dia: ${fmtDia(x)}`,`Horário: ${hm(R.hora)}`,`Pessoas: ${R.pessoas}`,`Lugar: ${lugar}`,R.mesa?`Pedido sugerido: ${R.mesa}`:'',`Nome: ${nome}`,`Código: ${codigo}`].filter(Boolean).join('\n');
   const f=document.getElementById('res-feito');
-  f.innerHTML=`<div class="placa" aria-hidden="true"><b>${num}</b><span>${tipo}</span><small>${codigo}</small></div>
-   <h3>${motivos.length?L('Pedido recebido','Request received'):L('Seu lugar está guardado','Your seat is saved')}</h3>
-   <p>Ryori ${esc(u.nome)}, ${fmtDia(x)}, ${hm(R.hora)}${motivos.length?L('. A equipe confirma pelo WhatsApp.','. The team confirms on WhatsApp.'):'.'}</p>
-   <p class="msg">${L('Reserva de demonstração: nada foi enviado. A ficha apareceu no painel da equipe, neste navegador. Na versão final, a casa recebe:','Demo booking: nothing was sent. On the live site, the restaurant gets:')}\n\n${esc(msg)}</p>`;
+  f.innerHTML=`<p class="rot" style="margin-top:24px;color:var(--creme-2)">${tipo} · Ryori ${esc(u.nome)}</p><p class="num">${num}</p>
+   <h3>${motivos.length?L('Pedido recebido.','Request received.'):L('Seu lugar está guardado.','Your seat is saved.')}</h3>
+   <p class="corrido-p" style="margin-top:12px">${fmtDia(x)}, ${hm(R.hora)}.${motivos.length?L(' A equipe confirma pelo WhatsApp.',' The team confirms on WhatsApp.'):''}</p>
+   <p class="msg">${L('Reserva de demonstração: nada foi enviado. A ficha apareceu no painel da equipe, neste navegador. No ar, a casa recebe:','Demo booking: nothing was sent. On the live site, the restaurant gets:')}\n\n${esc(msg)}</p>`;
   document.getElementById('res-form').hidden=true;f.hidden=false;document.getElementById('res-pe').hidden=true;document.getElementById('r-etapas').hidden=true;document.getElementById('r-volta').hidden=true;document.getElementById('res-corpo').scrollTop=0;
-  R.lugar=null;R.mesa='';
-});
+  R.lugar=null;R.mesa='';});
 
 /* ---------- o sushiman sugere ---------- */
 const S={pessoas:2,fome:'normal'};
@@ -543,104 +447,26 @@ function sugere(){
   const m=new Map(),pega=(l,q)=>{for(let k=0;k<q&&l.length;k++){const i=l[k%l.length];m.set(i.n,{i,q:(m.get(i.n)?.q||0)+1});}};
   pega(ent,Math.max(1,Math.round(n*.8*f)));pega(bar,Math.max(1,Math.round(n*f)));
   const linhas=[...m.values()],total=linhas.reduce((s,x)=>s+x.i.p*x.q,0);
-  document.getElementById('s-pes').innerHTML=[1,2,3,4,5,6].map(k=>`<button type="button" class="vidro" data-p="${k}" aria-pressed="${S.pessoas===k}">${k}</button>`).join('');
-  document.getElementById('s-fome').innerHTML=[['leve','Leve','Light'],['normal','Normal','Normal'],['fome','Com fome','Hungry']].map(([k,p,e])=>`<button type="button" class="vidro" data-f="${k}" aria-pressed="${S.fome===k}">${lang==='en'?e:p}</button>`).join('');
-  document.getElementById('s-lista').innerHTML=linhas.map(({i,q})=>`<div><em>${q}×</em><span><b>${lang==='en'?i.en[0]:i.n}</b><small>${lang==='en'?i.en[1]:i.d}</small></span><span>${brl(i.p*q)}</span></div>`).join('');
+  document.getElementById('s-pes').innerHTML=[1,2,3,4,5,6].map(k=>`<button type="button" class="fantasma" data-p="${k}" aria-pressed="${S.pessoas===k}">${k}</button>`).join('');
+  document.getElementById('s-fome').innerHTML=[['leve','Leve','Light'],['normal','Normal','Normal'],['fome','Com fome','Hungry']].map(([k,p,e])=>`<button type="button" class="fantasma" data-f="${k}" aria-pressed="${S.fome===k}">${L(p,e)}</button>`).join('');
+  document.getElementById('s-lista').innerHTML=linhas.map(({i,q})=>`<div><span>${q}×</span><span>${lang==='en'?i.en[0]:i.n}<small>${lang==='en'?i.en[1]:i.d}</small></span><span>${brl(i.p*q)}</span></div>`).join('');
   document.getElementById('s-total').innerHTML=`<b>${brl(total)}</b><span>${L(`cerca de ${brl(Math.round(total/n))} por pessoa`,`about ${brl(Math.round(total/n))} per person`)}</span>`;
   R.mesaSug=linhas.map(({i,q})=>`${q}× ${i.n}`).join(', ')+` · ${brl(total)}`;
-  window.Nigiri&&Nigiri.mesa(linhas);
-}
+  window.Nigiri&&Nigiri.mesa(linhas);}
 document.getElementById('sushiman').addEventListener('click',e=>{const b=e.target.closest('.fichas button');if(!b)return;if(b.dataset.p)S.pessoas=+b.dataset.p;if(b.dataset.f)S.fome=b.dataset.f;sugere();});
 document.getElementById('s-reservar').addEventListener('click',()=>{R.mesa=R.mesaSug;R.pessoas=Math.min(8,S.pessoas);R.lugar=null;abre('reserva');});
 
-/* ---------- idioma, doca, vídeo, entradas ---------- */
+/* ---------- idioma e doca ---------- */
 function aplicaLang(){const bl=document.getElementById('lang');bl.textContent=lang==='en'?'PT':'EN';bl.setAttribute('aria-label',lang==='en'?'Ver em português':'Ver em inglês');document.documentElement.lang=lang==='en'?'en':'pt-BR';
-  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});pinta();tempos();sugere();}
+  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});pinta();tempos();}
 document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
 const doca=document.getElementById('doca');
-new IntersectionObserver(([e])=>doca.classList.toggle('on',!e.isIntersecting&&e.boundingClientRect.top<0)).observe(document.querySelector('.capa .acoes'));
-const vid=document.getElementById('vid');vid.addEventListener('playing',()=>document.getElementById('abre').classList.add('pronto'),{once:true});
-if(matchMedia('(prefers-reduced-motion: reduce)').matches){vid.removeAttribute('autoplay');vid.pause();}
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vista');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
-document.querySelectorAll('.revela').forEach(x=>io.observe(x));
-document.querySelectorAll('.grade .cartao,.seq').forEach(c=>{c.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*6}deg) rotateX(${-y*6}deg)`;});c.addEventListener('pointerleave',()=>c.style.transform='');});
-aplicaLang();setInterval(pinta,60000);
-// a cortina abre uma vez por visita; quem prefere menos movimento entra direto
-(()=>{const n=document.getElementById('noren');let viu=false;try{viu=sessionStorage.getItem('ryori-noren')}catch(e){}
-  if(viu||matchMedia('(prefers-reduced-motion: reduce)').matches){n.classList.add('fim');return;}
-  setTimeout(()=>n.classList.add('abre-se'),550);setTimeout(()=>{n.classList.add('fim');try{sessionStorage.setItem('ryori-noren','1')}catch(e){}},2200);})();
-// refração só no Chromium (o único que aplica SVG ao que está atrás); nos outros, vidro fosco
-if(window.chrome&&CSS.supports('backdrop-filter','blur(1px)'))document.documentElement.classList.add('refrata');
+new IntersectionObserver(([e])=>doca.classList.toggle('on',!e.isIntersecting&&e.boundingClientRect.top<0)).observe(document.getElementById('acoes'));
+const vid=document.getElementById('vid');if(calmo){vid.removeAttribute('autoplay');vid.pause();}
+aplicaLang();story(0);setInterval(pinta,60000);
 </script>
-<!-- o nigiri em 3D: no cartão do sushiman e, maior, dentro da folha. Prévia ilustrativa, que vai ganhar os pratos reais escaneados -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-// 3D do Ryori. No cartão: um nigiri girando. Na folha do sushiman: uma tábua de hinoki onde as peças da mesa sugerida caem uma a uma.
-// Peças desenhadas (ilustrativas); a evolução é trocar cada uma pelo prato real escaneado.
-window.Nigiri=(function(){
- if(!window.THREE)return {cria(){},liga(){},mesa(){}};
- const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches,vivos={};
- const tex=(w,h,f)=>{const c=document.createElement('canvas');c.width=w;c.height=h;f(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);return t;};
- const arrozTex=tex(256,256,(c,w,h)=>{c.fillStyle='#f3efe6';c.fillRect(0,0,w,h);for(let i=0;i<1100;i++){c.fillStyle=`rgba(${205+Math.random()*40|0},${200+Math.random()*40|0},${188+Math.random()*40|0},.85)`;c.beginPath();c.ellipse(Math.random()*w,Math.random()*h,5,2.2,Math.random()*3,0,7);c.fill();}});
- const peixeTex=(a,b,lista)=>tex(512,128,(c,w,h)=>{const g=c.createLinearGradient(0,0,0,h);g.addColorStop(0,a);g.addColorStop(1,b);c.fillStyle=g;c.fillRect(0,0,w,h);if(lista)for(let x=-60;x<w+60;x+=34){c.strokeStyle=lista;c.lineWidth=3.5;c.beginPath();c.moveTo(x,0);c.quadraticCurveTo(x+30,h/2,x+10,h);c.stroke();}});
- const MAT={arroz:new THREE.MeshStandardMaterial({map:arrozTex,roughness:.95}),
-  salmao:new THREE.MeshPhysicalMaterial({map:peixeTex('#e4552a','#f37a44','rgba(255,226,206,.7)'),roughness:.35,clearcoat:.6}),
-  atum:new THREE.MeshPhysicalMaterial({map:peixeTex('#9e1b2c','#c22c3c'),roughness:.4,clearcoat:.5}),
-  branco:new THREE.MeshPhysicalMaterial({map:peixeTex('#efe6dc','#f7f1ea','rgba(220,200,190,.5)'),roughness:.35,clearcoat:.6}),
-  nori:new THREE.MeshStandardMaterial({color:0x17201a,roughness:.8}),
-  gyoza:new THREE.MeshStandardMaterial({color:0xe9cf9e,roughness:.7}),
-  tosta:new THREE.MeshStandardMaterial({color:0xb77a3a,roughness:.6}),
-  verde:new THREE.MeshStandardMaterial({color:0x5f8a3a,roughness:.7}),
-  tigela:new THREE.MeshStandardMaterial({color:0x2a2622,roughness:.5,metalness:.1}),
-  hinoki:new THREE.MeshStandardMaterial({map:tex(512,256,(c,w,h)=>{c.fillStyle='#d9bd8f';c.fillRect(0,0,w,h);for(let y=0;y<h;y+=3){c.strokeStyle=`rgba(150,110,60,${.06+Math.random()*.08})`;c.beginPath();c.moveTo(0,y);c.bezierCurveTo(w*.3,y+Math.random()*6-3,w*.6,y+Math.random()*6-3,w,y);c.stroke();}}),roughness:.75})};
- function nigiri(peixe){const g=new THREE.Group();const a=new THREE.Mesh(new THREE.SphereGeometry(1,32,20),MAT.arroz);a.scale.set(1.5,.6,.82);g.add(a);
-  const geo=new THREE.BoxGeometry(3.3,.24,1.5,32,1,8),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),z=p.getZ(i);p.setY(i,p.getY(i)-.15*x*x-.1*z*z+.64);}geo.computeVertexNormals();
-  g.add(new THREE.Mesh(geo,MAT[peixe]||MAT.salmao));return g;}
- function maki(peixe){const g=new THREE.Group();const n=new THREE.Mesh(new THREE.CylinderGeometry(.9,.9,1.1,28),MAT.nori);g.add(n);
-  const a=new THREE.Mesh(new THREE.CylinderGeometry(.78,.78,1.12,28),MAT.arroz);g.add(a);const c=new THREE.Mesh(new THREE.CylinderGeometry(.32,.32,1.14,16),MAT[peixe]||MAT.salmao);g.add(c);g.position.y=.55;return g;}
- function gyoza(){const g=new THREE.Group();const m=new THREE.Mesh(new THREE.SphereGeometry(1,24,12,0,Math.PI*2,0,Math.PI/2),MAT.gyoza);m.scale.set(1.3,.7,.6);g.add(m);const t=new THREE.Mesh(new THREE.CylinderGeometry(1.25,1.25,.06,24),MAT.tosta);t.scale.set(1,1,.48);g.add(t);return g;}
- function tigela(verde){const g=new THREE.Group();const b=new THREE.Mesh(new THREE.CylinderGeometry(1.1,.7,.8,32,1,true),MAT.tigela);b.material.side=THREE.DoubleSide;b.position.y=.4;g.add(b);
-  const f=new THREE.Mesh(new THREE.CylinderGeometry(1.02,1.02,.1,32),verde?MAT.verde:MAT.tosta);f.position.y=.62;g.add(f);return g;}
- function peca(item){const n=(item.n||'').toLowerCase(),t=item.t||[];
-  const peixe=/atum|tuna|maguro/.test(n)?'atum':/vieira|scallop|polvo|tako|shiromi/.test(n)?'branco':'salmao';
-  if(/edamame|pepino|shimeji|corn|missoshiru/.test(n))return tigela(/edamame|pepino/.test(n));
-  if(/gyoza|harumaki|kfc|shrimp|rock/.test(n))return gyoza();
-  if(/roll|cone|taco|crispy|chilli/.test(n))return maki(peixe);
-  return nigiri(peixe);}
- function cena(box,zoom){
-  const r=new THREE.WebGLRenderer({antialias:true,alpha:true});r.setPixelRatio(Math.min(2,devicePixelRatio));box.prepend(r.domElement);
-  const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(zoom?34:32,1,.1,200);
-  sc.add(new THREE.HemisphereLight(0xfff1df,0x241c16,zoom?.55:.8));const sol=new THREE.SpotLight(0xffe2c2,zoom?.85:1.2,0,.7,.6);sol.position.set(3,12,6);sc.add(sol);
-  const rim=new THREE.DirectionalLight(0xddb384,.65);rim.position.set(-6,4,-5);sc.add(rim);
-  const raiz=new THREE.Group();sc.add(raiz);
-  const tam=()=>{const w=box.clientWidth,h=box.clientHeight;if(!w||!h)return;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();};tam();addEventListener('resize',tam);
-  let arr=null,vis=true,caindo=[];
-  box.addEventListener('pointerdown',e=>{arr=e.clientX;});box.addEventListener('pointermove',e=>{if(arr===null)return;raiz.rotation.y+=(e.clientX-arr)*.01;arr=e.clientX;});addEventListener('pointerup',()=>arr=null);
-  new IntersectionObserver(([e])=>vis=e.isIntersecting).observe(box);
-  const v={r,sc,cam,raiz,tam,caindo,zoom};
-  (function loop(t){if(vis){if(!reduz&&arr===null)raiz.rotation.y+=zoom?.0025:.006;
-    caindo.forEach(c=>{const k=Math.min(1,(t-c.t0)/650);const e=1-Math.pow(1-k,3);c.o.position.y=c.y+(1-e)*6;c.o.rotation.z=(1-e)*.6;});
-    if(!zoom)raiz.position.y=Math.sin(t/900)*.04;r.render(sc,cam);}requestAnimationFrame(loop);})(0);
-  return v;}
- return {
-  cria(box){if(!box||vivos[box.id])return;const v=cena(box,false);v.cam.position.set(0,3.4,9.6);v.cam.lookAt(0,-.15,0);
-   const n=nigiri('salmao');v.raiz.add(n);const pr=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.35,.14,64),MAT.tigela);pr.position.y=-.62;v.raiz.add(pr);v.raiz.rotation.y=-.6;vivos[box.id]=v;},
-  liga(id){const b=document.getElementById(id);if(vivos[id]){setTimeout(vivos[id].tam,80);return;}
-   setTimeout(()=>{const v=cena(b,true);v.cam.position.set(0,12.5,11.5);v.cam.lookAt(0,-.6,0);
-    MAT.hinoki.color=new THREE.Color(0xb89c72);const tabua=new THREE.Mesh(new THREE.BoxGeometry(13,.5,7),MAT.hinoki);tabua.position.y=-.25;v.raiz.add(tabua);
-    [-6,6].forEach(x=>{const p=new THREE.Mesh(new THREE.BoxGeometry(.8,.7,7.5),MAT.hinoki);p.position.set(x,-.85,0);v.raiz.add(p);});
-    v.pecas=new THREE.Group();v.raiz.add(v.pecas);vivos[id]=v;if(this._fila)this.mesa(this._fila);},160);},
-  mesa(linhas){this._fila=linhas;const v=vivos.palco;if(!v||!v.pecas)return;
-   while(v.pecas.children.length)v.pecas.remove(v.pecas.children[0]);v.caindo.length=0;
-   const itens=[];linhas.forEach(({i,q})=>{for(let k=0;k<q;k++)itens.push(i);});
-   const cols=Math.min(5,Math.max(3,Math.ceil(Math.sqrt(itens.length*1.6)))),rows=Math.ceil(itens.length/cols),esc=Math.min(.85,3.4/Math.max(cols,rows));
-   const t0=performance.now();
-   itens.forEach((it,k)=>{const o=peca(it);o.scale.multiplyScalar(esc);const c=k%cols,rr=k/cols|0;
-    const x=(c-(cols-1)/2)*(11.5/cols),z=(rr-(rows-1)/2)*(5.8/Math.max(rows,1.6));o.position.set(x,0,z);o.rotation.y=(Math.random()-.5)*.5;
-    v.pecas.add(o);if(!reduz)v.caindo.push({o,y:0,t0:t0+k*110});});}
- };
-})();
-Nigiri.cria(document.getElementById('tile-3d'));
-</script>
+<script src="../nigiri.js"></script>
+<script>window.Nigiri&&Nigiri.cria(document.getElementById('tile-3d'));</script>
 </body>
 </html>
