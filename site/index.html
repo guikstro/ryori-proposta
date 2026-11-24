@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Ryori, cozinha japonesa contemporânea em Fortaleza. Buganvília e Iguatemi.">
+<title>Ryori · protótipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Ryori: pedra clara, tinta sumi e o cobre da logo. Shippori Mincho (o "ryōri" da marca é uma serifa fina) e Zen Kaku Gothic. */
+:root{--pedra:#E7E6E1;--pedra-2:#DAD8D0;--sumi:#1D1C1A;--sumi-2:#55534D;--cobre:#7E5226;--cobre-claro:#B8875A;--regra:#C9C6BC;
+  --serif:'Shippori Mincho',serif;--sans:'Zen Kaku Gothic New',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--pedra);color:var(--sumi);font:400 16px/1.75 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cobre);outline-offset:3px}
+.demo{background:var(--sumi);color:var(--pedra);font-size:13px;text-align:center;padding:7px 16px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.topo{display:flex;align-items:center;gap:28px;padding:12px 28px;max-width:1180px;margin:0 auto}
+.topo img{height:62px;filter:invert(1);mix-blend-mode:multiply}
+.topo nav{display:flex;gap:26px;margin-left:auto;font-size:15px}
+.topo nav a{text-decoration:none;padding:10px 0}
+.topo nav a:hover{color:var(--cobre)}
+.lang{background:none;border:1px solid var(--sumi);font:500 13px var(--sans);min-height:44px;min-width:50px;cursor:pointer;color:var(--sumi)}
+
+/* abertura: 料理 quer dizer "cozinhar"; é o nome da casa */
+.abre{display:grid;grid-template-columns:auto 1fr 1.15fr;gap:44px;align-items:stretch;padding:24px 0 72px}
+.kanji{writing-mode:vertical-rl;font-family:var(--serif);font-weight:500;font-size:clamp(110px,13vw,190px);line-height:1;color:var(--cobre);letter-spacing:.06em;align-self:start}
+.abre .txt{align-self:end;padding-bottom:8px}
+.abre h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,3.6vw,52px);line-height:1.2}
+.abre .sig{color:var(--sumi-2);margin:14px 0 24px;max-width:34ch}
+.estados{list-style:none;margin-bottom:26px;border-top:1px solid var(--sumi)}
+.estados li{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--regra);font-size:15px}
+.estados b{font-family:var(--serif);font-weight:600;font-size:18px}
+.estados span{color:var(--sumi-2)}
+.estados .on span{color:var(--cobre)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 26px;background:var(--sumi);color:var(--pedra);text-decoration:none;font-weight:500;border:1px solid var(--sumi)}
+.btn.o{background:transparent;color:var(--sumi)}
+.acoes{display:flex;gap:10px;flex-wrap:wrap}
+.abre .foto{background:#2b2723 center/cover no-repeat;min-height:min(70vh,620px)}
+
+section{padding:96px 0}
+.cab h2{font-family:var(--serif);font-weight:500;font-size:clamp(34px,4vw,54px);line-height:1.15}
+.cab p{color:var(--sumi-2);max-width:58ch;margin-top:10px}
+
+/* monte a sua mesa: a peça da casa */
+.mesa{background:var(--sumi);color:var(--pedra)}
+.mesa .cab p{color:#B9B5AC}
+.mesa .grade{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;margin-top:40px}
+.ctrl h3{font-family:var(--serif);font-weight:500;font-size:20px;margin:0 0 10px}
+.ctrl .grupo{margin-bottom:28px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{background:transparent;border:1px solid #6d6a63;color:var(--pedra);font:500 15px var(--sans);min-height:48px;min-width:52px;padding:0 16px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--cobre-claro);border-color:var(--cobre-claro);color:var(--sumi)}
+.ctrl label{display:flex;gap:12px;align-items:center;min-height:48px;cursor:pointer;border-top:1px solid #3b3935}
+.ctrl input{accent-color:var(--cobre-claro);width:20px;height:20px}
+.sugestao{border-top:1px solid var(--pedra)}
+.sug-item{display:grid;grid-template-columns:40px 1fr auto;gap:14px;padding:14px 0;border-bottom:1px solid #3b3935;align-items:baseline}
+.sug-item .q{font-family:var(--serif);font-size:22px;color:var(--cobre-claro)}
+.sug-item b{font-family:var(--serif);font-weight:500;font-size:19px}
+.sug-item small{display:block;color:#A9A59C;font-size:14px;line-height:1.5}
+.sug-item .v{font-variant-numeric:tabular-nums;white-space:nowrap}
+.total{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0 6px;flex-wrap:wrap}
+.total b{font-family:var(--serif);font-weight:500;font-size:40px;color:var(--cobre-claro)}
+.total span{color:#B9B5AC}
+.mesa .nota{font-size:14px;color:#A9A59C;margin-top:10px;max-width:60ch}
+.mesa .btn{background:var(--cobre-claro);border-color:var(--cobre-claro);color:var(--sumi);margin-top:20px}
+
+/* cardápio */
+.indice{display:flex;flex-wrap:wrap;gap:4px 26px;margin-top:30px;padding:12px 0;border-top:1px solid var(--sumi);border-bottom:1px solid var(--regra);position:sticky;top:0;background:var(--pedra);z-index:5;font-size:15px}
+.indice a{text-decoration:none;padding:6px 0}
+.indice a:hover{color:var(--cobre)}
+.aviso{font-size:15px;color:var(--cobre);margin-top:14px}
+.grupo-c{padding:40px 0 10px;display:grid;grid-template-columns:250px 1fr;gap:40px;border-bottom:1px solid var(--regra)}
+.grupo-c h3{font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.2}
+.grupo-c .nota{font-size:14px;color:var(--sumi-2);margin-top:6px}
+.itens{columns:2 300px;column-gap:44px}
+.item{break-inside:avoid;padding:0 0 20px}
+.item .n{font-family:var(--serif);font-weight:600;font-size:18px}
+.item .p{color:var(--cobre);margin-left:10px;font-variant-numeric:tabular-nums}
+.item .d{color:var(--sumi-2);font-size:15px;line-height:1.6}
+.antes{display:none}
+body.revisao .antes{display:block;font-size:13px;color:var(--cobre);text-decoration:line-through}
+
+/* casas */
+.casas .grade{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:36px}
+.casa .foto{aspect-ratio:16/10;background:#2b2723 center/cover no-repeat;margin-bottom:20px}
+.casa h3{font-family:var(--serif);font-weight:500;font-size:32px}
+.casa .end{color:var(--sumi-2);margin-bottom:14px}
+.horas{list-style:none}
+.horas li{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--regra);font-variant-numeric:tabular-nums;font-size:15px}
+.horas li.hoje{color:var(--cobre);font-weight:500}
+.casa .links{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px}
+.casa .links a{min-height:44px;display:inline-flex;align-items:center;text-underline-offset:5px}
+
+footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--sumi-2);font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--sumi)}
+.ferr{position:fixed;left:16px;bottom:16px;z-index:30}
+.ferr button{min-height:44px;padding:0 16px;background:var(--pedra);color:var(--sumi);border:1px solid var(--sumi);font:500 14px var(--sans);cursor:pointer}
+.ferr button[aria-pressed=true]{background:var(--sumi);color:var(--pedra)}
+
+@media (max-width:900px){
+  .topo nav{display:none}
+  .abre{grid-template-columns:auto 1fr;gap:18px}
+  .abre .foto{grid-column:1/-1;min-height:46vh;order:-1}
+  .kanji{font-size:96px}
+  .mesa .grade,.casas .grade{grid-template-columns:1fr;gap:28px}
+  .grupo-c{grid-template-columns:1fr;gap:10px}
+  section{padding:64px 0}
+  .wrap{padding:0 22px}
+  .indice{overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="demo" data-t="demo">Protótipo feito pela Timeless para o Ryori. Não é o site oficial da casa.</div>
+<div class="topo">
+  <img src="https://static.wixstatic.com/media/404bb8_7d5670b5bc4c471db1008a3949596d86~mv2.png/v1/fill/w_600,h_440,al_c,q_85/ryori.png" alt="Ryori">
+  <nav aria-label="Seções">
+    <a href="#mesa" data-t="n1">Monte a sua mesa</a>
+    <a href="#cardapio" data-t="n2">Cardápio</a>
+    <a href="#casas" data-t="n3">As casas</a>
+    <a href="reservar/" data-t="n4">Reservar</a>
+  </nav>
+  <button class="lang" type="button" id="lang">EN</button>
+</div>
+
+<div class="wrap abre">
+  <div class="kanji" lang="ja" aria-label="料理, ryōri">料理</div>
+  <div class="txt">
+    <h1 data-t="h1">Cozinha japonesa contemporânea, em Fortaleza.</h1>
+    <p class="sig" data-t="sig">Ryōri quer dizer cozinhar, em japonês. Duas casas: Buganvília, com varanda, e Iguatemi.</p>
+    <ul class="estados" id="estados"></ul>
+    <div class="acoes">
+      <a class="btn" href="#mesa" data-t="bMesa">Monte a sua mesa</a>
+      <a class="btn o" href="reservar/" data-t="bRes">Reservar</a>
+    </div>
+  </div>
+  <div class="foto" style="background-image:url(https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_1300,h_1500,al_c,q_82,enc_auto/ryori.jpg)" role="img" aria-label="Barco de sashimi do Ryori"></div>
+</div>
+
+<main>
+  <section class="mesa" id="mesa">
+    <div class="wrap">
+      <div class="cab">
+        <h2 data-t="mesaT">Deixe o sushiman sugerir</h2>
+        <p data-t="mesaL">Diga quantos vão, a fome e o que vocês não comem. O site monta uma mesa com pratos do cardápio e mostra quanto fica.</p>
+      </div>
+      <div class="grade">
+        <div class="ctrl">
+          <div class="grupo"><h3 data-t="qPessoas">Quantas pessoas?</h3><div class="seg" id="c-pessoas"></div></div>
+          <div class="grupo"><h3 data-t="qFome">Qual a fome?</h3><div class="seg" id="c-fome"></div></div>
+          <div class="grupo"><h3 data-t="qPref">Alguma restrição?</h3>
+            <label><input type="checkbox" id="c-cru"> <span data-t="semCru">Nada de peixe cru</span></label>
+            <label><input type="checkbox" id="c-veg"> <span data-t="veg">Mesa vegetariana</span></label>
+          </div>
+        </div>
+        <div>
+          <div class="sugestao" id="sugestao" aria-live="polite"></div>
+          <div class="total" id="total"></div>
+          <p class="nota" data-t="mesaNota">Sugestão montada pelo site a partir do cardápio digital, com os preços de 24/11/2026. Na mesa, o sushiman ajusta. Bebidas e taxa de serviço não estão na conta.</p>
+          <a class="btn" href="reservar/" id="b-reservar-mesa" data-t="bResMesa">Reservar com essa ideia</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cardapio">
+    <div class="wrap">
+      <div class="cab">
+        <h2 data-t="cardT">Cardápio</h2>
+        <p data-t="cardL">Uma seleção do cardápio digital da casa, em português e inglês.</p>
+        <p class="aviso" data-t="alerg">A casa ainda não informa alergênicos no cardápio. Na dúvida, pergunte à equipe.</p>
+      </div>
+      <div class="indice" id="indice"></div>
+      <div id="lista"></div>
+    </div>
+  </section>
+
+  <section class="casas" id="casas">
+    <div class="wrap">
+      <div class="cab"><h2 data-t="casasT">As casas</h2><p data-t="casasL">O Buganvília fecha entre o almoço e o jantar; o Iguatemi fica aberto direto.</p></div>
+      <div class="grade" id="lista-casas"></div>
+    </div>
+  </section>
+</main>
+<footer>
+  <span>Ryori, do Grupo Social Clube</span>
+  <span><a href="links/">Link da bio</a> &nbsp; <a href="../painel/" data-t="painelL">Painel da equipe</a></span>
+  <span data-t="rodape">Protótipo da Timeless. Fotos do site do Grupo Social Clube; horários da bio do Instagram em 24/11/2026.</span>
+</footer>
+<div class="ferr"><button type="button" id="b-revisao" aria-pressed="false">Ver o que corrigimos</button></div>
+
+<script src="marca.js"></script>
+<script src="comum.js"></script>
+<script src="cardapio.js"></script>
+<script>
+const EN={demo:'Prototype made by Timeless for Ryori. Not the restaurant’s official website.',n1:'Build your table',n2:'Menu',n3:'Our houses',n4:'Book',
+ h1:'Contemporary Japanese cooking, in Fortaleza.',sig:'Ryōri means “cooking” in Japanese. Two houses: Buganvília, with a deck, and Iguatemi.',bMesa:'Build your table',bRes:'Book',
+ mesaT:'Let the sushi chef suggest',mesaL:'Tell us how many, how hungry and what you don’t eat. The site builds a table from the menu and shows the total.',
+ qPessoas:'How many people?',qFome:'How hungry?',qPref:'Any restriction?',semCru:'No raw fish',veg:'Vegetarian table',
+ mesaNota:'A suggestion built from the digital menu, prices as of 24 Nov 2026. At the table, the sushi chef adjusts it. Drinks and service charge not included.',bResMesa:'Book with this idea',
+ cardT:'Menu',cardL:'A selection from the restaurant’s digital menu, in Portuguese and English.',alerg:'The restaurant does not list allergens on the menu yet. If in doubt, ask the team.',
+ casasT:'Our houses',casasL:'Buganvília closes between lunch and dinner; Iguatemi stays open all day.',painelL:'Team panel',
+ rodape:'Timeless prototype. Photos from the Grupo Social Clube website; hours from the Instagram bio, 24 Nov 2026.'};
+const PT={};document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
+const brl=n=>'R$ '+n.toLocaleString('pt-BR');
+const M={pessoas:2,fome:'normal',cru:false,veg:false};
+
+function estados(){
+  document.getElementById('estados').innerHTML=MARCA.unidades.map(u=>{const s=estadoUnidade(u),on=s.k==='aberta';
+    const t=on?L(`aberta até ${hm(s.ate)}`,`open until ${hm(s.ate)}`):s.k==='pausa'?L(`volta às ${hm(s.abre)}`,`back at ${hm(s.abre)}`):s.k==='antes'?L(`abre às ${hm(s.abre)}`,`opens at ${hm(s.abre)}`):L(`abre amanhã às ${hm(s.abre)}`,`opens tomorrow at ${hm(s.abre)}`);
+    return `<li class="${on?'on':''}"><b>${u.nome}</b><span>${t}</span></li>`;}).join('');
+}
+// Monta a mesa: entradas e peças do sushibar proporcionais ao grupo e à fome, seguindo a ordem de sugestão
+function monta(){
+  const f={leve:.75,normal:1,fome:1.35}[M.fome], n=M.pessoas;
+  const todos=CARDAPIO.filter(g=>g.id!=='executivo').flatMap(g=>g.itens.map(i=>({...i,grupo:g.id})));
+  const ok=i=>(!M.cru||!i.t.includes('cru'))&&(!M.veg||i.t.includes('veg'));
+  const ord=l=>l.filter(ok).sort((a,b)=>a.sug-b.sug);
+  const entradas=ord(todos.filter(i=>i.grupo==='starters'||i.grupo==='veg'));
+  const bar=M.veg?[]:ord(todos.filter(i=>i.grupo==='sushibar'));
+  const qE=Math.max(1,Math.round(n*.8*f)), qB=M.veg?0:Math.max(1,Math.round(n*1*f));
+  const escolha=new Map();
+  const pega=(lista,q)=>{for(let k=0;k<q&&lista.length;k++){const i=lista[k%lista.length];escolha.set(i.n,{i,q:(escolha.get(i.n)?.q||0)+1});}};
+  pega(entradas,qE+(M.veg?Math.round(n*.8*f):0)); pega(bar,qB);
+  const linhas=[...escolha.values()];
+  const total=linhas.reduce((s,x)=>s+x.i.p*x.q,0);
+  document.getElementById('sugestao').innerHTML=linhas.map(({i,q})=>`<div class="sug-item"><span class="q">${q}×</span><div><b>${lang==='en'?i.en[0]:i.n}</b><small>${lang==='en'?i.en[1]:i.d}</small></div><span class="v">${brl(i.p*q)}</span></div>`).join('');
+  document.getElementById('total').innerHTML=`<b>${brl(total)}</b><span>${L(`cerca de ${brl(Math.round(total/n))} por pessoa, para ${n}`,`about ${brl(Math.round(total/n))} per person, for ${n}`)}</span>`;
+  document.getElementById('b-reservar-mesa').href=`reservar/`;
+}
+function controles(){
+  document.getElementById('c-pessoas').innerHTML=[1,2,3,4,5,6].map(n=>`<button type="button" data-p="${n}" aria-pressed="${M.pessoas===n}">${n}</button>`).join('');
+  document.getElementById('c-fome').innerHTML=[['leve','Leve','Light'],['normal','Normal','Normal'],['fome','Com fome','Hungry']].map(([k,p,e])=>`<button type="button" data-f="${k}" aria-pressed="${M.fome===k}">${lang==='en'?e:p}</button>`).join('');
+}
+document.getElementById('c-pessoas').addEventListener('click',e=>{const b=e.target.closest('button');if(b){M.pessoas=+b.dataset.p;controles();monta();}});
+document.getElementById('c-fome').addEventListener('click',e=>{const b=e.target.closest('button');if(b){M.fome=b.dataset.f;controles();monta();}});
+document.getElementById('c-cru').addEventListener('change',e=>{M.cru=e.target.checked;monta();});
+document.getElementById('c-veg').addEventListener('change',e=>{M.veg=e.target.checked;monta();});
+
+function cardapio(){
+  document.getElementById('indice').innerHTML=CARDAPIO.map(g=>`<a href="#${g.id}">${lang==='en'?g.en:g.cat}</a>`).join('');
+  document.getElementById('lista').innerHTML=CARDAPIO.map(g=>`<div class="grupo-c" id="${g.id}"><div><h3>${lang==='en'?g.en:g.cat}</h3>${g.nota?`<p class="nota">${L(g.nota,'Served at lunch.')}</p>`:''}</div>
+   <div class="itens">${g.itens.map(i=>`<div class="item"><div><span class="n">${lang==='en'?i.en[0]:i.n}</span><span class="p">${brl(i.p)}</span></div><div class="d">${lang==='en'?i.en[1]:i.d}</div>${i.fix?`<div class="antes">${L('antes','before')}: ${i.fix}</div>`:''}</div>`).join('')}</div></div>`).join('');
+}
+function casas(){
+  const {d}=agoraFortaleza();
+  document.getElementById('lista-casas').innerHTML=MARCA.unidades.map(u=>`<div class="casa"><div class="foto" style="background-image:url(${u.foto})" role="img" aria-label="${u.nome}"></div><h3>${u.nome}</h3><p class="end">${u.end}</p>
+   <ul class="horas">${[0,1,2,3,4,5,6].map(k=>`<li class="${k===d?'hoje':''}"><span>${lang==='en'?DAYS[k]:DIAS[k][0].toUpperCase()+DIAS[k].slice(1)}${k===d?L(' (hoje)',' (today)'):''}</span><span>${u.hor[k].map(([a,b])=>hm(a)+L(' às ','–')+hm(b)).join(L(' e ',', '))}</span></li>`).join('')}</ul>
+   <div class="links"><a href="${u.mapa}" target="_blank" rel="noopener">${L('Como chegar','Directions')}</a><a href="reservar/?casa=${u.id}">${L('Reservar','Book')}</a></div></div>`).join('');
+}
+function tudo(){estados();controles();monta();cardapio();casas();}
+function aplicaLang(){document.getElementById('lang').textContent=lang==='en'?'PT':'EN';document.documentElement.lang=lang==='en'?'en':'pt-BR';
+  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});tudo();}
+document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
+const bR=document.getElementById('b-revisao');bR.addEventListener('click',()=>{const on=document.body.classList.toggle('revisao');bR.setAttribute('aria-pressed',on);});
+aplicaLang(); setInterval(estados,60000);
+</script>
+</body>
+</html>
