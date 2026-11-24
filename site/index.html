@@ -6,6 +6,8 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Ryori, cozinha japonesa contemporânea em Fortaleza. Buganvília e Iguatemi.">
 <title>Ryori · protótipo</title>
+<!-- Dados conferidos em 24/11/2026 (Tripadvisor, Linktree, bio do Instagram). WhatsApp fica de fora até a casa confirmar. -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Restaurant", "name": "Ryori Buganvília", "servesCuisine": ["Japonesa", "Sushi"], "telephone": "+55 85 3224-9997", "address": {"@type": "PostalAddress", "streetAddress": "Av. Dom Luís, 1113, lojas 18 e 19", "addressLocality": "Fortaleza", "addressRegion": "CE", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "11:30", "closes": "15:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "18:00", "closes": "23:30"}]}, {"@type": "Restaurant", "name": "Ryori Iguatemi", "servesCuisine": ["Japonesa", "Sushi"], "telephone": "+55 85 3241-4683", "address": {"@type": "PostalAddress", "streetAddress": "Av. Washington Soares, 85, Shopping Iguatemi", "addressLocality": "Fortaleza", "addressRegion": "CE", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "11:30", "closes": "22:00"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
@@ -81,8 +83,15 @@ section{padding:96px 0}
 .grupo-c .nota{font-size:14px;color:var(--sumi-2);margin-top:6px}
 .itens{columns:2 300px;column-gap:44px}
 .item{break-inside:avoid;padding:0 0 20px}
+.item .linha{display:flex;align-items:baseline;gap:8px}
 .item .n{font-family:var(--serif);font-weight:600;font-size:18px}
-.item .p{color:var(--cobre);margin-left:10px;font-variant-numeric:tabular-nums}
+.item .p{color:var(--cobre);margin-left:auto;padding-left:10px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.item .p.sem{font-size:13px;color:var(--sumi-2)}
+.item .alg{font-size:13px;color:var(--sumi-2);margin:0 0 2px}
+.item .alg.pend{font-style:italic}
+.conf{display:inline-block;margin-top:8px;font-size:13px;font-weight:500;color:var(--cobre);border-bottom:1px solid currentColor}
+.aviso-alerg{margin-top:28px;font-size:15px;font-weight:500}
+.casa .trip{font-size:14px;color:var(--sumi-2);margin:-6px 0 12px}
 .item .d{color:var(--sumi-2);font-size:15px;line-height:1.6}
 .antes{display:none}
 body.revisao .antes{display:block;font-size:13px;color:var(--cobre);text-decoration:line-through}
@@ -122,14 +131,14 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--sumi-2
 <body>
 <div class="demo" data-t="demo">Protótipo feito pela Timeless para o Ryori. Não é o site oficial da casa.</div>
 <div class="topo">
-  <img src="https://static.wixstatic.com/media/404bb8_7d5670b5bc4c471db1008a3949596d86~mv2.png/v1/fill/w_600,h_440,al_c,q_85/ryori.png" alt="Ryori">
+  <img src="https://static.wixstatic.com/media/404bb8_7d5670b5bc4c471db1008a3949596d86~mv2.png/v1/fill/w_600,h_440,al_c,q_85/ryori.png" alt="Ryori" width="85" height="62">
   <nav aria-label="Seções">
     <a href="#mesa" data-t="n1">Monte a sua mesa</a>
     <a href="#cardapio" data-t="n2">Cardápio</a>
     <a href="#casas" data-t="n3">As casas</a>
     <a href="reservar/" data-t="n4">Reservar</a>
   </nav>
-  <button class="lang" type="button" id="lang">EN</button>
+  <button class="lang" type="button" id="lang" aria-label="Ver em inglês">EN</button>
 </div>
 
 <div class="wrap abre">
@@ -160,6 +169,7 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--sumi-2
           <div class="grupo"><h3 data-t="qPref">Alguma restrição?</h3>
             <label><input type="checkbox" id="c-cru"> <span data-t="semCru">Nada de peixe cru</span></label>
             <label><input type="checkbox" id="c-veg"> <span data-t="veg">Mesa vegetariana</span></label>
+            <p class="nota" data-t="vegNota">O missoshiru saiu da mesa vegetariana até a cozinha confirmar o caldo.</p>
           </div>
         </div>
         <div>
@@ -176,17 +186,17 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--sumi-2
     <div class="wrap">
       <div class="cab">
         <h2 data-t="cardT">Cardápio</h2>
-        <p data-t="cardL">Uma seleção do cardápio digital da casa, em português e inglês.</p>
-        <p class="aviso" data-t="alerg">A casa ainda não informa alergênicos no cardápio. Na dúvida, pergunte à equipe.</p>
+        <p data-t="cardL">Uma seleção do cardápio digital do Iguatemi, em português e inglês, com o Almoço executivo e a Sequência Japonesa.</p>
       </div>
       <div class="indice" id="indice"></div>
       <div id="lista"></div>
+      <p class="aviso-alerg" data-t="avisoAlerg">Para alergias, avise a equipe ao pedir.</p>
     </div>
   </section>
 
   <section class="casas" id="casas">
     <div class="wrap">
-      <div class="cab"><h2 data-t="casasT">As casas</h2><p data-t="casasL">O Buganvília fecha entre o almoço e o jantar; o Iguatemi fica aberto direto.</p></div>
+      <div class="cab"><h2 data-t="casasT">As casas</h2><p data-t="casasL">O Buganvília fecha entre o almoço e o jantar; o Iguatemi fica aberto direto. Para grupos de 9 ou mais, ligue para a casa.</p></div>
       <div class="grade" id="lista-casas"></div>
     </div>
   </section>
@@ -207,11 +217,15 @@ const EN={demo:'Prototype made by Timeless for Ryori. Not the restaurant’s off
  mesaT:'Let the sushi chef suggest',mesaL:'Tell us how many, how hungry and what you don’t eat. The site builds a table from the menu and shows the total.',
  qPessoas:'How many people?',qFome:'How hungry?',qPref:'Any restriction?',semCru:'No raw fish',veg:'Vegetarian table',
  mesaNota:'A suggestion built from the digital menu, prices as of 24 Nov 2026. At the table, the sushi chef adjusts it. Drinks and service charge not included.',bResMesa:'Book with this idea',
- cardT:'Menu',cardL:'A selection from the restaurant’s digital menu, in Portuguese and English.',alerg:'The restaurant does not list allergens on the menu yet. If in doubt, ask the team.',
- casasT:'Our houses',casasL:'Buganvília closes between lunch and dinner; Iguatemi stays open all day.',painelL:'Team panel',
+ cardT:'Menu',cardL:'A selection from the Iguatemi digital menu, in Portuguese and English, with the lunch menu and the Japanese tasting sequence.',avisoAlerg:'For allergies, tell the team when you order.',vegNota:'Miso soup is off the vegetarian table until the kitchen confirms the broth.',
+ casasT:'Our houses',casasL:'Buganvília closes between lunch and dinner; Iguatemi stays open all day. For groups of 9 or more, call the restaurant.',painelL:'Team panel',
  rodape:'Timeless prototype. Photos from the Grupo Social Clube website; hours from the Instagram bio, 24 Nov 2026.'};
 const PT={};document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
 const brl=n=>'R$ '+n.toLocaleString('pt-BR');
+const ALG={gluten:['glúten','gluten'],trigo:['trigo','wheat'],lactose:['lactose','lactose'],leite:['leite','milk'],peixe:['peixe','fish'],amendoas:['amêndoas','almonds'],corantes:['corantes','colourings'],castanhas:['castanhas','tree nuts'],soja:['soja','soy'],ovo:['ovo','egg'],crustaceos:['crustáceos','shellfish']};
+const alg=i=>(i.alerg||[]).length?`<div class="alg">${L('Alergênicos','Allergens')}: ${i.alerg.map(a=>L(...ALG[a])).join(', ')}</div>`:`<div class="alg pend">${L('Alergênicos: confirmar com a casa','Allergens: to be confirmed by the restaurant')}</div>`;
+const preco=p=>p==null?`<span class="p sem">${L('preço com a casa','price on request')}</span>`:`<span class="p">${brl(p)}</span>`;
+const conf=g=>g.confirmar?`<p class="conf">${L('A confirmar com a casa','To be confirmed by the restaurant')}</p>`:'';
 const M={pessoas:2,fome:'normal',cru:false,veg:false};
 
 function estados(){
@@ -222,7 +236,7 @@ function estados(){
 // Monta a mesa: entradas e peças do sushibar proporcionais ao grupo e à fome, seguindo a ordem de sugestão
 function monta(){
   const f={leve:.75,normal:1,fome:1.35}[M.fome], n=M.pessoas;
-  const todos=CARDAPIO.filter(g=>g.id!=='executivo').flatMap(g=>g.itens.map(i=>({...i,grupo:g.id})));
+  const todos=CARDAPIO.filter(g=>g.id!=='executivo'&&g.id!=='sequencia').flatMap(g=>g.itens.map(i=>({...i,grupo:g.id})));
   const ok=i=>(!M.cru||!i.t.includes('cru'))&&(!M.veg||i.t.includes('veg'));
   const ord=l=>l.filter(ok).sort((a,b)=>a.sug-b.sug);
   const entradas=ord(todos.filter(i=>i.grupo==='starters'||i.grupo==='veg'));
@@ -235,7 +249,9 @@ function monta(){
   const total=linhas.reduce((s,x)=>s+x.i.p*x.q,0);
   document.getElementById('sugestao').innerHTML=linhas.map(({i,q})=>`<div class="sug-item"><span class="q">${q}×</span><div><b>${lang==='en'?i.en[0]:i.n}</b><small>${lang==='en'?i.en[1]:i.d}</small></div><span class="v">${brl(i.p*q)}</span></div>`).join('');
   document.getElementById('total').innerHTML=`<b>${brl(total)}</b><span>${L(`cerca de ${brl(Math.round(total/n))} por pessoa, para ${n}`,`about ${brl(Math.round(total/n))} per person, for ${n}`)}</span>`;
-  document.getElementById('b-reservar-mesa').href=`reservar/`;
+  // a mesa sugerida segue para a reserva e aparece na revisão como "Pedido sugerido"
+  const resumo=linhas.map(({i,q})=>`${q}× ${i.n}`).join(', ')+` · ${brl(total)}`;
+  document.getElementById('b-reservar-mesa').href=`reservar/?mesa=${encodeURIComponent(resumo)}`;
 }
 function controles(){
   document.getElementById('c-pessoas').innerHTML=[1,2,3,4,5,6].map(n=>`<button type="button" data-p="${n}" aria-pressed="${M.pessoas===n}">${n}</button>`).join('');
@@ -248,17 +264,17 @@ document.getElementById('c-veg').addEventListener('change',e=>{M.veg=e.target.ch
 
 function cardapio(){
   document.getElementById('indice').innerHTML=CARDAPIO.map(g=>`<a href="#${g.id}">${lang==='en'?g.en:g.cat}</a>`).join('');
-  document.getElementById('lista').innerHTML=CARDAPIO.map(g=>`<div class="grupo-c" id="${g.id}"><div><h3>${lang==='en'?g.en:g.cat}</h3>${g.nota?`<p class="nota">${L(g.nota,'Served at lunch.')}</p>`:''}</div>
-   <div class="itens">${g.itens.map(i=>`<div class="item"><div><span class="n">${lang==='en'?i.en[0]:i.n}</span><span class="p">${brl(i.p)}</span></div><div class="d">${lang==='en'?i.en[1]:i.d}</div>${i.fix?`<div class="antes">${L('antes','before')}: ${i.fix}</div>`:''}</div>`).join('')}</div></div>`).join('');
+  document.getElementById('lista').innerHTML=CARDAPIO.map(g=>`<div class="grupo-c" id="${g.id}"><div><h3>${lang==='en'?g.en:g.cat}</h3>${g.nota?`<p class="nota">${L(g.nota,g.notaEn||g.nota)}</p>`:''}${conf(g)}</div>
+   <div class="itens">${g.itens.map(i=>`<div class="item"><div class="linha"><span class="n">${lang==='en'?i.en[0]:i.n}</span>${preco(i.p)}</div>${alg(i)}<div class="d">${lang==='en'?i.en[1]:i.d}</div>${i.fix?`<div class="antes">${L('antes','before')}: ${i.fix}</div>`:''}</div>`).join('')}</div></div>`).join('');
 }
 function casas(){
   const {d}=agoraFortaleza();
-  document.getElementById('lista-casas').innerHTML=MARCA.unidades.map(u=>`<div class="casa"><div class="foto" style="background-image:url(${u.foto})" role="img" aria-label="${u.nome}"></div><h3>${u.nome}</h3><p class="end">${u.end}</p>
+  document.getElementById('lista-casas').innerHTML=MARCA.unidades.map(u=>`<div class="casa"><div class="foto" style="background-image:url(${u.foto})" role="img" aria-label="${L('Ryori '+u.nome+', foto da casa','Ryori '+u.nome+', photo of the restaurant')}"></div><h3>${u.nome}</h3><p class="end">${u.end}</p>${u.trip?`<p class="trip">Tripadvisor ${L(u.trip[0],u.trip[3])}, ${L(u.trip[1]+' avaliações',u.trip[4]+' reviews')} (24/11/2026)</p>`:''}
    <ul class="horas">${[0,1,2,3,4,5,6].map(k=>`<li class="${k===d?'hoje':''}"><span>${lang==='en'?DAYS[k]:DIAS[k][0].toUpperCase()+DIAS[k].slice(1)}${k===d?L(' (hoje)',' (today)'):''}</span><span>${u.hor[k].map(([a,b])=>hm(a)+L(' às ','–')+hm(b)).join(L(' e ',', '))}</span></li>`).join('')}</ul>
-   <div class="links"><a href="${u.mapa}" target="_blank" rel="noopener">${L('Como chegar','Directions')}</a><a href="reservar/?casa=${u.id}">${L('Reservar','Book')}</a></div></div>`).join('');
+   <div class="links"><a href="${u.mapa}" target="_blank" rel="noopener">${L('Como chegar','Directions')}</a><a href="reservar/?casa=${u.id}">${L('Reservar','Book')}</a>${u.tel?`<a href="tel:+55${u.tel.replace(/\D/g,'')}">${L('Ligar','Call')} ${u.tel}</a>`:''}</div></div>`).join('');
 }
 function tudo(){estados();controles();monta();cardapio();casas();}
-function aplicaLang(){document.getElementById('lang').textContent=lang==='en'?'PT':'EN';document.documentElement.lang=lang==='en'?'en':'pt-BR';
+function aplicaLang(){const bl=document.getElementById('lang');bl.textContent=lang==='en'?'PT':'EN';bl.setAttribute('aria-label',lang==='en'?'Ver em português':'Ver em inglês');document.documentElement.lang=lang==='en'?'en':'pt-BR';
   document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});tudo();}
 document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
 const bR=document.getElementById('b-revisao');bR.addEventListener('click',()=>{const on=document.body.classList.toggle('revisao');bR.setAttribute('aria-pressed',on);});
