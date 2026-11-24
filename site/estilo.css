@@ -99,3 +99,61 @@ svg.ic.cheio{fill:currentColor;stroke:none}
 .placa span{writing-mode:vertical-rl;font:600 16px var(--mincho)}
 .placa small{font-size:10.5px;color:#5a4630}
 @keyframes pendura{0%{transform:rotate(-16deg)}60%{transform:rotate(6deg)}100%{transform:rotate(0)}}
+
+/* a reserva é uma triagem: uma pergunta por vez, e a ficha ao lado guarda o que já foi escolhido */
+.tri{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:64px;margin-top:52px;align-items:start}
+.ficha-r{position:sticky;top:90px}
+.ficha-r ol{list-style:none;margin-top:12px;border-top:1px dashed var(--cortica)}
+.ficha-r li{border-bottom:1px dashed var(--cortica)}
+.ficha-r li button,.ficha-r li span.l{display:flex;justify-content:space-between;gap:12px;width:100%;padding:14px 0;font-size:12px;color:var(--creme-3);text-align:left}
+.ficha-r li.ok button{color:var(--creme)}
+.ficha-r li.ok button span:last-child{color:var(--brasa)}
+.ficha-r li.agora span.l{color:var(--creme)}
+.ficha-r li.agora span.l::after{content:'●';color:var(--brasa)}
+.ficha-r .mesa-s{margin-top:14px;font-size:10.5px;color:var(--creme-3)}
+.etapa{min-height:460px;animation:passo .55s var(--ease)}
+@keyframes passo{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.etapa .n{color:var(--creme-2)}
+.etapa .titulo{margin-top:12px}
+.etapa .corrido-p{margin-top:12px;max-width:52ch}
+.opcoes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.opcao{text-align:left;padding:24px;border:1px solid var(--cortica);border-radius:var(--r-cartao);transition:border-color .3s,background .3s}
+.opcao:hover,.opcao[aria-pressed=true]{border-color:var(--casca);background:var(--noite-2)}
+.opcao:disabled{opacity:.35;cursor:not-allowed}
+.opcao b{display:block;font-weight:500;font-size:34px;line-height:.9}
+.opcao small{display:block;font-size:11px;color:var(--brasa);margin-top:12px}
+.opcao span{display:block;text-transform:none;font-weight:400;font-size:14px;color:var(--creme-2);margin-top:6px}
+.etapa .fichas{margin-top:28px}
+.etapa .fichas .fantasma{min-width:66px;min-height:54px;font-size:13px}
+.turno+.turno{margin-top:26px}
+.turno .rot{color:var(--creme-2);margin-top:28px}
+.turno .fichas{margin-top:12px}
+.etapa .planta-caixa{margin-top:26px}
+.escolha{font-size:15px;line-height:1.3;margin-top:16px;min-height:2.6em}
+.pe-e{display:flex;gap:10px;align-items:center;margin-top:34px;flex-wrap:wrap}
+.pe-e .btn{min-width:220px}
+.resumo-e{margin-top:26px;padding:20px;border-radius:var(--r-cartao);background:var(--noite-2);border:1px dashed var(--cortica);font-size:13px;line-height:1.6}
+.resumo-e b{display:block;font-weight:500;font-size:22px;line-height:1;margin-bottom:6px}
+.etapa .campo{max-width:480px}
+.feito{padding:28px;border-radius:var(--r-cartao);background:var(--noite-2);border:1px dashed var(--cortica)}
+.feito .par{display:grid;grid-template-columns:120px 1fr;gap:28px;align-items:start}
+.feito .placa{margin:30px 0 0}
+.feito h3{font-weight:500;font-size:34px;line-height:.92}
+.feito p{margin-top:10px}
+.feito .msg{text-transform:none;white-space:pre-line;margin-top:18px;padding-top:14px;border-top:1px dashed var(--madeira);font-size:12px;color:var(--creme-2)}
+.feito .acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+@media (max-width:900px){.tri{grid-template-columns:1fr;gap:28px;margin-top:32px}.ficha-r{position:static}.ficha-r li button,.ficha-r li span.l{padding:10px 0}.opcoes{grid-template-columns:1fr}.etapa{min-height:0}.feito .par{grid-template-columns:1fr}.feito .placa{margin:30px auto 0}}
+/* na bio, a triagem cabe numa coluna e a ficha vira uma faixa compacta */
+.tri.compacto{grid-template-columns:1fr;gap:18px;margin-top:4px}
+.tri.compacto .ficha-r{position:static}
+.tri.compacto .ficha-r li button,.tri.compacto .ficha-r li span.l{padding:8px 0;font-size:11px}
+.tri.compacto .etapa{min-height:0}
+.tri.compacto .opcoes{grid-template-columns:1fr}
+.tri.compacto .opcao b{font-size:28px}
+.tri.compacto .titulo{font-size:30px}
+.tri.compacto .feito .par{grid-template-columns:1fr}
+.tri.compacto .feito .placa{margin:30px auto 0}
+.tri.compacto .pe-e .btn{flex:1;min-width:0}
+
+.tri.fim{grid-template-columns:1fr}
+.tri.fim .feito{max-width:760px}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#100904">
+<meta name="theme-color" content="#14110e">
 <title>Ryori · cozinha japonesa contemporânea em Fortaleza</title>
 <meta name="description" content="Ryori, cozinha japonesa contemporânea em Fortaleza. Buganvília e Iguatemi. Balcão do sushiman, Sequência Japonesa e reservas.">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
@@ -13,63 +13,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 <style>
-/* Site do Ryori. Duas formas de tela, como no ORYZO:
-   foto (a casa em contexto, de ponta a ponta) e sala escura (um objeto no centro, título à esquerda, texto à direita).
-   Entre elas, só linhas tracejadas. */
+/* Site do Ryori, enxuto: uma imagem abre a página, e cada seção diz uma coisa só.
+   Abertura, sobre (o nigiri em 3D no escuro), cozinha, Sequência, reserva e as casas. */
 .demo{position:fixed;z-index:60;left:0;right:0;bottom:0;font-size:9.5px;text-align:center;padding:5px 10px;background:var(--nogueira);color:var(--creme-3);border-top:1px dashed var(--cortica)}
 .demo b{font-weight:500;color:var(--brasa)}
-
-/* navegação fixa */
-.nav{position:fixed;z-index:40;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 24px;transition:background .4s}
-.nav.solida{background:rgba(16,9,4,.94)}
-.nav .marca{font-size:14px;letter-spacing:.02em}
-.nav nav{display:flex;gap:26px}
+.nav{position:fixed;z-index:40;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 28px;transition:background .4s}
+.nav.solida{background:rgba(20,17,14,.94)}
+.nav nav{display:flex;gap:28px}
 .nav nav a{font-size:12px;padding:4px 0;border-bottom:1px dashed transparent}
 .nav nav a.on{border-bottom-color:var(--creme)}
-.nav .dir{display:flex;align-items:center;gap:18px}
-.lateral{position:fixed;z-index:30;right:10px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-size:10px;color:var(--creme-3);letter-spacing:.06em;pointer-events:none}
-@media (max-width:900px){.nav nav{display:none}.lateral{display:none}.nav{padding:14px 16px}}
+.nav .dir{display:flex;align-items:center;gap:20px}
+@media (max-width:900px){.nav nav{display:none}.nav{padding:16px}}
 
-/* 1. abertura: foto */
-.abre{position:relative;height:100svh;min-height:640px;overflow:hidden}
-.abre video,.abre .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%}
-.abre::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,9,4,.55),rgba(16,9,4,0) 30%,rgba(16,9,4,.1) 55%,rgba(16,9,4,.85))}
-.abre .lockup{position:absolute;z-index:2;left:24px;top:96px}
-.abre .lockup .rot{max-width:34ch}
-.abre .lockup h1{font-weight:500;font-size:clamp(84px,17vw,230px);line-height:.82;margin-top:10px;margin-left:-.04em}
-.abre .info{position:absolute;z-index:2;left:24px;bottom:56px;width:min(380px,calc(100% - 48px));padding:24px;border-radius:var(--r-cartao);background:rgba(16,9,4,.62)}
-.abre .info hr{margin:14px 0}
-.abre .info .estados li{display:flex;justify-content:space-between;gap:12px;list-style:none;font-size:12px;padding:3px 0}
-.abre .info .estados span{color:var(--creme-2)}
-.abre .info .acoes{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
-.abre .video{position:absolute;z-index:2;right:24px;bottom:56px;width:200px;border-radius:var(--r-cartao);overflow:hidden;background:var(--nogueira)}
-.abre .video img{width:100%;height:118px;object-fit:cover;opacity:.85}
-.abre .video span{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;font-size:11px}
-@media (max-width:900px){.abre .lockup{top:76px;left:16px}.abre .info{left:16px;bottom:44px;width:calc(100% - 32px);padding:20px}.abre .video{display:none}}
+/* 1. abertura: uma imagem só */
+.abre{position:relative;height:100svh;min-height:620px;overflow:hidden}
+.abre>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:respira 14s var(--ease) forwards}
+@keyframes respira{to{transform:scale(1)}}
+.abre::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,14,.6),rgba(20,17,14,.1) 30%,rgba(20,17,14,.2) 55%,rgba(20,17,14,.9))}
+.abre .lockup{position:absolute;z-index:2;left:28px;right:28px;bottom:56px;display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap}
+.abre .lockup .logo{--w:min(56vw,360px)}
+.abre .lockup .dir{max-width:30ch}
+.abre .lockup .dir .rot{color:var(--creme-2);line-height:1.5}
+.abre .lockup .dir .btn{margin-top:22px}
+@media (max-width:900px){.abre .lockup{left:16px;right:16px;bottom:48px}}
 
 /* sala escura: título, objeto, texto */
-.sala{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr minmax(280px,40%) 1fr;align-items:center;gap:var(--g);padding:120px 24px 90px}
-.sala>.esq{align-self:center}
-.sala>.dir{align-self:center}
+.sala{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr minmax(280px,40%) 1fr;align-items:center;gap:var(--g);padding:130px 28px 100px}
+.sala>*{min-width:0}
 .sala .obj{position:relative;aspect-ratio:1;width:100%}
 .sala .obj canvas{width:100%!important;height:100%!important}
 .sala .esq .rot{margin-bottom:18px;color:var(--creme-2)}
-.sala .dir .corrido+.corrido{margin-top:18px}
 .sala .dir .acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
-@media (max-width:900px){.sala{grid-template-columns:1fr;min-height:0;padding:96px 16px 72px;gap:28px}.sala .obj{max-width:420px;margin:0 auto}}
-.divisa{margin:0 24px}
+@media (max-width:900px){.sala{grid-template-columns:1fr;min-height:0;padding:100px 16px 80px;gap:28px}.sala .obj{max-width:420px;margin:0 auto}}
+.divisa{margin:0 28px}
 @media (max-width:900px){.divisa{margin:0 16px}}
 
-/* 3. cozinha: abas, uma foto por vez */
-.cozinha{padding:110px 24px 90px}
-.cozinha .cab{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);align-items:end}
-.cozinha .abas{display:flex;gap:22px;flex-wrap:wrap;margin-top:42px}
-.cozinha .abas button{font-size:12px;padding:6px 0;border-bottom:1px dashed transparent;color:var(--creme-3);transition:color .3s}
-.cozinha .abas button[aria-selected=true]{color:var(--creme);border-bottom-color:var(--creme)}
-.prato-g{display:grid;grid-template-columns:1fr minmax(280px,44%) 1fr;gap:var(--g);align-items:center;margin-top:20px;min-height:62svh}
+/* cozinha: abas, uma foto por vez */
+.cozinha{padding:120px 28px 100px}
+.cab{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);align-items:end}
+.abas{display:flex;gap:24px;flex-wrap:wrap;margin-top:44px}
+.abas button{font-size:12px;padding:6px 0;border-bottom:1px dashed transparent;color:var(--creme-3);transition:color .3s}
+.abas button[aria-selected=true]{color:var(--creme);border-bottom-color:var(--creme)}
+.prato-g{display:grid;grid-template-columns:1fr minmax(280px,44%) 1fr;gap:var(--g);align-items:center;margin-top:20px;min-height:60svh}
+.prato-g>*{min-width:0}
 .prato-g .foto{aspect-ratio:1;width:100%;object-fit:cover}
 .prato-g .titulo{margin-bottom:14px}
-.prato-g .preco{font-size:24px;margin-top:20px}
+.prato-g .preco{font-size:24px}
 .cardapio-todo{margin-top:56px}
 .cardapio-todo summary{list-style:none;cursor:pointer;display:inline-flex}
 .cardapio-todo summary::-webkit-details-marker{display:none}
@@ -77,134 +66,78 @@
 .grupo:first-of-type{margin-top:30px}
 .grupo h3{font-weight:500;font-size:18px}
 .grupo .nota{font-size:13px;margin-top:8px}
-.item{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:12px 0;border-bottom:1px dashed rgba(64,55,46,.6)}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:12px 0;border-bottom:1px dashed rgba(46,40,34,.9)}
 .item:last-child{border-bottom:0}
-.item .n{font-size:14px}
-.item .p{font-size:14px}
 .item .d{grid-column:1/-1;text-transform:none;font-weight:400;font-size:14px;line-height:1.4;color:var(--creme-2)}
 .item .alg{grid-column:1/-1;font-size:10px;color:var(--creme-3)}
-@media (max-width:900px){.cozinha{padding:90px 16px 72px}.cozinha .cab{grid-template-columns:1fr}.prato-g{grid-template-columns:1fr;min-height:0;gap:22px}.prato-g .foto{max-width:440px;margin:0 auto}.grupo{grid-template-columns:1fr}}
+@media (max-width:900px){.cozinha{padding:96px 16px 80px}.cab{grid-template-columns:1fr}.prato-g{grid-template-columns:1fr;min-height:0;gap:22px}.prato-g .foto{max-width:440px;margin:0 auto}.grupo{grid-template-columns:1fr}}
 
-/* 4. sequência: o tempo no centro */
+/* sequência */
 .tempo-v{position:relative;aspect-ratio:1;width:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px dashed var(--cortica);border-radius:50%}
-.tempo-v .num{font-size:clamp(110px,14vw,190px);line-height:.8}
+.tempo-v .num{font:600 clamp(110px,14vw,190px)/.8 var(--mincho);color:var(--brasa)}
 .tempo-v .nome{font-size:16px;margin-top:16px}
 .tempo-v .jp{font-size:15px;color:var(--creme-3);margin-top:6px}
 .tempo-v ul{list-style:none;margin-top:14px;text-transform:none;font-weight:400;font-size:13.5px;line-height:1.55;color:var(--creme-2);max-width:72%}
 .tempo-v .setas{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);display:flex;gap:10px;background:var(--nogueira);padding:0 10px}
 .precos{margin-top:28px}
 .precos div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px dashed var(--cortica);font-size:13px}
-.precos div span:last-child{white-space:nowrap}
 
-/* 5. sushiman: a tábua em 3D */
-#palco{aspect-ratio:1;width:100%;cursor:grab;touch-action:pan-y}
-.lista-s{margin-top:22px}
-.lista-s div{display:grid;grid-template-columns:34px 1fr auto;gap:10px;padding:10px 0;border-top:1px dashed var(--cortica);font-size:12.5px;align-items:baseline}
-.lista-s small{display:block;text-transform:none;font-weight:400;font-size:12.5px;color:var(--creme-3);margin-top:3px}
-.total-s{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;border-top:1px solid var(--madeira);margin-top:6px}
-.total-s b{font-weight:500;font-size:30px}
-.total-s span{font-size:11px;color:var(--creme-2);text-align:right}
-.ctrl p.rot{margin:18px 0 10px;color:var(--creme-2)}
+/* reserva */
+.balcao{padding:120px 28px 100px}
+@media (max-width:900px){.balcao{padding:96px 16px 80px}}
 
-/* 6. reserva no balcão */
-.balcao{padding:110px 24px 90px}
-.balcao-g{display:grid;grid-template-columns:1fr minmax(320px,46%) 1fr;gap:var(--g);margin-top:42px;align-items:start}
-.balcao-g>*,.sala>*,.prato-g>*,.antes>*{min-width:0}
-.balcao-g .passos p.rot{margin:0 0 10px;color:var(--creme-2)}
-.balcao-g .passos .fichas{margin-bottom:22px}
-.escolha{font-size:15px;line-height:1.3;margin-top:16px;min-height:2.6em}
-.feito{margin-top:26px;padding:24px;border-radius:var(--r-cartao);background:var(--noite-2);border:1px dashed var(--cortica)}
-.feito .par{display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:start}
-.feito .placa{margin:30px 0 0}
-.feito h3{font-weight:500;font-size:22px;line-height:1}
-.feito p{margin-top:10px}
-.feito .msg{text-transform:none;white-space:pre-line;margin-top:16px;padding-top:14px;border-top:1px dashed var(--madeira);font-size:12px;color:var(--creme-2)}
-.feito .acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-@media (max-width:1100px){.balcao-g{grid-template-columns:1fr 1fr}.balcao-g .centro{grid-column:1/-1;order:-1}}
-@media (max-width:900px){.balcao{padding:90px 16px 72px}.balcao-g{grid-template-columns:1fr}}
-
-/* 7. casas: foto de ponta a ponta */
+/* casas */
 .casas{display:grid;grid-template-columns:1fr 1fr}
-.casa{position:relative;min-height:92svh;overflow:hidden;display:flex;align-items:flex-end;padding:24px}
+.casa{position:relative;min-height:88svh;overflow:hidden;display:flex;align-items:flex-end;padding:28px}
 .casa>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.casa::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,9,4,.2),rgba(16,9,4,.15) 40%,rgba(16,9,4,.9))}
-.casa .info{position:relative;z-index:1;width:100%;max-width:440px;padding:24px;border-radius:var(--r-cartao);background:rgba(16,9,4,.66)}
-.casa h3{font-weight:500;font-size:41px;line-height:.9}
+.casa::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,14,.15),rgba(20,17,14,.92))}
+.casa .info{position:relative;z-index:1;width:100%;max-width:420px}
+.casa h3{font-weight:500;font-size:44px;line-height:.9}
 .casa .end{margin-top:10px}
-.casa ul{list-style:none;margin-top:16px}
-.casa li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px dashed var(--cortica);font-size:11.5px;color:var(--creme-2)}
-.casa li.hoje{color:var(--creme)}
-.casa .acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-@media (max-width:900px){.casas{grid-template-columns:1fr}.casa{min-height:86svh;padding:16px}}
+.casa .acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.casa .horas{margin-top:14px;font-size:11.5px;color:var(--creme-2);line-height:1.7}
+@media (max-width:900px){.casas{grid-template-columns:1fr}.casa{min-height:78svh;padding:18px}}
 
-/* 8. antes de vir */
-.antes{padding:110px 24px 90px;display:grid;grid-template-columns:1fr 2fr;gap:var(--g)}
-.antes details{border-top:1px dashed var(--cortica)}
-.antes details:last-child{border-bottom:1px dashed var(--cortica)}
-.antes summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;padding:20px 0;font-size:15px}
-.antes summary::-webkit-details-marker{display:none}
-.antes summary::after{content:'+';font-size:20px;line-height:.8}
-.antes details[open] summary::after{content:'−'}
-.antes details p{padding:0 0 22px;max-width:60ch}
-@media (max-width:900px){.antes{grid-template-columns:1fr;padding:90px 16px 72px}}
-
-footer{padding:60px 24px 110px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--g);border-top:1px dashed var(--cortica)}
-footer .marca-g{font-size:clamp(60px,10vw,140px);line-height:.82}
+footer{padding:64px 28px 110px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--g);border-top:1px dashed var(--cortica)}
 footer h4{font-weight:500;font-size:10px;color:var(--creme-3);margin-bottom:12px}
 footer p,footer a{display:block;font-size:12px;line-height:1.7}
-@media (max-width:900px){footer{grid-template-columns:1fr 1fr;padding:56px 16px 100px}footer .marca-g{grid-column:1/-1}}
+@media (max-width:900px){footer{grid-template-columns:1fr 1fr;padding:56px 16px 100px}footer>div:first-child{grid-column:1/-1}}
 </style>
 </head>
 <body>
-<div class="demo">Protótipo da <b>Timeless</b> para o Ryori. Não é o site oficial. Vídeo e fotos do Instagram e do site do Grupo Social Clube.</div>
+<div class="demo">Protótipo da <b>Timeless</b> para o Ryori. Não é o site oficial. Fotos do Instagram do Ryori e do site do Grupo Social Clube.</div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-zap" viewBox="0 0 24 24"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2Z"/><path d="M9.2 8.6c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.7l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.5 2.4.2.1.4.1.5 0l.6-.7c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.4.4.6 0 .9-.7 1.8-1.7 1.9-1.3.2-3-.4-4.7-2-1.6-1.6-2.4-3.3-2.3-4.6 0-.5.2-.9.5-1.2Z"/></symbol>
   <symbol id="i-sacola" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8Zm4 0V6.5a3 3 0 0 1 6 0V8"/></symbol>
   <symbol id="i-pino" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Zm0-9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></symbol>
   <symbol id="i-esq" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
   <symbol id="i-dir" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm-1 5h16M8 3v4m8-4v4"/></symbol>
 </svg>
 
 <header class="nav" id="nav">
-  <a class="marca" href="#topo" aria-label="Ryori, início"><span class="logo" style="--w:52px" aria-hidden="true"></span></a>
-  <nav aria-label="Seções">
-    <a href="#sobre" data-t="n1">Sobre</a><a href="#cozinha" data-t="n2">Cozinha</a><a href="#sequencia" data-t="n3">Sequência</a><a href="#casas" data-t="n4">Casas</a><a href="#antes" data-t="n5">Antes de vir</a>
-  </nav>
+  <a href="#topo" aria-label="Ryori, início"><span class="logo" style="--w:52px" aria-hidden="true"></span></a>
+  <nav aria-label="Seções"><a href="#sobre" data-t="n1">Sobre</a><a href="#cozinha" data-t="n2">Cozinha</a><a href="#sequencia" data-t="n3">Sequência</a><a href="#casas" data-t="n4">Casas</a></nav>
   <div class="dir"><a class="sub" href="#balcao" data-t="nRes">Reservar</a><button type="button" class="sub" id="lang" aria-label="Ver em inglês">EN</button></div>
 </header>
-<span class="lateral" aria-hidden="true">Ryori · <span class="jp">料理</span> · Fortaleza</span>
 
 <main>
-<!-- 1. abertura -->
 <section class="abre" id="topo">
-  <img class="poster" src="fotos/abertura.jpg" alt="" aria-hidden="true">
-  <video id="vid" autoplay muted loop playsinline preload="metadata" poster="fotos/abertura.jpg" aria-label="O chef do Ryori servindo o ramen"><source src="fotos/abertura.mp4" type="video/mp4"></video>
-  <div class="lockup"><p class="rot" data-t="tag">Cozinha japonesa contemporânea, em Fortaleza.</p><h1><span class="logo" style="--w:min(64vw,520px)" role="img" aria-label="Ryori"></span></h1></div>
-  <div class="info">
-    <p class="rot" data-t="infoT">Duas casas: Buganvília e Iguatemi.</p>
-    <hr class="traco claro">
-    <ul class="estados" id="estados"></ul>
-    <div class="acoes"><a class="btn" href="#balcao" data-t="bRes">Escolher o meu lugar</a></div>
+  <img src="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_2400,h_1500,al_c,q_85,enc_auto/ryori.jpg" alt="Barco de sashimi do Ryori" width="2400" height="1500">
+  <div class="lockup">
+    <span class="logo" role="img" aria-label="Ryori"></span>
+    <div class="dir"><p class="rot" data-t="tag">Cozinha japonesa contemporânea. Buganvília e Iguatemi, Fortaleza.</p><a class="btn" href="#balcao" data-t="bRes">Reservar o seu lugar</a></div>
   </div>
-  <a class="video" href="#sequencia"><img src="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_600,h_360,al_c,q_80,enc_auto/ryori.jpg" alt="" width="200" height="118"><span><span data-t="vidT">Sequência · 8 tempos</span><svg class="ic cheio"><use href="#i-play"/></svg></span></a>
 </section>
 
-<!-- 2. sobre: sala escura com o nigiri -->
 <section class="sala revela" id="sobre">
   <div class="esq"><p class="rot" data-t="sobreR">Sobre o Ryori</p><h2 class="display" data-t="sobreT">Ryōri quer dizer cozinhar.</h2></div>
   <div class="obj" id="nigiri" aria-label="Um nigiri de salmão em 3D, girando" role="img"></div>
-  <div class="dir">
-    <p class="corrido" data-t="sobreA">Cozinha japonesa contemporânea em duas casas de Fortaleza, com o balcão de frente para o sushiman.</p>
-    <p class="corrido-p" style="margin-top:18px" data-t="sobreB">No Buganvília, a varanda e dois turnos, almoço e jantar. No Iguatemi, a casa aberta o dia inteiro. Sushibar, cozinha quente, almoço executivo e a Sequência Japonesa em oito tempos.</p>
-  </div>
+  <div class="dir"><p class="corrido" data-t="sobreA">Cozinha japonesa contemporânea em duas casas de Fortaleza, com o balcão de frente para o sushiman.</p></div>
 </section>
 <hr class="traco divisa">
 
-<!-- 3. cozinha -->
 <section class="cozinha revela" id="cozinha">
-  <div class="cab"><h2 class="display" data-t="cozT">Da cozinha.</h2><p class="corrido-p" data-t="cozL">Quatro pratos da casa, com as fotos do Instagram do Ryori. O cardápio completo vem logo abaixo, em português e inglês.</p></div>
+  <div class="cab"><h2 class="display" data-t="cozT">Da cozinha.</h2><p class="corrido-p" data-t="cozL">Quatro pratos da casa. O cardápio completo vem logo abaixo, em português e inglês.</p></div>
   <div class="abas" role="tablist" id="abas"></div>
   <div class="prato-g" id="prato-g" role="tabpanel"></div>
   <details class="cardapio-todo">
@@ -215,64 +148,25 @@ footer p,footer a{display:block;font-size:12px;line-height:1.7}
 </section>
 <hr class="traco divisa">
 
-<!-- 4. sequência -->
 <section class="sala revela" id="sequencia">
   <div class="esq"><p class="rot" data-t="seqR">Oito tempos, servidos à mesa</p><h2 class="display" data-t="seqT">Sequência Japonesa.</h2></div>
   <div class="obj"><div class="tempo-v" id="tempo-v" aria-live="polite"></div></div>
-  <div class="dir">
-    <p class="corrido" data-t="seqA">Do sunomono à sobremesa, a cozinha decide a ordem e manda à mesa.</p>
-    <div class="precos" id="precos"></div>
-    <div class="acoes"><a class="btn" href="#balcao" data-t="seqB">Reservar para a Sequência</a></div>
-  </div>
+  <div class="dir"><div class="precos" id="precos"></div><div class="acoes"><a class="btn" href="#balcao" data-t="seqB">Reservar para a Sequência</a></div></div>
 </section>
 <hr class="traco divisa">
 
-<!-- 5. sushiman -->
-<section class="sala revela" id="sushiman">
-  <div class="esq"><p class="rot" data-t="suR">Para quem não sabe o que pedir</p><h2 class="display" data-t="suT">Deixe o sushiman sugerir.</h2>
-    <div class="ctrl"><p class="rot" data-t="qP">Quantas pessoas</p><div class="fichas" id="c-pessoas"></div><p class="rot" data-t="qF">A fome</p><div class="fichas" id="c-fome"></div></div></div>
-  <div class="obj"><div id="palco" role="img" aria-label="Tábua de hinoki com as peças da mesa sugerida, em 3D"></div><p class="micro" style="text-align:center;margin-top:8px" data-t="palcoN">Arraste para girar. Prévia ilustrativa: os pratos reais entram escaneados.</p></div>
-  <div class="dir"><div class="lista-s" id="lista-s"></div><div class="total-s" id="total-s"></div>
-    <div class="acoes"><a class="btn" href="#balcao" id="b-mesa" data-t="bMesa">Reservar com essa mesa</a></div></div>
-</section>
-<hr class="traco divisa">
-
-<!-- 6. reserva no balcão -->
 <section class="balcao revela" id="balcao">
-  <div class="cozinha" style="padding:0"><div class="cab"><h2 class="display" data-t="bT">O seu lugar.</h2><p class="corrido-p" data-t="bL">No balcão, de frente para o sushiman, ou numa mesa. Escolha a casa, o dia e o horário; a planta mostra o que está livre.</p></div></div>
-  <div class="balcao-g">
-    <div class="passos">
-      <p class="rot" data-t="pCasa">Casa</p><div class="fichas" id="p-casa"></div>
-      <p class="rot" data-t="pDia">Dia</p><div class="fichas rola" id="p-dia"></div>
-      <p class="rot" data-t="pHora">Horário</p><div class="fichas" id="p-hora"></div>
-      <p class="rot" data-t="pPes">Pessoas</p><div class="fichas" id="p-pes"></div>
-    </div>
-    <div class="centro"><div class="planta-caixa"><svg id="pl" role="group" aria-label="Planta da casa: balcão, salão e varanda"></svg></div><p class="escolha" id="escolha" aria-live="polite"></p><p class="micro" data-t="plN">Planta ilustrativa: na versão final, os lugares e a ocupação vêm da agenda da casa.</p></div>
-    <div class="fim">
-      <label class="campo"><span data-t="pNome">Nome</span><input id="p-nome" autocomplete="name"></label>
-      <label class="campo"><span>WhatsApp</span><input id="p-zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 9 0000-0000" aria-describedby="p-erro"></label>
-      <p class="erro" id="p-erro"></p>
-      <button type="button" class="btn" id="p-ok" disabled data-t="pOk" style="margin-top:12px;width:100%">Reservar este lugar</button>
-      <div id="feito" aria-live="polite"></div>
-    </div>
-  </div>
+  <div class="cab"><h2 class="display" data-t="bT">O seu lugar.</h2><p class="corrido-p" data-t="bL">Uma pergunta por vez. No fim, você escolhe o lugar na planta: no balcão, de frente para o sushiman, ou numa mesa.</p></div>
+  <div id="reserva"></div>
 </section>
 
-<!-- 7. casas -->
 <section class="casas" id="casas" aria-label="As casas"></section>
-
-<!-- 8. antes de vir -->
-<section class="antes revela" id="antes">
-  <h2 class="display" data-t="aT">Antes de vir.</h2>
-  <div id="faq"></div>
-</section>
 </main>
 
 <footer>
-  <div class="marca-g"><span class="logo" style="--w:min(60vw,260px)" role="img" aria-label="Ryori"></span></div>
-  <div><h4 data-t="fCasas">Casas</h4><div id="f-casas"></div></div>
+  <div><span class="logo" style="--w:min(56vw,220px)" role="img" aria-label="Ryori"></span></div>
   <div><h4 data-t="fMais">Mais</h4><a href="links/" data-t="fBio">Link da bio</a><a href="https://www.instagram.com/restauranteryori/" target="_blank" rel="noopener">Instagram</a><a href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener">Delivery iFood</a><a href="../painel/" data-t="fPainel">Painel da equipe</a></div>
-  <div><h4 data-t="fCred">Créditos</h4><p class="destaque" data-t="fProt">Protótipo da Timeless</p><p data-t="fFotos">Vídeo e fotos do Instagram do Ryori e do site do Grupo Social Clube. Horários da bio do Instagram, 24/11/2026.</p></div>
+  <div><h4 data-t="fCred">Créditos</h4><p class="destaque" data-t="fProt">Protótipo da Timeless</p><p data-t="fFotos">Ryori, do Grupo Social Clube.</p></div>
 </footer>
 
 <script src="marca.js"></script>
@@ -280,147 +174,63 @@ footer p,footer a{display:block;font-size:12px;line-height:1.7}
 <script src="cardapio.js"></script>
 <script src="planta.js"></script>
 <script src="dados.js"></script>
+<script src="reserva.js"></script>
 <script>
-const EN={n1:'About',n2:'Kitchen',n3:'Sequence',n4:'Houses',n5:'Before you come',nRes:'Book',tag:'Contemporary Japanese cooking, in Fortaleza.',infoT:'Two houses: Buganvília and Iguatemi.',bRes:'Choose my seat',vidT:'Sequence · 8 courses',
- sobreR:'About Ryori',sobreT:'Ryōri means to cook.',sobreA:'Contemporary Japanese cooking in two Fortaleza houses, with the counter facing the sushi chef.',sobreB:'At Buganvília, the deck and two services, lunch and dinner. At Iguatemi, open all day. Sushi bar, hot kitchen, weekday lunch and the eight-course Japanese Sequence.',
- cozT:'From the kitchen.',cozL:'Four of the house’s dishes, with photos from Ryori’s Instagram. The full menu is right below, in Portuguese and English.',verCard:'See the full menu',alergAv:'Allergens per Ceará state law 17.899/2022. Until the restaurant confirms, each dish reads “to be confirmed”.',
- seqR:'Eight courses, served to the table',seqT:'Japanese Sequence.',seqA:'From sunomono to dessert, the kitchen sets the order and sends it to the table.',seqB:'Book for the Sequence',
- suR:'For when you can’t decide',suT:'Let the sushi chef suggest.',qP:'How many',qF:'Appetite',palcoN:'Drag to rotate. Illustrative preview: the real dishes will be scanned.',bMesa:'Book with this table',
- bT:'Your seat.',bL:'At the counter, facing the sushi chef, or at a table. Pick the house, day and time; the plan shows what is free.',pCasa:'House',pDia:'Day',pHora:'Time',pPes:'Guests',plN:'Illustrative plan: in the final version, seats and availability come from the house’s book.',pNome:'Name',pOk:'Book this seat',
- aT:'Before you come.',fCasas:'Houses',fMais:'More',fBio:'Bio link',fPainel:'Team panel',fCred:'Credits',fProt:'Timeless prototype',fFotos:'Video and photos from Ryori’s Instagram and the Grupo Social Clube website. Hours from the Instagram bio, 24 Nov 2026.'};
+const EN={n1:'About',n2:'Kitchen',n3:'Sequence',n4:'Houses',nRes:'Book',tag:'Contemporary Japanese cooking. Buganvília and Iguatemi, Fortaleza.',bRes:'Book your seat',
+ sobreR:'About Ryori',sobreT:'Ryōri means to cook.',sobreA:'Contemporary Japanese cooking in two Fortaleza houses, with the counter facing the sushi chef.',
+ cozT:'From the kitchen.',cozL:'Four of the house’s dishes. The full menu is right below, in Portuguese and English.',verCard:'See the full menu',alergAv:'Allergens per Ceará state law 17.899/2022. Until the restaurant confirms, each dish reads “to be confirmed”.',
+ seqR:'Eight courses, served to the table',seqT:'Japanese Sequence.',seqB:'Book for the Sequence',bT:'Your seat.',bL:'One question at a time. At the end, you pick your seat on the plan: at the counter, facing the sushi chef, or at a table.',
+ fMais:'More',fBio:'Bio link',fPainel:'Team panel',fCred:'Credits',fProt:'Timeless prototype',fFotos:'Ryori, Grupo Social Clube.'};
 const PT={};document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
 const brl=n=>'R$ '+n.toLocaleString('pt-BR');
 const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const ALG={gluten:['glúten','gluten'],trigo:['trigo','wheat'],lactose:['lactose','lactose'],leite:['leite','milk'],peixe:['peixe','fish'],amendoas:['amêndoas','almonds'],corantes:['corantes','colourings'],castanhas:['castanhas','tree nuts'],soja:['soja','soy'],ovo:['ovo','egg'],crustaceos:['crustáceos','shellfish']};
 const estTxt=u=>{const s=estadoUnidade(u);return s.k==='aberta'?L(`aberta até ${hm(s.ate)}`,`open until ${hm(s.ate)}`):s.k==='pausa'?L(`volta às ${hm(s.abre)}`,`back at ${hm(s.abre)}`):s.k==='antes'?L(`abre às ${hm(s.abre)}`,`opens at ${hm(s.abre)}`):L(`abre amanhã, ${hm(s.abre)}`,`opens tomorrow, ${hm(s.abre)}`);};
-function estados(){document.getElementById('estados').innerHTML=MARCA.unidades.map(u=>`<li><b style="font-weight:500">${u.nome}</b><span>${estTxt(u)}</span></li>`).join('');}
+const reserva=Reserva.monta(document.getElementById('reserva'),{origem:'site'});
 
-/* ---------- cozinha: abas ---------- */
 let aba=0;
 function cozinha(){
   document.getElementById('abas').innerHTML=PRATOS.map((p,i)=>`<button type="button" role="tab" aria-selected="${i===aba}" data-i="${i}">${p.n}</button>`).join('');
   const p=PRATOS[aba];
   document.getElementById('prato-g').innerHTML=`<div><h3 class="titulo">${p.n}</h3><p class="corrido-p">${L(...p.d)}</p></div>
    <img class="foto no-escuro" src="fotos/${p.f}.jpg" alt="${esc(p.n)}, foto do Instagram do Ryori" width="560" height="560">
-   <div>${p.p?`<p class="preco">${brl(p.p)}</p>`:`<p class="rot" style="color:var(--creme-2)">${L('Preço com a casa','Price on request')}</p>`}<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px"><a class="fantasma" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><svg class="ic"><use href="#i-sacola"/></svg>${L('Pedir no iFood','Order on iFood')}</a></div></div>`;}
+   <div>${p.p?`<p class="preco">${brl(p.p)}</p>`:''}<div style="margin-top:22px"><a class="fantasma" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><svg class="ic"><use href="#i-sacola"/></svg>${L('Pedir no iFood','Order on iFood')}</a></div></div>`;}
 document.getElementById('abas').addEventListener('click',e=>{const b=e.target.closest('button');if(b){aba=+b.dataset.i;cozinha();}});
 const alg=i=>(i.alerg||[]).length?`${L('Alergênicos','Allergens')}: ${i.alerg.map(a=>L(...ALG[a])).join(', ')}`:L('Alergênicos: confirmar com a casa','Allergens: to be confirmed');
-function cardapio(){document.getElementById('lista').innerHTML=CARDAPIO.map(g=>`<div class="grupo" id="g-${g.id}"><div><h3>${lang==='en'?g.en:g.cat}</h3>${g.nota?`<p class="corrido-p nota">${L(g.nota,g.notaEn||g.nota)}</p>`:''}</div>
-  <div>${g.itens.map(i=>`<div class="item"><span class="n">${lang==='en'?i.en[0]:i.n}</span><span class="p">${i.p==null?L('com a casa','on request'):brl(i.p)}</span><span class="d">${lang==='en'?i.en[1]:i.d}</span><span class="alg">${alg(i)}</span></div>`).join('')}</div></div>`).join('');}
+function cardapio(){document.getElementById('lista').innerHTML=CARDAPIO.map(g=>`<div class="grupo"><div><h3>${lang==='en'?g.en:g.cat}</h3>${g.nota?`<p class="corrido-p nota">${L(g.nota,g.notaEn||g.nota)}</p>`:''}</div>
+  <div>${g.itens.map(i=>`<div class="item"><span>${lang==='en'?i.en[0]:i.n}</span><span>${i.p==null?L('com a casa','on request'):brl(i.p)}</span><span class="d">${lang==='en'?i.en[1]:i.d}</span><span class="alg">${alg(i)}</span></div>`).join('')}</div></div>`).join('');}
 
-/* ---------- sequência ---------- */
 let tk=0,tAuto=null;
 function sequencia(){const t=SEQ[tk];
   document.getElementById('tempo-v').innerHTML=`<span class="num">${tk+1}</span><span class="nome">${t[0]}</span><span class="jp" lang="ja">${t[1]}</span><ul>${t[2].map(x=>`<li>${x}</li>`).join('')}</ul>
    <div class="setas"><button type="button" class="fantasma redondo" data-s="-1" aria-label="${L('Tempo anterior','Previous course')}"><svg class="ic"><use href="#i-esq"/></svg></button><button type="button" class="fantasma redondo" data-s="1" aria-label="${L('Próximo tempo','Next course')}"><svg class="ic"><use href="#i-dir"/></svg></button></div>`;
-  document.getElementById('precos').innerHTML=[['Buganvília',L('Jantar, domingo a quarta, com sashimi','Dinner, Sun to Wed, with sashimi'),159],['Buganvília',L('Almoço, todos os dias, sem sashimi','Lunch, every day, no sashimi'),129],['Iguatemi',L('Jantar, domingo a quarta, com sashimi','Dinner, Sun to Wed, with sashimi'),159]].map(([c,q,p])=>`<div><span>${c} · ${q}</span><span>R$ ${p}</span></div>`).join('')+`<p class="micro" style="margin-top:10px">${L('Valores por pessoa, do cardápio da Sequência publicado pela casa em 24/11/2026.','Per person, from the sequence menu published by the restaurant, 24 Nov 2026.')}</p>`;}
+  document.getElementById('precos').innerHTML=[['Buganvília',L('Jantar, domingo a quarta, com sashimi','Dinner, Sun to Wed, with sashimi'),159],['Buganvília',L('Almoço, todos os dias, sem sashimi','Lunch, every day, no sashimi'),129],['Iguatemi',L('Jantar, domingo a quarta, com sashimi','Dinner, Sun to Wed, with sashimi'),159]].map(([c,q,p])=>`<div><span>${c} · ${q}</span><span>R$ ${p}</span></div>`).join('')+`<p class="micro" style="margin-top:10px">${L('Por pessoa, do cardápio da Sequência publicado pela casa em 24/11/2026.','Per person, from the sequence menu published by the restaurant, 24 Nov 2026.')}</p>`;}
 document.getElementById('tempo-v').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;clearInterval(tAuto);tk=(tk+ +b.dataset.s+SEQ.length)%SEQ.length;sequencia();});
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches)tAuto=setInterval(()=>{tk=(tk+1)%SEQ.length;sequencia();},5200);
 
-/* ---------- sushiman ---------- */
-const M={pessoas:2,fome:'normal'};let mesaSug='';
-function monta(){
-  const f={leve:.75,normal:1,fome:1.35}[M.fome],n=M.pessoas;
-  const todos=CARDAPIO.filter(g=>['starters','veg','sushibar'].includes(g.id)).flatMap(g=>g.itens.map(i=>({...i,grupo:g.id})));
-  const ord=l=>[...l].sort((a,b)=>a.sug-b.sug),ent=ord(todos.filter(i=>i.grupo!=='sushibar')),bar=ord(todos.filter(i=>i.grupo==='sushibar'));
-  const m=new Map(),pega=(l,q)=>{for(let k=0;k<q&&l.length;k++){const i=l[k%l.length];m.set(i.n,{i,q:(m.get(i.n)?.q||0)+1});}};
-  pega(ent,Math.max(1,Math.round(n*.8*f)));pega(bar,Math.max(1,Math.round(n*f)));
-  const linhas=[...m.values()],total=linhas.reduce((s,x)=>s+x.i.p*x.q,0);
-  document.getElementById('c-pessoas').innerHTML=[1,2,3,4,5,6].map(k=>`<button type="button" class="fantasma" data-p="${k}" aria-pressed="${M.pessoas===k}">${k}</button>`).join('');
-  document.getElementById('c-fome').innerHTML=[['leve','Leve','Light'],['normal','Normal','Normal'],['fome','Com fome','Hungry']].map(([k,p,e])=>`<button type="button" class="fantasma" data-f="${k}" aria-pressed="${M.fome===k}">${L(p,e)}</button>`).join('');
-  document.getElementById('lista-s').innerHTML=linhas.map(({i,q})=>`<div><span>${q}×</span><span>${lang==='en'?i.en[0]:i.n}<small>${lang==='en'?i.en[1]:i.d}</small></span><span>${brl(i.p*q)}</span></div>`).join('');
-  document.getElementById('total-s').innerHTML=`<b>${brl(total)}</b><span>${L(`cerca de ${brl(Math.round(total/n))} por pessoa.<br>Bebidas e serviço à parte.`,`about ${brl(Math.round(total/n))} per person.<br>Drinks and service extra.`)}</span>`;
-  mesaSug=linhas.map(({i,q})=>`${q}× ${i.n}`).join(', ')+` · ${brl(total)}`;
-  window.Nigiri&&Nigiri.mesa(linhas);}
-document.querySelector('#sushiman .ctrl').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.p)M.pessoas=+b.dataset.p;if(b.dataset.f)M.fome=b.dataset.f;monta();});
-document.getElementById('b-mesa').addEventListener('click',()=>{B.mesa=mesaSug;B.pessoas=Math.min(8,M.pessoas);B.lugar=null;passos();});
-
-/* ---------- reserva no balcão ---------- */
-const Q=new URLSearchParams(location.search),CH=MARCA.id+'-casa';
-const B={casa:null,dia:null,hora:null,pessoas:2,lugar:null,mesa:''};
-{const q=Q.get('casa');let u=null;try{u=localStorage.getItem(CH)}catch(e){}B.casa=unidade(q)?q:unidade(u)?u:MARCA.unidades[0].id;}
-const U=()=>unidade(B.casa);
-function dias(){const {d}=agoraFortaleza(),h=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Fortaleza'}));return [...Array(10)].map((_,k)=>{const dt=new Date(h);dt.setDate(h.getDate()+k);return {k,wd:(d+k)%7,dt};});}
-const fmtDia=x=>`${(lang==='en'?DAYS:DIAS)[x.wd]}, ${x.dt.getDate()}/${x.dt.getMonth()+1}`;
-function horas(x){const {m}=agoraFortaleza(),o=[];U().hor[x.wd].forEach(([a,b])=>{for(let t=a;t<=b-60;t+=30){if(x.k===0&&t<m+30)continue;o.push(t);}});return o;}
-if(horas(dias()[0]).length)B.dia=0;else B.dia=1;
-function ocupado(id){const s=`${B.casa}|${B.dia}|${B.hora}|${id}`;let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h%10<4;}
-const par=()=>B.lugar&&B.lugar[0]==='b'&&B.pessoas===2?'b'+(+B.lugar.slice(1)+1):null;
-function est(id){const pronto=B.dia!==null&&B.hora!==null,n=B.pessoas;
-  if(id===B.lugar||id===par())return {k:'meu'};
-  if(!pronto||ocupado(id))return {k:pronto?'ocupado':'fora'};
-  if(id[0]==='b'){if(n>2)return {k:'fora'};if(n===2){const i=+id.slice(1);if(i===10||ocupado('b'+(i+1)))return {k:'fora'};}return {k:'livre'};}
-  const c=Planta.CAP[id];return c<n||c>n+2?{k:'fora'}:{k:'livre'};}
-function passos(){const ds=dias(),pronto=B.dia!==null&&B.hora!==null;
-  document.getElementById('p-casa').innerHTML=MARCA.unidades.map(u=>`<button type="button" class="fantasma" data-v="${u.id}" aria-pressed="${B.casa===u.id}">${u.nome}</button>`).join('');
-  document.getElementById('p-dia').innerHTML=ds.map(x=>{const v=!horas(x).length;return `<button type="button" class="fantasma" data-v="${x.k}" aria-pressed="${B.dia===x.k}" ${v?'disabled':''}>${x.k===0?L('Hoje','Today'):(lang==='en'?DAYS:DIAS)[x.wd].slice(0,3)}<small>${x.dt.getDate()}/${x.dt.getMonth()+1}</small></button>`;}).join('');
-  document.getElementById('p-hora').innerHTML=B.dia===null?'':horas(ds[B.dia]).map(h=>`<button type="button" class="fantasma" data-v="${h}" aria-pressed="${B.hora===h}">${hm(h)}</button>`).join('');
-  document.getElementById('p-pes').innerHTML=[1,2,3,4,5,6,7,8].map(n=>`<button type="button" class="fantasma" data-v="${n}" aria-pressed="${B.pessoas===n}">${n}</button>`).join('');
-  Planta.desenha(document.getElementById('pl'),{varanda:B.casa==='buganvilia',L,estado:est,aoTocar:id=>{if(est(id).k==='livre'){B.lugar=id;passos();}}});
-  document.getElementById('escolha').textContent=!pronto?L('Escolha o dia e o horário para ver os lugares livres.','Pick a day and time to see the free seats.'):B.lugar?(Planta.nome(B.lugar,L)+(par()?L(', com o vizinho',', with the next one'):'')+(B.mesa?L('. Com a mesa do sushiman.','. With the chef’s table.'):'.')):B.pessoas>2?L(`Para ${B.pessoas}, toque numa mesa.`,`For ${B.pessoas}, tap a table.`):L('Toque num banquinho do balcão ou numa mesa.','Tap a counter stool or a table.');
-  pode();}
-const zapOk=()=>{const d=document.getElementById('p-zap').value.replace(/\D/g,'').replace(/^55(?=\d{11}$)/,'');return d.length===11&&d[2]==='9';};
-function pode(){document.getElementById('p-ok').disabled=!(B.lugar&&document.getElementById('p-nome').value.trim().length>1&&zapOk());}
-document.querySelector('.passos').addEventListener('click',e=>{const b=e.target.closest('.fichas button');if(!b||b.disabled)return;const g=b.parentNode.id,v=b.dataset.v;
-  if(g==='p-casa'){B.casa=v;B.hora=null;B.lugar=null;try{localStorage.setItem(CH,v)}catch(e){}if(B.dia!==null&&!horas(dias()[B.dia]).length)B.dia=null;}
-  if(g==='p-dia'){B.dia=+v;B.hora=null;B.lugar=null;}if(g==='p-hora'){B.hora=+v;B.lugar=null;}if(g==='p-pes'){B.pessoas=+v;B.lugar=null;}
-  passos();});
-document.querySelector('.fim').addEventListener('input',()=>{document.getElementById('p-erro').textContent=document.getElementById('p-zap').value&&!zapOk()?L('Use o celular com DDD: (85) 9 0000-0000.','Use a mobile number with area code.'):'';pode();});
-document.getElementById('p-ok').addEventListener('click',()=>{
-  const x=dias()[B.dia],u=U(),nome=document.getElementById('p-nome').value.trim(),zap=document.getElementById('p-zap').value,balcao=B.lugar[0]==='b';
-  const codigo=MARCA.prefixo+'-'+u.sigla+String(x.dt.getDate()).padStart(2,'0')+String(B.hora/30|0).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,5).toUpperCase();
-  const ini=new Date(x.dt);ini.setHours(B.hora/60|0,B.hora%60,0,0);
-  const lugar=Planta.nome(B.lugar),motivos=[];if(balcao)motivos.push('lugar no balcão do sushiman');if(B.pessoas>=6)motivos.push(`grupo de ${B.pessoas}`);
-  Reservas.nova({codigo,casa:u.id,criada:new Date().toISOString(),inicio:ini.toISOString(),dia:fmtDia(x),hora:hm(B.hora),pessoas:B.pessoas,ocasiao:'',pedidos:[lugar],lugar:B.lugar,lugarPar:par(),mesa:B.mesa,obs:'',nome,zap,status:motivos.length?'aguardando':'confirmada',motivos,origem:'site'});
-  const msg=[`Olá! Reserva no Ryori ${u.nome}.`,`Dia: ${fmtDia(x)}`,`Horário: ${hm(B.hora)}`,`Pessoas: ${B.pessoas}`,`Lugar: ${lugar}`,B.mesa?`Pedido sugerido: ${B.mesa}`:'',`Nome: ${nome}`,`Código: ${codigo}`].filter(Boolean).join('\n');
-  const fimH=new Date(ini.getTime()+2*3600e3),fz=d=>`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}00`;
-  const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Ryori//PT\r\nBEGIN:VEVENT\r\nUID:${codigo}@ryori\r\nDTSTART;TZID=America/Fortaleza:${fz(ini)}\r\nDTEND;TZID=America/Fortaleza:${fz(fimH)}\r\nSUMMARY:Ryori ${u.nome}, ${lugar}\r\nLOCATION:${u.end}, Fortaleza\r\nEND:VEVENT\r\nEND:VCALENDAR`;
-  const num=B.lugar.slice(1)+(par()?'·'+par().slice(1):''),tipo=B.lugar[0]==='b'?L('balcão','counter'):B.lugar[0]==='v'?L('varanda','deck'):L('mesa','table');
-  document.getElementById('feito').innerHTML=`<div class="feito"><div class="par"><div class="placa" aria-hidden="true"><b>${num}</b><span>${tipo}</span><small>${codigo}</small></div><div><h3>${motivos.length?L('Pedido recebido.','Request received.'):L('Seu lugar está guardado.','Your seat is saved.')}</h3>
-   <p class="corrido-p">Ryori ${esc(u.nome)}, ${fmtDia(x)}, ${hm(B.hora)}. ${esc(Planta.nome(B.lugar,L))}.${motivos.length?L(' A equipe confirma pelo WhatsApp.',' The team confirms on WhatsApp.'):''}</p>
-   <div class="acoes"><a class="fantasma" download="ryori.ics" href="data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}"><svg class="ic"><use href="#i-cal"/></svg>${L('Pôr na agenda','Add to calendar')}</a><a class="fantasma" href="${u.mapa}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pino"/></svg>${L('Como chegar','Directions')}</a></div>
-   </div></div><p class="msg">${L('Reserva de demonstração: nada foi enviado. A ficha apareceu no painel da equipe, neste navegador. No ar, a casa recebe:','Demo booking: nothing was sent. On the live site, the restaurant gets:')}\n\n${esc(msg)}</p></div>`;
-  document.getElementById('p-ok').disabled=true;B.lugar=null;B.mesa='';});
-
-/* ---------- casas, perguntas e rodapé ---------- */
 const FOTOS={buganvilia:'fotos/experiencia.jpg',iguatemi:'https://static.wixstatic.com/media/404bb8_426e0201e447475ab51af18c093908ab~mv2.jpg/v1/fill/w_1600,h_1400,al_c,q_82,enc_auto/ryori-iguatemi.jpg'};
-function casas(){const {d}=agoraFortaleza(),ord=[1,2,3,4,5,6,0];
-  document.getElementById('casas').innerHTML=MARCA.unidades.map(u=>`<article class="casa"><img src="${FOTOS[u.id]||u.foto}" alt="${L('Ryori '+u.nome,'Ryori '+u.nome)}" loading="lazy" width="720" height="900"><div class="info">
-   <p class="rot" style="color:var(--creme-2)">${estTxt(u)}</p><h3 style="margin-top:8px">${u.nome}</h3><p class="corrido-p end">${u.end}, Fortaleza</p>
-   <ul>${ord.map(k=>`<li class="${k===d?'hoje':''}"><span>${(lang==='en'?DAYS:DIAS)[k]}</span><span>${u.hor[k].map(([a,b])=>hm(a)+'–'+hm(b)).join(' · ')}</span></li>`).join('')}</ul>
-   <div class="acoes"><a class="fantasma" href="${u.mapa}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pino"/></svg>${L('Como chegar','Directions')}</a><a class="fantasma" href="https://wa.me/${ZAP[u.id]}?text=${encodeURIComponent(L(`Olá! Vim pelo site e queria falar com o Ryori ${u.nome}.`,`Hello! I came from the website and would like to talk to Ryori ${u.nome}.`))}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-zap"/></svg>WhatsApp</a>${u.tel?`<a class="sub" href="tel:+55${u.tel.replace(/\D/g,'')}" style="align-self:center">${u.tel}</a>`:''}</div></div></article>`).join('');
-  document.getElementById('f-casas').innerHTML=MARCA.unidades.map(u=>`<p>${u.nome}<br><span style="color:var(--creme-3)">${u.end}</span></p>`).join('');}
-function faq(){const F=[
-  [L('Como funciona a reserva','How booking works'),L('Você escolhe a casa, o dia, o horário e o lugar na planta. Mesa no salão sai confirmada na hora. Lugar no balcão do sushiman e grupos a partir de 6 pessoas a equipe confirma pelo WhatsApp.','Pick the house, day, time and the seat on the plan. Dining-room tables are confirmed instantly. Counter seats and groups of 6 or more are confirmed by the team on WhatsApp.')],
-  [L('Grupos grandes e eventos','Large groups and events'),L('Para 9 pessoas ou mais, fale direto com a casa pelo WhatsApp ou pelo telefone. A equipe monta a mesa.','For 9 or more, contact the house on WhatsApp or by phone. The team sets the table.')],
-  [L('A Sequência Japonesa','The Japanese Sequence'),L('No jantar, de domingo a quarta, nas duas casas, por R$ 159 por pessoa, com sashimi. No Buganvília também no almoço, todos os dias, por R$ 129, sem sashimi.','At dinner, Sunday to Wednesday, at both houses, R$ 159 per person, with sashimi. At Buganvília also at lunch, every day, R$ 129, without sashimi.')],
-  [L('Alergias e restrições','Allergies and restrictions'),L('Avise ao reservar e ao pedir. O cardápio mostra os alergênicos de cada prato conforme a casa confirma.','Tell us when booking and ordering. The menu shows each dish’s allergens as the restaurant confirms them.')],
-  [L('Cadeira para criança','High chair'),L('Se precisar de cadeira para criança, avise na reserva ou no WhatsApp da casa.','If you need a high chair, mention it when booking or on the house’s WhatsApp.')],
-  [L('Delivery','Delivery'),L('Pelo iFood, com o cardápio da casa e o Ryori Box para montar as combinações em casa.','On iFood, with the house menu and the Ryori Box to build your own combinations at home.')]];
-  document.getElementById('faq').innerHTML=F.map(([q,a])=>`<details><summary>${q}</summary><p class="corrido-p">${a}</p></details>`).join('');}
+function casas(){
+  const turnoTxt=u=>{const h=u.hor[1];return h.map(([a,b])=>`${hm(a)}–${hm(b)}`).join(' · ');};
+  document.getElementById('casas').innerHTML=MARCA.unidades.map(u=>`<article class="casa"><img src="${FOTOS[u.id]||u.foto}" alt="Ryori ${u.nome}" loading="lazy" width="720" height="900"><div class="info">
+   <p class="rot" style="color:var(--brasa)">${estTxt(u)}</p><h3 style="margin-top:8px">${u.nome}</h3><p class="corrido-p end">${u.end}, Fortaleza</p><p class="horas">${L('Todos os dias','Every day')}: ${turnoTxt(u)}</p>
+   <div class="acoes"><a class="fantasma" href="${u.mapa}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pino"/></svg>${L('Como chegar','Directions')}</a><a class="fantasma" href="https://wa.me/${ZAP[u.id]}?text=${encodeURIComponent(L(`Olá! Vim pelo site e queria falar com o Ryori ${u.nome}.`,`Hello! I came from the website and would like to talk to Ryori ${u.nome}.`))}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-zap"/></svg>WhatsApp</a></div></div></article>`).join('');}
 
-/* ---------- idioma e movimento ---------- */
-function tudo(){estados();cozinha();cardapio();sequencia();monta();passos();casas();faq();}
+function tudo(){cozinha();cardapio();sequencia();casas();reserva.pinta();}
 function aplicaLang(){const bl=document.getElementById('lang');bl.textContent=lang==='en'?'PT':'EN';bl.setAttribute('aria-label',lang==='en'?'Ver em português':'Ver em inglês');document.documentElement.lang=lang==='en'?'en':'pt-BR';
   document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});tudo();}
 document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
 const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('solida',scrollY>innerHeight*.6),{passive:true});
-const secs=[...document.querySelectorAll('main>section[id]')],links=[...document.querySelectorAll('.nav nav a')];
-const ioNav=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}),{rootMargin:'-45% 0px -50% 0px'});secs.forEach(s=>ioNav.observe(s));
+const links=[...document.querySelectorAll('.nav nav a')],ioNav=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main>section[id]').forEach(s=>ioNav.observe(s));
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vista');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.revela').forEach(x=>io.observe(x));
-const vid=document.getElementById('vid');if(matchMedia('(prefers-reduced-motion: reduce)').matches){vid.removeAttribute('autoplay');vid.pause();}
-aplicaLang();setInterval(estados,60000);
+aplicaLang();setInterval(casas,60000);
 if(location.hash){const alvo=document.querySelector(location.hash);if(alvo)requestAnimationFrame(()=>setTimeout(()=>alvo.scrollIntoView({behavior:'instant',block:'start'}),60));}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="nigiri.js"></script>
 <script>
-// O 3D liga quando a seção aparece: o nigiri sozinho no "Sobre" e a tábua no "Sushiman".
-if(window.Nigiri){
-  new IntersectionObserver(([e],o)=>{if(e.isIntersecting){Nigiri.cria(document.getElementById('nigiri'));o.disconnect();}},{rootMargin:'200px'}).observe(document.getElementById('nigiri'));
-  new IntersectionObserver(([e],o)=>{if(e.isIntersecting){Nigiri.liga('palco');setTimeout(monta,300);o.disconnect();}},{rootMargin:'200px'}).observe(document.getElementById('palco'));
-}
+if(window.Nigiri)new IntersectionObserver(([e],o)=>{if(e.isIntersecting){Nigiri.cria(document.getElementById('nigiri'));o.disconnect();}},{rootMargin:'200px'}).observe(document.getElementById('nigiri'));
 </script>
 </body>
 </html>
