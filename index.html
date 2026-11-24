@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Ryori · proposta da Timeless</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ryori · proposta da Timeless">
+<meta property="og:description" content="Proposta para o Ryori: domínio próprio, link da bio, site com cardápio em inglês, reserva por unidade e painel da equipe.">
+<meta property="og:image" content="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_2000,h_1300,al_c,q_82,enc_auto/ryori.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
@@ -85,6 +90,23 @@ p + p{margin-top:12px}
 .zap{display:inline-flex;align-items:center;min-height:64px;padding:0 30px;background:var(--acento);color:var(--acento-txt);text-decoration:none;font-size:20px;font-weight:600;margin:10px 0 40px}
 .assina{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--regra);font-size:15px;color:var(--tinta-2)}
 .assina img{height:30px}
+.ganhos{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px;border-top:2px solid var(--tinta);padding-top:20px}
+.ganhos b{display:block;font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.3;margin-bottom:6px}
+.ganhos span{color:var(--tinta-2);font-size:16px}
+.calc{grid-column:1/-1;margin-top:14px;padding:18px 20px;background:var(--fundo-2)}
+.plano.rec .calc{background:var(--fundo)}
+.calc h5{font-family:var(--serif);font-weight:600;font-size:19px;margin-bottom:4px}
+.calc .mut{font-size:15px}
+.calc .campos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:12px}
+.calc label{display:grid;gap:2px;font-size:14px;color:var(--tinta-2);align-content:end}
+.calc input{background:transparent;border:0;border-bottom:2px solid var(--tinta);font:400 18px var(--sans);color:var(--tinta);padding:6px 2px;min-height:44px;width:100%;border-radius:0}
+.calc .res{margin-top:14px;font-size:16px;font-variant-numeric:tabular-nums}
+.calc .res div{display:flex;justify-content:space-between;gap:16px;padding:6px 0;border-top:1px solid var(--regra)}
+.calc .res div:last-child{font-weight:600}
+.calc button{background:none;border:0;font:500 15px var(--sans);color:var(--tinta);text-decoration:underline;text-underline-offset:4px;cursor:pointer;min-height:44px;padding:0}
+.prazo{display:block;font-size:14px;color:var(--tinta-2);margin-top:4px}
+.prova{margin-top:30px;padding:16px 20px;background:var(--fundo-2);font-size:16px}
+.prova b{font-family:var(--serif);font-weight:600}
 .flutua{position:fixed;right:18px;bottom:18px;z-index:9;background:var(--acento);color:var(--acento-txt);text-decoration:none;font-weight:600;min-height:52px;display:none;align-items:center;padding:0 20px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 @media (max-width:880px){
   .folha{padding:64px 22px} .capa .base{padding:32px 22px}
@@ -94,19 +116,21 @@ p + p{margin-top:12px}
   .tela{height:300px} .tela iframe{transform:scale(.33)}
   .plano{grid-template-columns:1fr} .plano .val{text-align:left} .inclui{grid-template-columns:1fr;gap:18px}
   .enderecos div{grid-template-columns:1fr;gap:2px} .enderecos em{text-align:left}
+  .ganhos{grid-template-columns:1fr;gap:18px} .calc .campos{grid-template-columns:1fr 1fr}
 }
 @media print{
   @page{size:A4;margin:0}
-  body{font-size:15px} .flutua{display:none!important} .abrir{display:none}
+  body{font-size:15px} .flutua{display:none!important} .abrir{display:none} .so-tela{display:none}
   .folha{max-width:none;height:297mm;overflow:hidden;padding:22mm 18mm;border:0;break-after:page}
   .capa{min-height:297mm;break-after:page} .capa .base{width:62%}
   .caminho{grid-template-columns:repeat(4,1fr)} .vivo{grid-template-columns:auto 1fr} .site .vivo{grid-template-columns:1fr 1fr}
   .tela{height:470px} .tela iframe{transform:scale(.48)}
   h3{font-size:38px;margin-bottom:14px} .folha .texto.mut{font-size:14px}
   .achado{padding:11px 0;gap:24px;grid-template-columns:1fr 2.2fr} .achado b{font-size:18px} .achado p{font-size:13px;line-height:1.5}
-  .miudos{margin-top:18px} .miudo{padding:5px 0;font-size:12.5px} .miudo .onde{font-size:11.5px} .elogio{font-size:15px;margin-top:16px;padding:12px 16px}
+  .miudos{margin-top:18px} .miudo{padding:5px 0;font-size:12.5px} .miudo .onde{font-size:11.5px} .elogio{font-size:13px;line-height:1.4;margin-top:10px;padding:8px 12px} .notas li{padding:9px 0} .notas b{font-size:16px} .notas span{font-size:13px} .achado .fonte{font-size:11.5px;margin-top:4px}
   .folha.conta-folha{height:auto;min-height:0;overflow:visible}
   .plano{break-inside:avoid;padding:16px 0} .plano:last-child{break-before:page;margin-top:22mm}
+  .calc{display:none} .ganhos b{font-size:16px} .ganhos span{font-size:13px}
   .vem li{font-size:13px;padding:4px 0 4px 20px} .vem li::before{top:12px} .plano h4,.plano .val{font-size:24px} .inclui{break-inside:avoid}
 }
 
@@ -127,16 +151,22 @@ p + p{margin-top:12px}
   <h2>Entrada</h2>
   <h3>O que está na mesa hoje</h3>
   <p class="texto mut">Abrimos o Instagram, o Linktree, o cardápio digital, o Tripadvisor e o Registro.br em 24/11/2026.</p>
-  <div style="margin-top:32px"><div class="achado"><div><b>O domínio ryori.com.br está livre.</b><div class="fonte">Registro.br, 24/11/2026</div></div><p>O Registro.br responde “Domínio disponível para registro”, por R$ 40 por ano. Qualquer pessoa pode registrar hoje. Uma casa com 53,4 mil seguidores e duas unidades não tem endereço próprio na internet. Recomendamos registrar já, mesmo antes de qualquer conversa com a gente.</p></div><div class="achado"><div><b>Uma casa japonesa sem cardápio em inglês.</b><div class="fonte">Linktree e cardápio digital</div></div><p>O Linktree do Santa Grelha, do mesmo grupo, tem “Menu English”. O do Ryori não tem, e o cardápio digital só existe em português, com nomes como “Ussuzukuri Takô” e “Shakê Butter Truffle” sem explicação para quem vem de fora.</p></div><div class="achado"><div><b>Nenhum alergênico informado.</b><div class="fonte">cardápio digital</div></div><p>Camarão, polvo, vieira, amendoim e ovas aparecem em vários pratos, e nenhum deles tem aviso de alergênico. No Tripadvisor, a casa aparece como adequada para quem não come glúten.</p></div></div>
-  <div class="miudos"><h4>E os detalhes que pouca gente vê</h4><div class="miudo"><span>A Sequência Japonesa só existe em PDF dentro do Linktree.</span><span class="onde">Linktree</span></div><div class="miudo"><span>O Linktree usa o tema cinza padrão, sem a marca da casa, e serve Buganvília e Iguatemi ao mesmo tempo.</span><span class="onde">Linktree</span></div><div class="miudo"><span>“huramaki”, “tar tare”, “c om salmão”; o “Magurô Foie Gras” não cita atum na descrição.</span><span class="onde">cardápio digital</span></div><div class="miudo"><span>No cardápio a casa se chama “Ryori Sushi”; em todo o resto, “Ryori”.</span><span class="onde">cardápio digital</span></div><div class="miudo"><span>As 15 respostas recentes no Tripadvisor do Buganvília repetem o mesmo texto.</span><span class="onde">Tripadvisor</span></div></div>
+  <div style="margin-top:32px"><div class="achado"><div><b>O domínio ryori.com.br está livre.</b><div class="fonte">Registro.br, conferido em 24/11/2026</div></div><p>A consulta do Registro.br não encontra registro para ryori.com.br, e o domínio custa R$ 40 por ano. Qualquer pessoa pode registrar hoje. Uma casa com 53,4 mil seguidores e duas unidades não tem endereço próprio na internet. Recomendamos registrar já, mesmo antes de qualquer conversa com a gente.</p></div><div class="achado"><div><b>Uma casa japonesa sem cardápio em inglês.</b><div class="fonte">Linktree e cardápio digital</div></div><p>O Linktree do Santa Grelha, do mesmo grupo, tem “Menu English”. O do Ryori não tem, e o cardápio digital só existe em português, com nomes como “Ussuzukuri Takô” e “Shakê Butter Truffle” sem explicação para quem vem de fora.</p></div><div class="achado"><div><b>Nenhum alergênico informado.</b><div class="fonte">cardápio digital</div></div><p>Camarão, polvo, vieira, amendoim e ovas aparecem em vários pratos, e nenhum deles tem aviso de alergênico. No Tripadvisor, a casa aparece como adequada para quem não come glúten.</p></div></div>
+  <div class="miudos"><h4>E os detalhes que pouca gente vê</h4><div class="miudo"><span>A Sequência Japonesa só existe em PDF dentro do Linktree.</span><span class="onde">Linktree</span></div><div class="miudo"><span>O Linktree usa o tema cinza padrão e mistura as duas casas.</span><span class="onde">Linktree</span></div><div class="miudo"><span>“huramaki”, “tar tare”, “c om salmão”; o “Magurô Foie Gras” não cita atum na descrição.</span><span class="onde">cardápio digital</span></div><div class="miudo"><span>No cardápio a casa se chama “Ryori Sushi”; em todo o resto, “Ryori”.</span><span class="onde">cardápio digital</span></div><div class="miudo"><span>As 15 respostas recentes no Tripadvisor do Buganvília repetem o mesmo texto.</span><span class="onde">Tripadvisor</span></div></div>
+  <p class="elogio">O que já funciona: no Tripadvisor, o Ryori Iguatemi tem nota 4,9 com 1.337 avaliações e o Ryori Buganvília, 4,8 com 2.527. Tripadvisor, 24/11/2026.</p>
 </section>
 
 <section class="folha">
   <h2>Prato principal</h2>
   <h3>O caminho que proponho</h3>
-  <p class="texto mut">Hoje o Ryori não tem endereço próprio: Instagram, Linktree padrão, cardápio na plataforma de reservas e PDFs. A proposta começa pelo domínio e termina na mesa.</p>
-  <ol class="caminho"><li><b>Domínio</b><span>ryori.com.br registrado em nome do grupo.</span></li><li><b>As duas casas</b><span>Buganvília e Iguatemi, cada uma dizendo se está aberta agora.</span></li><li><b>Monte a sua mesa</b><span>O cliente diz quantos são e a fome; o site sugere pratos e o total.</span></li><li><b>Reserva e painel</b><span>Reserva por unidade, com triagem, e cada equipe vê as suas.</span></li></ol>
+  <p class="texto mut">Hoje o Ryori não tem endereço próprio: Instagram, Linktree padrão, cardápio no site de reservas e PDFs. A proposta começa pelo domínio e termina na mesa.</p>
+  <ol class="caminho"><li><b>Domínio</b><span>ryori.com.br registrado em nome do grupo.</span></li><li><b>As duas casas</b><span>Buganvília e Iguatemi, cada uma dizendo se está aberta agora.</span></li><li><b>Monte a sua mesa</b><span>O cliente diz quantos são e a fome; o site sugere pratos e o total.</span></li><li><b>Reserva e painel</b><span>Reserva por unidade, confirmada pela equipe quando precisa, e cada casa vê as suas.</span></li></ol>
   <p class="fica">O GetIn e o iFood podem continuar por trás. A porta de entrada passa a ser do Ryori, num endereço que é dele.</p>
+  <ul class="ganhos">
+    <li><b>O contato do cliente fica com a casa</b><span>Quem reserva ou pede pelo site deixa nome e WhatsApp com o Ryori, e não só dentro do aplicativo de outra empresa.</span></li>
+    <li><b>O pedido direto custa menos</b><span>Reserva e pedido pelo canal da casa não pagam a comissão do aplicativo. A conta, com os números de vocês, está no plano Canal direto.</span></li>
+    <li><b>A informação certa em todo lugar</b><span>Horário, endereço e cardápio iguais no site, na bio e no perfil do Google, que o dono do perfil alinha com a gente.</span></li>
+  </ul>
 </section>
 
 <section class="folha">
@@ -144,7 +174,7 @@ p + p{margin-top:12px}
   <h3>O link da bio</h3>
   <div class="vivo">
     <div class="cel"><iframe src="site/links/" title="Protótipo do link da bio" loading="lazy"></iframe></div>
-    <div><ul class="notas"><li><b>料理, ryōri</b><span>O nome da casa em japonês abre a página, com a logo e as duas casas.</span></li><li><b>O estado de cada casa</b><span>“Aberta até 22h” no Iguatemi, “volta às 18h” no Buganvília entre os turnos.</span></li><li><b>Monte a sua mesa</b><span>Um atalho para a sugestão do sushiman, direto da bio.</span></li><li><b>Menu in English</b><span>O cardápio em inglês, que hoje não existe.</span></li></ul><a class="abrir" href="site/links/">Abrir o link da bio</a></div>
+    <div><ul class="notas"><li><b>料理, ryōri</b><span>O nome da casa em japonês abre a página, com a logo e as duas casas.</span></li><li><b>Um botão principal: reservar</b><span>O cliente escolhe a casa num toque, vê se está aberta (“volta às 18h” no Buganvília entre os turnos) e reserva.</span></li><li><b>Monte a sua mesa</b><span>Um atalho para a sugestão do sushiman, direto da bio.</span></li><li><b>Menu in English</b><span>O cardápio em inglês, que hoje não existe.</span></li></ul><a class="abrir" href="site/links/">Abrir o link da bio</a></div>
   </div>
 </section>
 
@@ -152,35 +182,48 @@ p + p{margin-top:12px}
   <h2>Segundo acompanhamento</h2>
   <h3>O site, a reserva e o painel</h3>
   <div class="tela"><iframe src="site/" title="Protótipo do site" loading="lazy" tabindex="-1"></iframe></div>
-  <div class="vivo"><ul class="notas"><li><b>Deixe o sushiman sugerir</b><span>Quantas pessoas, a fome e as restrições; o site monta a mesa com pratos reais e o total.</span></li><li><b>Cardápio em português e inglês</b><span>Com os nomes japoneses explicados para quem vem de fora.</span></li></ul><ul class="notas"><li><b>Duas casas, dois horários</b><span>O Buganvília fecha entre almoço e jantar; o Iguatemi fica aberto direto.</span></li><li><b>Reserva por unidade, com triagem</b><span>Pedir lugar no balcão ou na varanda vai para a equipe confirmar.</span></li></ul></div>
-  <a class="abrir" href="site/">Abrir o site</a><a class="abrir" href="site/reservar/">Testar a reserva</a><a class="abrir" href="painel/">Ver o painel da equipe</a>
+  <div class="vivo"><ul class="notas"><li><b>Deixe o sushiman sugerir</b><span>Quantas pessoas, a fome e as restrições; o site monta a mesa com pratos reais e o total.</span></li><li><b>Cardápio em português e inglês</b><span>Com os nomes japoneses explicados para quem vem de fora.</span></li></ul><ul class="notas"><li><b>Duas casas, dois horários</b><span>O Buganvília fecha entre almoço e jantar; o Iguatemi fica aberto direto.</span></li><li><b>Reserva por unidade, com confirmação da equipe</b><span>Pedir lugar no balcão ou na varanda vai para a equipe confirmar. A mesa sugerida segue junto com a reserva.</span></li></ul></div>
+  <a class="abrir" href="site/">Abrir o site</a><a class="abrir" href="site/reservar/">Testar a reserva (demonstração, nada é enviado)</a><a class="abrir" href="painel/">Ver o painel (abre neste aparelho)</a>
+  <p class="texto mut so-tela" style="margin-top:14px;font-size:15px">A reserva de teste e o painel conversam só dentro do mesmo navegador: faça uma reserva e abra o painel no mesmo aparelho para ver a ficha chegar.</p>
 </section>
 
 <section class="folha">
   <h2>Como fica no ar</h2>
   <h3>Cada peça no seu endereço</h3>
   <p class="texto mut">Para mostrar, juntamos tudo num link só. Publicado, cada parte tem o seu endereço e o seu público.</p>
-  <div class="enderecos"><div><b>ryori.com.br</b><span>O site da casa, no domínio que hoje está livre.</span><em>clientes</em></div><div><b>ryori.com.br/links</b><span>O link da bio do Instagram.</span><em>quem vem do Instagram</em></div><div><b>ryori.com.br/reservar</b><span>A reserva em passos, por unidade.</span><em>clientes</em></div><div><b>painel.ryori.com.br</b><span>Reservas de cada casa, fichas e relatório do mês. Com login.</span><em>equipes do Buganvília e do Iguatemi</em></div></div>
-  <p class="fica">O cliente nunca vê o painel, e cada casa vê só as próprias reservas.</p>
+  <div class="enderecos"><div><b>ryori.com.br</b><span>O site da casa, no domínio que hoje está livre.</span><em>clientes</em></div><div><b>ryori.com.br/links</b><span>O link da bio do Instagram.</span><em>quem vem do Instagram</em></div><div><b>ryori.com.br/reservar</b><span>A reserva em passos, por unidade.</span><em>clientes</em></div><div><b>painel.ryori.com.br</b><span>Reservas de cada casa, a ficha de cada reserva e o relatório do mês. Com login.</span><em>equipes do Buganvília e do Iguatemi</em></div></div>
+  <p class="fica">O cliente nunca vê o painel. Na versão final, cada casa entra com login e vê só as próprias reservas.</p>
 </section>
 
 <section class="folha conta-folha">
   <h2>A conta</h2>
   <h3>Três formas de servir</h3>
-  <p class="texto mut">Os valores são para a marca, com as duas casas de Fortaleza no mesmo site. O registro do domínio é do grupo e custa R$ 40 por ano no Registro.br.</p>
+  <p class="texto mut">Os valores são para a marca, com as duas casas de Fortaleza no mesmo site. O registro (R$ 40 por ano no Registro.br) é pago pelo grupo, em nome do grupo. A mensalidade cobre a configuração e a hospedagem.</p>
   <div class="conta">
-    <div class="plano"><h4>Biolink</h4><div class="val">R$ 590<small>e R$ 99 por mês</small></div>
-      <p>Para trocar o Linktree por uma página da casa, com as duas unidades.</p><ul class="vem"><li>Página de links em ryori.com.br, com a logo, o 料理 e as cores da casa</li><li>Buganvília e Iguatemi, cada um com o estado de agora</li><li>Atalho para o “monte a sua mesa”</li><li>Cardápio, menu em inglês, executivo e iFood em ordem</li><li>Painel com os toques em cada botão, todo mês</li></ul></div>
-    <div class="plano rec"><h4>Site da casa<span class="sug">sugestão da casa</span></h4><div class="val">R$ 1.490<small>e R$ 189 por mês</small></div>
-      <p>Para o Ryori ter endereço próprio, ser achado no Google e receber bem quem não fala português.</p><ul class="vem"><li class="tudo">Tudo do Biolink, mais:</li><li>Site completo em ryori.com.br, em português e inglês</li><li>“Deixe o sushiman sugerir”, com pratos reais e o total</li><li>Cardápio completo, que a casa edita sozinha</li><li>Revisão da carta com a cozinha: nomes, descrições e alergênicos</li><li>Reserva em passos por unidade, com balcão e varanda, confirmação e lembrete</li><li>Painel por unidade: reservas para confirmar, fichas e código</li><li>Horário e endereço iguais no Google, no Instagram e no Tripadvisor</li><li>Relatório do mês: visitas, reservas, idioma e de onde veio cada pessoa</li></ul></div>
-    <div class="plano"><h4>Canal direto</h4><div class="val">R$ 2.890<small>e R$ 329 por mês</small></div>
-      <p>Para vender parte do delivery sem pagar comissão a cada pedido.</p><ul class="vem"><li class="tudo">Tudo do Site da casa, mais:</li><li>Pedido direto pelo site, inclusive do Ryori Box, que chega pronto no WhatsApp</li><li>Lista de clientes das duas casas, com consentimento</li><li>Cupom de volta para quem pediu direto</li><li>Relatório com pedidos, ticket médio e o que mais sai</li></ul></div>
+    <div class="plano"><h4>Página de links</h4><div class="val">R$ 590<small>de implantação + R$ 99 por mês</small><span class="prazo">no ar em 5 dias úteis</span></div>
+      <p>O link da bio do Instagram. Para trocar o Linktree por uma página da casa, com as duas unidades de Fortaleza.</p><ul class="vem"><li>Página de links em ryori.com.br, com a logo, o 料理 e as cores da casa</li><li>Buganvília e Iguatemi, cada um com o estado de agora</li><li>Atalho para o “monte a sua mesa”</li><li>Cardápio, menu em inglês, executivo e iFood em ordem</li><li>Painel com os toques em cada botão, todo mês</li></ul></div>
+    <div class="plano rec"><h4>Site da casa<span class="sug">recomendado</span></h4><div class="val">R$ 1.490<small>de implantação + R$ 189 por mês</small><span class="prazo">no ar em 15 dias úteis</span></div>
+      <p>Para o Ryori ter endereço próprio, ser achado no Google e receber bem quem não fala português.</p><ul class="vem"><li class="tudo">Tudo da Página de links, mais:</li><li>Site completo em ryori.com.br, em português e inglês</li><li>“Deixe o sushiman sugerir”, com pratos reais e o total</li><li>Cardápio completo, que a casa edita sozinha, com espaço para marcar os alergênicos de cada prato</li><li>Menu Executivo e Sequência Japonesa no cardápio, sem PDF</li><li>Revisão da carta com a cozinha: nomes, descrições e alergênicos</li><li>Reserva em passos por unidade, com balcão e varanda, confirmação e lembrete</li><li>Painel por unidade: reservas para confirmar, a ficha de cada reserva e o código</li><li>Horário e endereço alinhados com o perfil do Google da casa (o dono do perfil dá o acesso), o Instagram e o Tripadvisor</li><li>Relatório do mês: visitas, reservas, idioma e de onde veio cada pessoa</li></ul></div>
+    <div class="plano"><h4>Canal direto</h4><div class="val">R$ 2.890<small>de implantação + R$ 329 por mês</small><span class="prazo">no ar em 25 dias úteis</span></div>
+      <p>Para vender parte do delivery pelo canal da casa, sem a comissão do aplicativo. A taxa do meio de pagamento continua.</p><ul class="vem"><li class="tudo">Tudo do Site da casa, mais:</li><li>Pedido direto pelo site, que chega pronto no WhatsApp da casa</li><li>Lista de clientes das duas casas, com consentimento</li><li>Cupom de volta para quem pediu direto</li><li>Relatório com pedidos, valor médio por pedido e o que mais sai</li></ul>
+      <div class="calc" id="calc">
+        <h5>Faça a conta com os números de vocês</h5>
+        <p class="mut">Os campos começam vazios. Preencha com os números da casa; nada é enviado.</p>
+        <div class="campos">
+          <label>Pedidos por mês que passariam para o canal direto<input id="c-ped" inputmode="numeric" placeholder="ex.: 300"></label>
+          <label>Valor médio por pedido (R$)<input id="c-val" inputmode="decimal" placeholder="ex.: 90"></label>
+          <label>Comissão do aplicativo hoje (%)<input id="c-com" inputmode="decimal" placeholder="do contrato"></label>
+          <label>Taxa do meio de pagamento (%)<input id="c-tax" inputmode="decimal" placeholder="da maquininha"></label>
+        </div>
+        <div class="res" id="c-res" aria-live="polite"></div>
+        <button type="button" id="c-ex">Preencher com um exemplo (números fictícios)</button>
+      </div></div>
   </div>
   <div class="inclui">
-    <div><b>Toda mensalidade inclui</b><span>Hospedagem, domínio, certificado de segurança, suporte pelo WhatsApp e até 4 ajustes de conteúdo por mês, como trocar um preço ou a oferta da semana.</span></div>
+    <div><b>Toda mensalidade inclui</b><span>Hospedagem, configuração do domínio ryori.com.br (o registro é do grupo), certificado de segurança, suporte pelo WhatsApp e até 4 ajustes de conteúdo por mês. Conta como ajuste trocar um preço, uma foto, um horário ou um prato. Não conta criar uma seção ou uma página nova.</span></div>
     <div><b>Fica de fora</b><span>Mídia paga, sessão de fotos, taxas de meios de pagamento e mudanças de layout. Esses itens são orçados à parte.</span></div>
   </div>
-  <p class="rodape-conta">A nota é emitida pelo MEI de Guilherme Castro; a Timeless assina o trabalho.</p>
+  <p class="rodape-conta">Os prazos contam a partir da aprovação dos textos e das fotos. Esta proposta vale por 7 dias, até 1º de dezembro de 2026.</p>
 </section>
 
 <section class="folha">
@@ -188,13 +231,27 @@ p + p{margin-top:12px}
   <h3>Quinze minutos, com o cardápio aberto</h3>
   <p class="texto mut">Levo o protótipo no celular e corrigimos juntos o que estiver diferente da casa. As fotos são do site do Grupo Social Clube; para publicar, usamos as que vocês aprovarem.</p>
   <p class="texto mut">O que encontramos aqui conversa com o Santa Grelha e a Carbone, do mesmo grupo. A estrutura de duas casas num site só vale para as três marcas.</p>
-  <a class="zap" href="https://wa.me/5585994241988?text=Ol%C3%A1%2C%20Guilherme.%20Vi%20a%20proposta%20para%20o%20Ryori." target="_blank" rel="noopener">Conversar no WhatsApp</a>
+  <p class="texto mut">A prova está neste documento: o link da bio, o site, a reserva e o painel funcionam no celular de vocês, com o cardápio e os horários das duas casas.</p>
+  <a class="zap" href="https://wa.me/5585994241988?text=Ol%C3%A1%2C%20Guilherme!%20Vi%20a%20proposta%20do%20Ryori%20e%20queria%20conversar." target="_blank" rel="noopener">Conversar no WhatsApp</a>
   <div class="assina"><span>Guilherme Castro<br>(85) 99424-1988</span><img src="assets/timeless.png" alt="Timeless"></div>
 </section>
 <script>
+(()=>{const $=i=>document.getElementById(i),n=i=>parseFloat(($(i).value||'').replace(/\./g,'').replace(',','.')),
+ brl=v=>'R$ '+Math.round(v).toLocaleString('pt-BR'),MENS=329;
+ function conta(){const p=n('c-ped'),v=n('c-val'),c=n('c-com'),t=n('c-tax'),r=$('c-res');
+  if([p,v,c,t].some(x=>!isFinite(x))){r.innerHTML='';return;}
+  const venda=p*v,com=venda*c/100,tax=venda*t/100,fica=com-tax-MENS;
+  r.innerHTML=`<div><span>Comissão do aplicativo sobre esses pedidos</span><span>${brl(com)} por mês</span></div>
+  <div><span>No canal direto: taxa do meio de pagamento</span><span>− ${brl(tax)}</span></div>
+  <div><span>Mensalidade do Canal direto</span><span>− ${brl(MENS)}</span></div>
+  <div><span>${fica>=0?'Fica com a casa':'Com esses números, o canal direto custa mais'}</span><span>${brl(Math.abs(fica))} por mês</span></div>`;}
+ ['c-ped','c-val','c-com','c-tax'].forEach(i=>$(i).addEventListener('input',conta));
+ $('c-ex').addEventListener('click',()=>{$('c-ped').value='300';$('c-val').value='90';$('c-com').value='23';$('c-tax').value='3';conta();
+  $('c-res').insertAdjacentHTML('beforeend','<p class="mut" style="font-size:14px;margin-top:8px">Exemplo com números fictícios, só para mostrar a conta. Troque pelos da casa.</p>');});
+})();
 const fl=()=>document.querySelector('.flutua').style.display=scrollY>innerHeight*.6?'flex':'none';
 addEventListener('scroll',fl,{passive:true});
 </script>
-<a class="flutua" href="https://wa.me/5585994241988?text=Ol%C3%A1%2C%20Guilherme.%20Vi%20a%20proposta%20para%20o%20Ryori." target="_blank" rel="noopener">WhatsApp</a>
+<a class="flutua" href="https://wa.me/5585994241988?text=Ol%C3%A1%2C%20Guilherme!%20Vi%20a%20proposta%20do%20Ryori%20e%20queria%20conversar." target="_blank" rel="noopener">WhatsApp</a>
 </body>
 </html>
