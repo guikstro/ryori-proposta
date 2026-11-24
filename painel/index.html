@@ -7,100 +7,147 @@
 <title>Painel da equipe · Ryori</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--fundo:#E7E6E1;--fundo-2:#DAD8D0;--tinta:#1D1C1A;--tinta-2:#55534D;--tinta-3:#6B6862;--acento:#7E5226;--acento-txt:#F4EFE6;--regra:#C9C6BC;
-  --serif:'Shippori Mincho',serif;--sans:'Zen Kaku Gothic New',system-ui,sans-serif;--peso-titulo:500;--borda:1px;--raio:0;--logo-filtro:invert(1);--logo-blend:multiply}
-/* Área interna: mais densa que o site, com a mesma marca. */
+/* Painel do Ryori: o balcão do dia. A equipe escolhe casa, dia e horário e vê na planta quem senta onde.
+   Ao lado, a lista do dia por horário. Tocar num lugar ocupado abre a ficha. */
+:root{--pedra:#E7E6E1;--pedra-2:#DAD8D0;--sumi:#1D1C1A;--sumi-2:#55534D;--sumi-3:#6B6862;--cobre:#7E5226;--hinoki:#E2CBA4;--hinoki-2:#C9AA7C;--regra:#C9C6BC;--verde:#2F5B3A;
+ --chao:#DEDCD4;--cozinha:#CFCCC2;--vidro:rgba(214,228,232,.7);--vidro-borda:#9FB3B8;--planta:#7C8B6A;
+ --serif:'Shippori Mincho',serif;--sans:'Zen Kaku Gothic New',system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--fundo);color:var(--tinta);font:400 16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+body{background:var(--pedra);color:var(--sumi);font:400 15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
-.demo{background:var(--tinta);color:var(--fundo);font-size:13px;text-align:center;padding:7px 16px}
-header{display:flex;align-items:center;gap:18px;padding:14px 28px;border-bottom:2px solid var(--tinta);flex-wrap:wrap}
-header img{height:38px;filter:var(--logo-filtro);mix-blend-mode:var(--logo-blend)}
-header h1{font-family:var(--serif);font-weight:var(--peso-titulo);font-size:20px}
-header .quem{margin-left:auto;font-size:14px;color:var(--tinta-2)}
-main{max-width:1100px;margin:0 auto;padding:28px}
-.numeros{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--tinta);border-bottom:1px solid var(--regra);margin-bottom:28px}
-.numeros div{padding:14px 16px 14px 0}
-.numeros b{display:block;font-family:var(--serif);font-size:30px;line-height:1.1}
-.numeros span{font-size:14px;color:var(--tinta-2)}
-.numeros .alerta b{color:var(--acento)}
-.barra{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-.filtro{display:flex;border:2px solid var(--tinta);border-radius:var(--raio);overflow:hidden;max-width:100%;overflow-x:auto}
-.filtro button{background:none;border:0;font:500 15px var(--sans);min-height:44px;padding:0 16px;cursor:pointer;color:var(--tinta);white-space:nowrap}
-.filtro button[aria-pressed=true]{background:var(--tinta);color:var(--fundo)}
-.ficha{display:grid;grid-template-columns:110px 1fr auto;gap:8px 24px;padding:18px 0;border-top:1px solid var(--regra);align-items:start}
-.ficha .quando b{display:block;font-family:var(--serif);font-size:24px;line-height:1}
-.ficha .quando span{font-size:13px;color:var(--tinta-2)}
-.ficha .casa{font-size:12px;font-weight:500;color:var(--fundo);background:var(--tinta);padding:1px 7px;display:inline-block;margin-top:6px;border-radius:var(--raio)}
-.ficha .quem b{font-weight:500;font-size:17px}
-.ficha .quem small{color:var(--tinta-2);margin-left:6px}
-.ficha .det{font-size:15px;color:var(--tinta-2);margin-top:2px}
-.ficha .triagem{font-size:14px;color:var(--acento);margin-top:6px}
-.ficha .cod{font-size:13px;color:var(--tinta-2);letter-spacing:.03em;margin-top:6px}
-.estado{font-size:13px;font-weight:500;padding:3px 0;text-align:right}
-.estado.aguardando{color:var(--acento)}
-.estado.confirmada{color:#2F5B3A}
-.estado.cancelada{color:var(--tinta-2);text-decoration:line-through}
-.acoes{display:flex;gap:8px;margin-top:8px;justify-content:flex-end;flex-wrap:wrap}
-.acoes button,.acoes a{font:500 14px var(--sans);min-height:40px;padding:0 14px;border:2px solid var(--tinta);border-radius:var(--raio);background:none;color:var(--tinta);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
-.acoes .sim{background:var(--tinta);color:var(--fundo)}
-.exemplo{font-size:12px;color:var(--tinta-2);border:1px solid var(--regra);padding:0 6px;margin-left:8px}
-.vazio{padding:40px 0;border-top:1px solid var(--regra);color:var(--tinta-2)}
-.rodape{margin-top:34px;padding-top:14px;border-top:1px solid var(--regra);font-size:14px;color:var(--tinta-2);max-width:70ch}
-@media (max-width:760px){main{padding:18px}.numeros{grid-template-columns:1fr 1fr}.ficha{grid-template-columns:72px 1fr}.ficha .lado{grid-column:1/-1}.estado,.acoes{text-align:left;justify-content:flex-start}header{padding:12px 18px}}
+:focus-visible{outline:3px solid var(--cobre);outline-offset:2px}
+.demo{background:var(--sumi);color:var(--pedra);font-size:13px;text-align:center;padding:7px 16px}
+header{display:flex;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid var(--sumi);flex-wrap:wrap}
+header .k{font-family:var(--serif);font-weight:700;font-size:30px;color:var(--cobre);line-height:1}
+header h1{font-family:var(--serif);font-weight:600;font-size:21px}
+header .hoje{margin-left:auto;font-size:14px;color:var(--sumi-2)}
+main{max-width:1240px;margin:0 auto;padding:20px 24px 60px}
+.ctrl{display:grid;gap:10px;margin-bottom:18px}
+.ctrl div{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.ctrl span.r{font-size:13px;color:var(--sumi-2);width:70px}
+.ctrl button{background:transparent;border:1px solid var(--sumi);min-height:42px;min-width:48px;padding:0 12px;font:500 14px var(--sans);color:var(--sumi);cursor:pointer;line-height:1.15}
+.ctrl button small{display:block;font-size:11px;color:var(--cobre)}
+.ctrl button[aria-pressed=true]{background:var(--sumi);color:var(--pedra)}
+.ctrl button[aria-pressed=true] small{color:var(--hinoki)}
+.grade{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:28px;align-items:start}
+.pl-rolar{overflow-x:auto;background:var(--chao)}
+.pl-rolar svg{display:block;width:100%;min-width:560px;height:auto}
+.pl-rot{font:500 13px var(--sans);fill:var(--sumi-2)}
+.pl-lugar{outline:none}
+.pl-assento{fill:#F4F1EA;stroke:var(--sumi);stroke-width:1.6}
+.pl-cadeira{fill:#F4F1EA;stroke:var(--sumi-3);stroke-width:1}
+.pl-num{font:500 12px var(--sans);fill:var(--sumi);pointer-events:none}
+.pl-lugar.livre{opacity:.55}
+.pl-lugar.meu,.pl-lugar.aguarda{cursor:pointer}
+.pl-lugar.meu .pl-assento,.pl-lugar.meu .pl-cadeira{fill:var(--cobre);stroke:var(--cobre)}
+.pl-lugar.meu .pl-num{fill:#fff;font-weight:700}
+.pl-lugar.aguarda .pl-assento{fill:#F3E4D2;stroke:var(--cobre);stroke-width:2.4;stroke-dasharray:5 3}
+.pl-lugar.aguarda .pl-num{fill:var(--cobre);font-weight:700}
+.pl-lugar.sel .pl-assento{stroke:var(--sumi);stroke-width:4;stroke-dasharray:none}
+.pl-lugar:focus-visible .pl-assento{stroke:var(--sumi);stroke-width:4}
+.legenda{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--sumi-2);margin-top:10px}
+.legenda i{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-right:6px;border:1.6px solid var(--sumi)}
+.legenda i.c{background:var(--cobre);border-color:var(--cobre)}.legenda i.a{background:#F3E4D2;border:2px dashed var(--cobre)}
+.numeros{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:14px}
+.numeros b{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1;margin-right:6px}
+.numeros .alerta b{color:var(--cobre)}
+.numeros span{color:var(--sumi-2)}
+.ficha{background:#F4F1EA;padding:16px 18px;border-left:4px solid var(--cobre);margin-bottom:16px}
+.ficha h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.2}
+.ficha p{font-size:14px;color:var(--sumi-2);margin-top:4px}
+.ficha .st{font-weight:500;color:var(--cobre)}.ficha .st.confirmada{color:var(--verde)}
+.acoes{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.acoes button,.acoes a{font:500 13px var(--sans);min-height:40px;padding:0 12px;border:1px solid var(--sumi);background:none;color:var(--sumi);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.acoes .sim{background:var(--sumi);color:var(--pedra)}
+.lista h2{font-family:var(--serif);font-weight:600;font-size:17px;margin-bottom:6px}
+.lista button{display:grid;grid-template-columns:58px 1fr auto;gap:10px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--regra);padding:10px 0;font:inherit;color:inherit;cursor:pointer;align-items:baseline}
+.lista button[aria-pressed=true]{background:#EEE9E0}
+.lista b{font-family:var(--serif);font-weight:600;font-size:17px}
+.lista small{color:var(--sumi-2);display:block}
+.lista em{font-style:normal;font-size:12px;color:var(--cobre)}
+.lista em.confirmada{color:var(--verde)}.lista em.cancelada{color:var(--sumi-3);text-decoration:line-through}
+.ex{font-size:11px;color:var(--sumi-2);border:1px solid var(--regra);padding:0 5px;margin-left:6px}
+.vazio{color:var(--sumi-2);padding:14px 0;border-top:1px solid var(--regra)}
+.rodape{margin-top:30px;font-size:14px;color:var(--sumi-2);max-width:70ch}
+@media (max-width:900px){.grade{grid-template-columns:minmax(0,1fr)}main{padding:16px 14px 50px}header{padding:12px 14px}.ctrl span.r{width:100%}}
 </style>
 </head>
 <body>
 <div class="demo">Protótipo do painel da equipe. Na versão final, esta área terá login e cada unidade verá só as suas reservas.</div>
-<header><img id="logo" alt=""><h1>Reservas</h1><span class="quem" id="hoje"></span></header>
+<header><span class="k" lang="ja" aria-hidden="true">料理</span><h1>O balcão do dia</h1><span class="hoje" id="hoje"></span></header>
 <main>
+  <div class="ctrl">
+    <div><span class="r">Casa</span><span id="c-casa" style="display:flex;gap:6px;flex-wrap:wrap"></span></div>
+    <div><span class="r">Dia</span><span id="c-dia" style="display:flex;gap:6px;flex-wrap:wrap"></span></div>
+    <div><span class="r">Horário</span><span id="c-hora" style="display:flex;gap:6px;flex-wrap:wrap"></span></div>
+  </div>
   <div class="numeros" id="numeros"></div>
-  <div class="barra">
-    <div class="filtro" role="group" aria-label="Casa" id="f-casa"></div>
-    <div class="filtro" role="group" aria-label="Situação" id="f-status">
-      <button type="button" data-f="todas" aria-pressed="true">Todas</button>
-      <button type="button" data-f="aguardando" aria-pressed="false">Para confirmar</button>
-      <button type="button" data-f="confirmada" aria-pressed="false">Confirmadas</button>
+  <div class="grade">
+    <div>
+      <div class="pl-rolar"><svg id="pl" role="group" aria-label="Planta: quem senta onde no horário escolhido"></svg></div>
+      <div class="legenda"><span><i class="c"></i>confirmada</span><span><i class="a"></i>para confirmar</span><span>Uma reserva ocupa o lugar por 2 horas.</span></div>
+    </div>
+    <div>
+      <div id="ficha"></div>
+      <div class="lista"><h2 id="lista-t"></h2><div id="lista"></div></div>
     </div>
   </div>
-  <div id="lista"></div>
-  <p class="rodape">As reservas feitas em <a href="../site/reservar/">site/reservar</a> aparecem aqui na hora (neste protótipo, só no mesmo navegador). Reserva comum já entra confirmada. Grupo a partir de 6 pessoas ou com pedido especial entra como “para confirmar”, e a equipe da unidade responde pelo WhatsApp. O código é só para a equipe localizar a reserva.</p>
+  <p class="rodape">As reservas feitas em <a href="../site/#balcao">site, escolha o seu lugar</a> aparecem aqui na hora (neste protótipo, só no mesmo navegador). Lugar no balcão e grupo a partir de 6 pessoas entram para confirmar.</p>
 </main>
 <script src="../site/marca.js"></script>
 <script src="../site/comum.js"></script>
+<script src="../site/planta.js"></script>
 <script>
 lang='pt';
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const base=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Fortaleza'}));
 const dd=(k,h,m)=>{const x=new Date(base);x.setDate(base.getDate()+k);x.setHours(h,m,0,0);return x;};
 const fd=x=>`${DIAS[x.getDay()]}, ${x.getDate()}/${x.getMonth()+1}`;
 let exemplos=(MARCA.exemplos||[]).map((e,i)=>{const x=dd(e.k,e.h,e.m);return {...e,codigo:MARCA.prefixo+'-EX'+(i+1),exemplo:1,inicio:x.toISOString(),dia:fd(x),hora:hm(e.h*60+e.m)};});
-let fCasa='todas',fStatus='todas';
-const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const todas=()=>[...Reservas.todas(),...exemplos].sort((a,b)=>new Date(a.inicio)-new Date(b.inicio));
-function muda(c,s){if(c.includes('-EX')){exemplos.find(x=>x.codigo===c).status=s;}else Reservas.muda(c,{status:s});pinta();}
+const chave=d=>`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+const minutos=r=>{const d=new Date(r.inicio);return d.getHours()*60+d.getMinutes();};
+const dias=[...Array(7)].map((_,k)=>dd(k,12,0));
+const S={casa:MARCA.unidades[0].id,dia:0,hora:null,sel:null};
+const doDia=()=>todas().filter(r=>r.casa===S.casa&&chave(new Date(r.inicio))===chave(dias[S.dia]));
+function slots(){const u=unidade(S.casa),out=[];u.hor[dias[S.dia].getDay()].forEach(([a,b])=>{for(let t=a;t<=b-60;t+=30)out.push(t);});return out;}
+const naHora=(r,t)=>r.status!=='cancelada'&&t>=minutos(r)&&t<minutos(r)+120;
+function inicial(){const l=doDia().filter(r=>r.status!=='cancelada');S.hora=l.length?minutos(l[0]):(slots()[0]??null);}
+function muda(c,s){if(c.includes('-EX'))exemplos.find(x=>x.codigo===c).status=s;else Reservas.muda(c,{status:s});pinta();}
 function pinta(){
- const l=todas().filter(x=>fCasa==='todas'||x.casa===fCasa);
- document.getElementById('hoje').textContent='Hoje é '+new Date().toLocaleDateString('pt-BR',{timeZone:'America/Fortaleza',weekday:'long',day:'numeric',month:'long'});
- const at=l.filter(x=>x.status!=='cancelada'),ag=at.filter(x=>x.status==='aguardando').length;
- document.getElementById('numeros').innerHTML=[[ag,'para confirmar',ag?'alerta':''],[at.length,'reservas ativas',''],[at.reduce((s,x)=>s+Number(x.pessoas),0),'pessoas esperadas',''],[Reservas.todas().length,'feitas pelo site agora','']].map(([n,t,c])=>`<div class="${c}"><b>${n}</b><span>${t}</span></div>`).join('');
- document.getElementById('f-casa').innerHTML=[['todas','Todas as casas'],...MARCA.unidades.map(u=>[u.id,u.nome])].map(([k,n])=>`<button type="button" data-c="${k}" aria-pressed="${fCasa===k}">${n}</button>`).join('');
- const vis=l.filter(x=>fStatus==='todas'||x.status===fStatus);
- document.getElementById('lista').innerHTML=vis.length?vis.map(x=>{const det=[x.pessoas+' pessoas',x.ocasiao,...x.pedidos,x.mesa?`pedido sugerido: ${x.mesa}`:'',x.obs?`“${x.obs}”`:''].filter(Boolean).map(esc).join(' · ');const u=unidade(x.casa);
-  return `<div class="ficha"><div class="quando"><b>${x.hora}</b><span>${x.dia}</span><br><span class="casa">${u?u.nome:''}</span></div>
-  <div class="quem"><b>${esc(x.nome)}</b><small>${esc(x.zap)}</small>${x.exemplo?'<span class="exemplo">exemplo</span>':''}<div class="det">${det}</div>
-  ${x.status==='aguardando'&&x.motivos.length?`<div class="triagem">Conferir antes de confirmar: ${esc(x.motivos.join(', '))}</div>`:''}<div class="cod">${x.codigo}</div></div>
-  <div class="lado"><div class="estado ${x.status}">${{aguardando:'Para confirmar',confirmada:'Confirmada',cancelada:'Cancelada'}[x.status]}</div><div class="acoes">
-  ${x.status==='aguardando'?`<button type="button" class="sim" data-r="${x.codigo}" data-s="confirmada">Confirmar</button>`:''}${x.status!=='cancelada'?`<button type="button" data-r="${x.codigo}" data-s="cancelada">Cancelar</button>`:''}
-  <a href="https://wa.me/55${x.zap.replace(/\D/g,'').replace(/^55/,'')}" target="_blank" rel="noopener">WhatsApp</a></div></div></div>`;}).join(''):`<p class="vazio">Nada aqui. <a href="../site/reservar/">Fazer uma reserva pelo site</a> para ver como ela chega.</p>`;
+  document.getElementById('hoje').textContent='Hoje é '+new Date().toLocaleDateString('pt-BR',{timeZone:'America/Fortaleza',weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('c-casa').innerHTML=MARCA.unidades.map(u=>`<button type="button" data-c="${u.id}" aria-pressed="${S.casa===u.id}">${u.nome}</button>`).join('');
+  document.getElementById('c-dia').innerHTML=dias.map((d,k)=>{const n=todas().filter(r=>r.casa===S.casa&&r.status!=='cancelada'&&chave(new Date(r.inicio))===chave(d)).length;
+    return `<button type="button" data-d="${k}" aria-pressed="${S.dia===k}">${k===0?'Hoje':DIAS[d.getDay()].slice(0,3)+' '+d.getDate()}${n?`<small>${n} ${n===1?'reserva':'reservas'}</small>`:''}</button>`;}).join('');
+  const dia=doDia();
+  document.getElementById('c-hora').innerHTML=slots().map(t=>{const n=dia.filter(r=>naHora(r,t)).length;return `<button type="button" data-h="${t}" aria-pressed="${S.hora===t}">${hm(t)}${n?`<small>${n}</small>`:''}</button>`;}).join('')||'<span class="vazio">Casa fechada neste dia.</span>';
+  const ativos=dia.filter(r=>r.status!=='cancelada'),ag=ativos.filter(r=>r.status==='aguardando').length;
+  document.getElementById('numeros').innerHTML=`<span class="${ag?'alerta':''}"><b>${ag}</b><span>para confirmar</span></span><span><b>${ativos.length}</b><span>reservas no dia</span></span><span><b>${ativos.reduce((s,r)=>s+Number(r.pessoas),0)}</b><span>pessoas</span></span>`;
+  // a planta no horário escolhido
+  const mapa={};dia.filter(r=>S.hora!==null&&naHora(r,S.hora)&&r.lugar).forEach(r=>{mapa[r.lugar]=r;if(r.lugarPar)mapa[r.lugarPar]=r;});
+  Planta.desenha(document.getElementById('pl'),{varanda:S.casa==='buganvilia',
+    estado:id=>{const r=mapa[id];if(!r)return {k:'livre'};return {k:r.status==='confirmada'?'meu':'aguarda',tag:id[0]==='b'?esc(r.nome.replace('Exemplo: ','').slice(0,1)):esc(r.nome.replace('Exemplo: ','').split(' ')[0].slice(0,7))};},
+    aoTocar:id=>{if(mapa[id]){S.sel=mapa[id].codigo;pinta();}}});
+  document.querySelectorAll('#pl .pl-lugar').forEach(g=>{const r=mapa[g.dataset.l];if(r&&r.codigo===S.sel)g.classList.add('sel');});
+  // a ficha escolhida
+  const r=dia.find(x=>x.codigo===S.sel);
+  document.getElementById('ficha').innerHTML=r?`<div class="ficha"><h3>${esc(r.nome)}${r.exemplo?'<span class="ex">exemplo</span>':''}</h3>
+    <p>${r.hora}, ${r.pessoas} pessoas, ${r.lugar?Planta.nome(r.lugar):'sem lugar marcado'}${r.lugarPar?' e o vizinho':''}</p>
+    ${r.mesa?`<p>Pedido sugerido: ${esc(r.mesa)}</p>`:''}${r.obs?`<p>“${esc(r.obs)}”</p>`:''}
+    <p class="st ${r.status}">${{aguardando:'Para confirmar',confirmada:'Confirmada',cancelada:'Cancelada'}[r.status]}${r.status==='aguardando'&&r.motivos?.length?': '+esc(r.motivos.join(', ')):''}</p>
+    <div class="acoes">${r.status==='aguardando'?`<button type="button" class="sim" data-r="${r.codigo}" data-s="confirmada">Confirmar</button>`:''}${r.status!=='cancelada'?`<button type="button" data-r="${r.codigo}" data-s="cancelada">Cancelar</button>`:''}<a href="https://wa.me/55${String(r.zap).replace(/\D/g,'').replace(/^55/,'')}" target="_blank" rel="noopener">WhatsApp ${esc(r.zap)}</a></div></div>`:'';
+  document.getElementById('lista-t').textContent=`${unidade(S.casa).nome}, ${fd(dias[S.dia])}`;
+  document.getElementById('lista').innerHTML=dia.length?dia.map(x=>`<button type="button" data-sel="${x.codigo}" aria-pressed="${x.codigo===S.sel}"><b>${x.hora}</b><span>${esc(x.nome)}<small>${x.pessoas} pessoas, ${x.lugar?Planta.nome(x.lugar):'sem lugar marcado'}</small></span><em class="${x.status}">${{aguardando:'confirmar',confirmada:'ok',cancelada:'cancelada'}[x.status]}</em></button>`).join(''):'<p class="vazio">Nenhuma reserva neste dia.</p>';
 }
-document.getElementById('lista').addEventListener('click',e=>{const b=e.target.closest('button[data-r]');if(b)muda(b.dataset.r,b.dataset.s);});
-document.getElementById('f-casa').addEventListener('click',e=>{const b=e.target.closest('button');if(b){fCasa=b.dataset.c;pinta();}});
-document.getElementById('f-status').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;fStatus=b.dataset.f;document.querySelectorAll('#f-status button').forEach(x=>x.setAttribute('aria-pressed',x===b));pinta();});
+document.querySelector('.ctrl').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.c){S.casa=b.dataset.c;S.sel=null;inicial();}if(b.dataset.d){S.dia=+b.dataset.d;S.sel=null;inicial();}if(b.dataset.h)S.hora=+b.dataset.h;pinta();});
+document.getElementById('lista').addEventListener('click',e=>{const b=e.target.closest('[data-sel]');if(!b)return;const r=doDia().find(x=>x.codigo===b.dataset.sel);S.sel=r.codigo;S.hora=minutos(r);pinta();});
+document.getElementById('ficha').addEventListener('click',e=>{const b=e.target.closest('button[data-r]');if(b)muda(b.dataset.r,b.dataset.s);});
 addEventListener('storage',pinta);
-const lg=document.getElementById('logo');lg.src=MARCA.logo;lg.alt=MARCA.nome;
+// abre no primeiro dia com reserva na primeira casa
+{const k=dias.findIndex(d=>todas().some(r=>r.casa===S.casa&&chave(new Date(r.inicio))===chave(d)));S.dia=k<0?0:k;inicial();}
 pinta();
 </script>
 </body>
