@@ -5,89 +5,252 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Ryori · links</title>
+<meta property="og:title" content="Ryori · Sequência Japonesa, reservas e cardápio">
+<meta property="og:image" content="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_1200,h_630,al_c,q_82,enc_auto/ryori.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Ryori, link da bio: a parede do balcão. Em casas japonesas o cardápio fica pendurado em plaquinhas de madeira (fuda).
-   Aqui cada plaquinha é um link, escrita na vertical. A reserva é o único bloco escuro. */
-:root{--pedra:#E7E6E1;--sumi:#1D1C1A;--sumi-2:#55534D;--cobre:#7E5226;--madeira:#D8BE96;--madeira-2:#C7A77A;--regra:#C9C6BC;
+/* Ryori, link da bio: imagem no lugar de botão. Quem vem do Instagram reconhece o prato, o preço e a oferta num relance.
+   A Sequência Japonesa abre a página. A reserva é a única ação escura. As plaquinhas de madeira ficam para o resto. */
+:root{--pedra:#E7E6E1;--pedra-2:#DAD8D0;--sumi:#1D1C1A;--sumi-2:#55534D;--cobre:#7E5226;--cobre-claro:#C99A68;--madeira:#D8BE96;--madeira-2:#C7A77A;--regra:#C9C6BC;
  --serif:'Shippori Mincho',serif;--sans:'Zen Kaku Gothic New',system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--pedra);color:var(--sumi);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+body{background:var(--pedra);color:var(--sumi);font:400 15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
 :focus-visible{outline:3px solid var(--cobre);outline-offset:2px}
-.demo{background:var(--sumi);color:var(--pedra);font-size:12.5px;text-align:center;padding:6px 12px}
-.pg{max-width:440px;margin:0 auto;padding:0 20px 36px}
-.topo{display:flex;align-items:flex-end;justify-content:space-between;padding:22px 0 16px}
-.topo .k{font-family:var(--serif);font-weight:600;font-size:56px;line-height:1;color:var(--cobre);letter-spacing:.04em}
-.topo img{height:58px;width:auto;filter:invert(1);mix-blend-mode:multiply}
-.casas{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--sumi)}
-.casas button{background:none;border:0;font:inherit;color:var(--sumi-2);text-align:left;padding:12px 0 10px;min-height:66px;cursor:pointer}
-.casas button+button{padding-left:16px;border-left:1px solid var(--regra)}
-.casas b{display:block;font-family:var(--serif);font-weight:600;font-size:21px;color:var(--sumi-2)}
-.casas small{font-size:13.5px}
-.casas button[aria-pressed=true] b{color:var(--sumi)}
-.casas button[aria-pressed=true] small{color:var(--cobre)}
-.reservar{display:flex;align-items:center;justify-content:center;min-height:58px;background:var(--sumi);color:var(--pedra);font:500 17px var(--sans)}
+.demo{background:var(--sumi);color:var(--pedra);font-size:12px;text-align:center;padding:6px 12px}
+.pg{max-width:460px;margin:0 auto;padding-bottom:90px}
+.secao{padding:0 18px}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.2}
+.sub{font-size:13.5px;color:var(--sumi-2)}
 
-/* a parede: trilho escuro, plaquinhas penduradas */
-.parede{margin-top:30px;position:relative;padding-top:14px}
-.parede::before{content:'';position:absolute;left:-6px;right:-6px;top:6px;height:6px;background:var(--sumi)}
-.fuda{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
-.fuda a{position:relative;height:200px;background:
-  repeating-linear-gradient(90deg,rgba(120,80,40,.06) 0 2px,transparent 2px 7px),
-  linear-gradient(180deg,var(--madeira),var(--madeira-2));
-  display:flex;justify-content:center;padding:16px 0 10px;transition:transform .25s;transform-origin:50% -10px}
-.fuda a::before{content:'';position:absolute;top:-9px;left:50%;width:6px;height:12px;margin-left:-3px;background:var(--sumi);border-radius:2px}
-.fuda a span{writing-mode:vertical-rl;font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.06em;color:var(--sumi);white-space:nowrap}
-.fuda a small{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:11px;color:#5a4630}
+/* 1. destaques: carrossel de imagem, como a vitrine de uma loja */
+.vitrine{position:relative}
+.trilho{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.trilho::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;position:relative;aspect-ratio:4/5;max-height:72vh;background:#2b2723 center/cover no-repeat;color:#fff;display:flex;flex-direction:column;justify-content:flex-end}
+.slide::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 35%,rgba(16,14,12,.82))}
+.slide .tx{position:relative;z-index:1;padding:0 20px 46px}
+.slide .chip{display:inline-flex;align-items:center;gap:7px;font:700 12.5px var(--sans);background:var(--pedra);color:var(--sumi);padding:5px 10px;margin-bottom:12px}
+.slide .chip i{width:8px;height:8px;border-radius:50%;background:#3E7B4F}
+.slide .chip.off i{background:var(--cobre)}
+.slide h1,.slide h3{font-family:var(--serif);font-weight:700;font-size:34px;line-height:1.08}
+.slide p{font-size:15px;opacity:.92;margin-top:6px;max-width:30ch}
+.slide .preco{font-family:var(--serif);font-weight:600;font-size:22px;margin-top:8px}
+.slide .preco small{font:400 13px var(--sans);opacity:.85}
+.slide .cta{display:inline-flex;align-items:center;min-height:46px;margin-top:14px;padding:0 18px;background:var(--pedra);color:var(--sumi);font-weight:700;font-size:15px}
+.pontos{position:absolute;left:0;right:0;bottom:16px;display:flex;justify-content:center;gap:6px;z-index:2}
+.pontos button{width:24px;height:24px;border:0;background:none;cursor:pointer;display:grid;place-items:center;padding:0}
+.pontos button::before{content:'';width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5)}
+.pontos button[aria-current=true]::before{background:#fff;width:20px;border-radius:4px}
+.marca{position:absolute;top:14px;left:18px;z-index:2;display:flex;align-items:center;gap:10px}
+.marca img{height:40px;width:auto;filter:brightness(0) invert(1)}
+.marca span{font-family:var(--serif);font-weight:700;font-size:26px;color:var(--cobre-claro)}
+
+/* 2. a casa e a reserva */
+.casas{display:grid;grid-template-columns:1fr 1fr;margin-top:16px;border:1px solid var(--sumi)}
+.casas button{background:none;border:0;font:inherit;color:var(--sumi-2);text-align:left;padding:10px 14px;min-height:60px;cursor:pointer}
+.casas button+button{border-left:1px solid var(--sumi)}
+.casas b{display:block;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--sumi-2)}
+.casas small{font-size:12.5px}
+.casas button[aria-pressed=true]{background:var(--sumi);color:var(--pedra)}
+.casas button[aria-pressed=true] b{color:var(--pedra)}
+.reservar{display:flex;align-items:center;justify-content:center;min-height:56px;margin-top:8px;background:var(--cobre);color:#fff;font-weight:700;font-size:16px}
+.prova{display:flex;gap:14px;align-items:center;margin-top:12px;font-size:13px;color:var(--sumi-2)}
+.prova b{font-family:var(--serif);font-size:20px;color:var(--sumi)}
+
+/* 3. a sequência, etapa por etapa */
+.seq{margin-top:34px;background:var(--sumi);color:var(--pedra);padding:22px 18px 20px}
+.seq h2{color:#fff}
+.seq .sub{color:#B9B5AC;margin-top:4px}
+.etapas{list-style:none;display:flex;gap:8px;overflow-x:auto;margin:16px -18px 0;padding:0 18px 6px;scrollbar-width:none;counter-reset:e}
+.etapas::-webkit-scrollbar{display:none}
+.etapas li{counter-increment:e;flex:0 0 112px;border-top:2px solid var(--cobre-claro);padding-top:8px}
+.etapas li::before{content:counter(e);display:block;font-family:var(--serif);font-weight:700;font-size:22px;color:var(--cobre-claro);line-height:1}
+.etapas b{display:block;font-family:var(--serif);font-weight:600;font-size:15px;margin-top:4px;line-height:1.25}
+.etapas small{display:block;font-size:12px;color:#A9A59C;line-height:1.35;margin-top:3px}
+.precos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.precos div{background:#2A2825;padding:12px}
+.precos b{display:block;font-family:var(--serif);font-weight:600;font-size:16px;color:#fff}
+.precos span{display:block;font-size:13px;color:#C9C5BC;margin-top:4px;line-height:1.4}
+.precos span strong{font-family:var(--serif);font-size:19px;color:var(--cobre-claro);font-weight:600}
+.seq .cta{display:flex;align-items:center;justify-content:center;min-height:50px;margin-top:14px;background:var(--pedra);color:var(--sumi);font-weight:700}
+.seq .fonte{font-size:11.5px;color:#8F8B83;margin-top:10px}
+
+/* 4. da cozinha: cartões de prato com foto e preço */
+.cozinha{margin-top:34px}
+.cozinha .cab{display:flex;justify-content:space-between;align-items:baseline;padding:0 18px}
+.cozinha .cab a{font-size:14px;color:var(--cobre);font-weight:700}
+.pratos{display:flex;gap:10px;overflow-x:auto;padding:12px 18px 4px;scroll-snap-type:x proximity;scroll-padding-left:18px;scrollbar-width:none}
+.pratos::-webkit-scrollbar{display:none}
+.prato{flex:0 0 156px;scroll-snap-align:start}
+.prato img{width:156px;height:195px;object-fit:cover;background:var(--pedra-2)}
+.prato b{display:block;font-family:var(--serif);font-weight:600;font-size:15.5px;margin-top:8px;line-height:1.25}
+.prato small{display:block;font-size:12.5px;color:var(--sumi-2);line-height:1.35}
+.prato em{display:block;font-style:normal;font-weight:700;color:var(--cobre);margin-top:4px}
+
+/* 5. o sushiman sugere */
+.sugere{margin:30px 18px 0;display:grid;grid-template-columns:120px 1fr;background:#F3EFE7;border:1px solid var(--regra)}
+.sugere img{width:120px;height:100%;object-fit:cover}
+.sugere div{padding:14px}
+.sugere h2{font-size:18px}
+.sugere .q{display:flex;gap:6px;margin-top:10px}
+.sugere .q button{min-width:44px;min-height:40px;border:1px solid var(--sumi);background:none;font:700 14px var(--sans);cursor:pointer;color:var(--sumi)}
+.sugere .q button[aria-pressed=true]{background:var(--sumi);color:var(--pedra)}
+.sugere .tot{font-size:13.5px;margin-top:10px;color:var(--sumi-2)}
+.sugere .tot b{font-family:var(--serif);font-size:19px;color:var(--sumi)}
+.sugere .tot a{display:block;color:var(--cobre);font-weight:700;margin-top:4px}
+
+/* 6. as plaquinhas: o resto, pendurado */
+.parede{margin:34px 18px 0;position:relative;padding-top:12px}
+.parede::before{content:'';position:absolute;left:-4px;right:-4px;top:5px;height:5px;background:var(--sumi)}
+.fuda{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.fuda a{position:relative;height:150px;background:repeating-linear-gradient(90deg,rgba(120,80,40,.06) 0 2px,transparent 2px 7px),linear-gradient(180deg,var(--madeira),var(--madeira-2));display:flex;justify-content:center;padding-top:14px;transition:transform .25s;transform-origin:50% -8px}
+.fuda a::before{content:'';position:absolute;top:-8px;left:50%;width:5px;height:11px;margin-left:-2.5px;background:var(--sumi);border-radius:2px}
+.fuda span{writing-mode:vertical-rl;font-family:var(--serif);font-weight:600;font-size:15.5px;letter-spacing:.05em;white-space:nowrap}
 .fuda a:hover,.fuda a:focus-visible{transform:rotate(-3deg)}
-@media (prefers-reduced-motion:reduce){.fuda a{transition:none}}
-.dica{font-size:13.5px;color:var(--sumi-2);margin-top:10px}
-footer{margin-top:22px;font-size:12.5px;color:var(--sumi-2)}
+footer{padding:26px 18px 0;font-size:12px;color:var(--sumi-2)}
+
+/* barra fixa de reserva, aparece depois do primeiro botão */
+.fixa{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(231,230,225,.94);backdrop-filter:blur(8px);border-top:1px solid var(--regra);transform:translateY(110%);transition:transform .3s}
+.fixa.on{transform:none}
+.fixa a{display:flex;align-items:center;justify-content:center;min-height:50px;max-width:432px;margin:0 auto;background:var(--cobre);color:#fff;font-weight:700}
+@media (prefers-reduced-motion:reduce){.fuda a,.fixa{transition:none}}
 </style>
 </head>
 <body>
-<div class="demo">Protótipo da Timeless para o Ryori. Não é a página oficial da casa.</div>
+<div class="demo">Protótipo da Timeless para o Ryori. Não é a página oficial da casa. Fotos do Instagram do Ryori.</div>
 <div class="pg">
-  <div class="topo">
-    <div class="k" lang="ja" aria-label="料理, ryōri: cozinhar">料理</div>
-    <img src="https://static.wixstatic.com/media/404bb8_7d5670b5bc4c471db1008a3949596d86~mv2.png/v1/fill/w_600,h_440,al_c,q_85/ryori.png" alt="Ryori" width="79" height="58">
+
+  <section class="vitrine" aria-label="Destaques">
+    <div class="marca"><img src="https://static.wixstatic.com/media/404bb8_7d5670b5bc4c471db1008a3949596d86~mv2.png/v1/fill/w_600,h_440,al_c,q_85/ryori.png" alt="Ryori" width="55" height="40"><span lang="ja" aria-hidden="true">料理</span></div>
+    <div class="trilho" id="trilho">
+      <article class="slide" style="background-image:url(https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_900,h_1125,al_c,q_80,enc_auto/ryori.jpg)" aria-label="Sequência Japonesa">
+        <div class="tx"><span class="chip" id="seq-hoje"><i></i><span></span></span>
+          <h1>Sequência Japonesa</h1>
+          <p>Oito etapas, das entradas à sobremesa, com sashimi.</p>
+          <div class="preco">R$ 159 <small>por pessoa, no jantar</small></div>
+          <a class="cta" href="#sequencia">Ver as etapas</a></div>
+      </article>
+      <article class="slide" style="background-image:url(../fotos/wagyu.jpg)" aria-label="Wagyu Stone">
+        <div class="tx"><h3>Wagyu Stone</h3><p>Wagyu com gergelim e ponzu, você finaliza na pedra quente.</p><div class="preco">R$ 98</div><a class="cta" href="../#cardapio">Ver no cardápio</a></div>
+      </article>
+      <article class="slide" style="background-image:url(../fotos/box.jpg)" aria-label="Ryori Box">
+        <div class="tx"><h3>Ryori Box</h3><p>Ingredientes do Ryori para montar suas combinações em casa. Pedidos limitados.</p><a class="cta" href="https://www.instagram.com/p/Dfz8HGhFLSB/" target="_blank" rel="noopener">Ver a Box</a></div>
+      </article>
+    </div>
+    <div class="pontos" id="pontos" role="group" aria-label="Escolher destaque"></div>
+  </section>
+
+  <div class="secao">
+    <div class="casas" id="casas" role="group" aria-label="Escolha a casa"></div>
+    <a class="reservar" id="reservar" href="../#balcao">Reservar lugar</a>
+    <div class="prova"><span><b>4,9</b> Tripadvisor, Iguatemi</span><span><b>4,8</b> Buganvília</span></div>
   </div>
-  <div class="casas" id="casas" role="group" aria-label="Escolha a casa"></div>
-  <a class="reservar" id="reservar" href="../#balcao">Reservar lugar</a>
+
+  <section class="seq" id="sequencia" aria-labelledby="seq-t">
+    <h2 id="seq-t">A Sequência, etapa por etapa</h2>
+    <p class="sub">A cozinha manda tudo à mesa, na ordem. Você só escolhe o dia.</p>
+    <ol class="etapas">
+      <li><b>Entradas</b><small>sunomono, missoshiro, ceviche, ebishin, lula crok</small></li>
+      <li><b>Carpaccio</b><small>ussuzukuri shiromi, salmão truffle, tuna tatak missô</small></li>
+      <li><b>Hand roll e onigiri</b><small>salmão, atum</small></li>
+      <li><b>Cozinha asiática</b><small>KFC, camarão Hong Kong, chow fun</small></li>
+      <li><b>Sushis tradicionais</b><small>hossomaki, uramaki, temaki, sashimi</small></li>
+      <li><b>Duplas especiais</b><small>jou, ebiten, shakê spicy, maguro tartufo</small></li>
+      <li><b>Makis especiais</b><small>hot pepper, cold and hot, uramaki shakê brie</small></li>
+      <li><b>Sobremesa</b><small>mousse de chocolate com yuzu ou cheesecake</small></li>
+    </ol>
+    <div class="precos">
+      <div><b>Buganvília</b><span>Jantar, domingo a quarta: <strong>R$ 159</strong><br>Almoço, todos os dias, sem sashimi: <strong>R$ 129</strong></span></div>
+      <div><b>Iguatemi</b><span>Jantar, domingo a quarta: <strong>R$ 159</strong></span></div>
+    </div>
+    <a class="cta" id="res-seq" href="../#balcao">Reservar para a Sequência</a>
+    <p class="fonte">Valor por pessoa. Do cardápio da Sequência publicado pela casa, conferido em 24/11/2026.</p>
+  </section>
+
+  <section class="cozinha" aria-labelledby="coz-t">
+    <div class="cab"><h2 id="coz-t">Da cozinha</h2><a href="../#cardapio">Cardápio completo</a></div>
+    <div class="pratos">
+      <a class="prato" href="../#cardapio"><img src="../fotos/fishtaco.jpg" alt="Fish taco do Ryori: casquinha de gyoza com salmão e ovas" width="156" height="195" loading="lazy"><b>Fish taco</b><small>gyoza crocante, salmão, wasabi, ovas</small><em>R$ 44</em></a>
+      <a class="prato" href="../#cardapio"><img src="../fotos/wagyu.jpg" alt="Wagyu Stone: fatia de wagyu sobre a pedra quente" width="156" height="195" loading="lazy"><b>Wagyu Stone</b><small>na pedra quente, gergelim e ponzu</small><em>R$ 98</em></a>
+      <a class="prato" href="../#cardapio"><img src="../fotos/cheesecake.jpg" alt="Cheesecake gelado com caramelo de missô" width="156" height="195" loading="lazy"><b>Cheesecake gelado</b><small>caramelo de missô e geleias</small><em>no cardápio</em></a>
+      <a class="prato" href="https://www.instagram.com/p/Dfz8HGhFLSB/" target="_blank" rel="noopener"><img src="../fotos/box.jpg" alt="Ryori Box com arroz de sushi e ingredientes" width="156" height="195" loading="lazy"><b>Ryori Box</b><small>para montar em casa</small><em>pedidos limitados</em></a>
+    </div>
+  </section>
+
+  <section class="sugere" aria-labelledby="sug-t">
+    <img src="../fotos/experiencia.jpg" alt="Salão do Ryori com mesas postas" width="120" height="160" loading="lazy">
+    <div>
+      <h2 id="sug-t">Deixe o sushiman sugerir</h2>
+      <div class="q" id="q" role="group" aria-label="Quantas pessoas"></div>
+      <p class="tot" id="tot" aria-live="polite"></p>
+    </div>
+  </section>
 
   <div class="parede">
-    <nav class="fuda" aria-label="Links">
+    <nav class="fuda" aria-label="Mais links">
       <a href="../#cardapio"><span>Cardápio</span></a>
-      <a href="../#mesa"><span>O sushiman sugere</span></a>
       <a href="../?lang=en#cardapio" lang="en"><span>English menu</span></a>
       <a href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><span>Pedir no iFood</span></a>
-      <a id="mapa" href="#" target="_blank" rel="noopener"><span>Como chegar</span></a>
-      <a id="trip" href="#" target="_blank" rel="noopener"><span>Avaliações</span><small>4,9</small></a>
+      <a id="mapa" href="https://www.google.com/maps/search/?api=1&query=Ryori+Fortaleza" target="_blank" rel="noopener"><span>Como chegar</span></a>
+      <a href="../#casas"><span>Eventos</span></a>
     </nav>
   </div>
-  <p class="dica" id="end"></p>
-  <footer>Ryori, do Grupo Social Clube. Horários da bio do Instagram, 24/11/2026.</footer>
+  <footer id="end"></footer>
 </div>
+<div class="fixa" id="fixa"><a id="reservar-fixo" href="../#balcao">Reservar lugar</a></div>
+
 <script src="../marca.js"></script>
 <script src="../comum.js"></script>
+<script src="../cardapio.js"></script>
 <script>
 const CH=MARCA.id+'-casa';
 let casa=(()=>{try{return localStorage.getItem(CH)}catch(e){return null}})();
 if(!unidade(casa))casa=MARCA.unidades[0].id;
+const brl=n=>'R$ '+n.toLocaleString('pt-BR');
 const est=u=>{const s=estadoUnidade(u);return s.k==='aberta'?`aberta até ${hm(s.ate)}`:s.k==='pausa'?`volta às ${hm(s.abre)}`:s.k==='antes'?`abre às ${hm(s.abre)}`:`abre amanhã, ${hm(s.abre)}`;};
+
+// a Sequência no jantar: domingo (0) a quarta (3), nas duas casas, a partir das 18h no Buganvília
+function seqHoje(){const {d,m}=agoraFortaleza(),c=document.getElementById('seq-hoje');
+  const dia=d<=3,t=dia?(m<1080?'Hoje tem Sequência no jantar':m<1380?'Hoje tem Sequência, agora no jantar':'Amanhã tem Sequência'):(d===6?'A Sequência volta amanhã, domingo':'A Sequência volta no domingo');
+  c.querySelector('span').textContent=t;c.classList.toggle('off',!dia&&!(d===6));}
 function pinta(){
   const u=unidade(casa);
   document.getElementById('casas').innerHTML=MARCA.unidades.map(x=>`<button type="button" data-c="${x.id}" aria-pressed="${x.id===casa}"><b>${x.nome}</b><small>${est(x)}</small></button>`).join('');
-  const r=document.getElementById('reservar');r.href=`../?casa=${u.id}#balcao`;r.textContent=`Reservar lugar no ${u.nome}`;
+  const alvo=`../?casa=${u.id}#balcao`;
+  document.getElementById('reservar').href=alvo;document.getElementById('reservar').textContent=`Reservar lugar no ${u.nome}`;
+  document.getElementById('reservar-fixo').href=alvo;document.getElementById('res-seq').href=alvo;
   document.getElementById('mapa').href=u.mapa;
-  document.getElementById('end').textContent=`${u.nome}: ${u.end}`;
+  document.getElementById('end').textContent=`Ryori ${u.nome}: ${u.end}. Grupo Social Clube. Preços e horários conferidos em 24/11/2026.`;
+  seqHoje();
 }
 document.getElementById('casas').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;casa=b.dataset.c;try{localStorage.setItem(CH,casa)}catch(e){}pinta();});
-document.getElementById('trip').href=MARCA.trip;
-pinta();setInterval(pinta,60000);
+
+// pontos do carrossel
+const tr=document.getElementById('trilho'),sl=[...tr.children],pt=document.getElementById('pontos');
+pt.innerHTML=sl.map((s,i)=>`<button type="button" aria-label="Destaque ${i+1}: ${s.getAttribute('aria-label')}"></button>`).join('');
+const marca=()=>{const i=Math.round(tr.scrollLeft/tr.clientWidth);[...pt.children].forEach((b,k)=>b.setAttribute('aria-current',k===i));};
+tr.addEventListener('scroll',()=>requestAnimationFrame(marca),{passive:true});
+pt.addEventListener('click',e=>{const k=[...pt.children].indexOf(e.target.closest('button'));if(k>=0)tr.scrollTo({left:k*tr.clientWidth,behavior:'smooth'});});
+marca();
+
+// o sushiman sugere: a mesma conta do site, resumida
+function mesa(n){const todos=CARDAPIO.filter(g=>['starters','veg','sushibar'].includes(g.id)).flatMap(g=>g.itens.map(i=>({...i,grupo:g.id})));
+  const ord=l=>[...l].sort((a,b)=>a.sug-b.sug),ent=ord(todos.filter(i=>i.grupo!=='sushibar')),bar=ord(todos.filter(i=>i.grupo==='sushibar'));
+  const qE=Math.max(1,Math.round(n*.8)),qB=Math.max(1,n);let t=0;for(let k=0;k<qE;k++)t+=ent[k%ent.length].p;for(let k=0;k<qB;k++)t+=bar[k%bar.length].p;return t;}
+let N=2;
+function sugere(){document.getElementById('q').innerHTML=[2,4,6].map(n=>`<button type="button" data-n="${n}" aria-pressed="${n===N}">${n}</button>`).join('');
+  const t=mesa(N);document.getElementById('tot').innerHTML=`Para ${N}, a mesa sai por cerca de <b>${brl(t)}</b> (${brl(Math.round(t/N))} por pessoa).<a href="../#mesa">Ver a mesa sugerida</a>`;}
+document.getElementById('q').addEventListener('click',e=>{const b=e.target.closest('button');if(b){N=+b.dataset.n;sugere();}});
+
+// barra fixa: aparece quando o botão principal sai da tela
+const fixa=document.getElementById('fixa');
+new IntersectionObserver(([e])=>fixa.classList.toggle('on',!e.isIntersecting&&e.boundingClientRect.top<0)).observe(document.getElementById('reservar'));
+
+pinta();sugere();setInterval(pinta,60000);
 </script>
 </body>
 </html>
