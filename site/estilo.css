@@ -155,3 +155,10 @@ svg.ic.cheio{fill:currentColor;stroke:none}
 
 .tri.fim{grid-template-columns:1fr}
 .tri.fim .feito{max-width:760px}
+
+/* acabamento editorial: os títulos na Shippori Mincho, em caixa normal, como na identidade do Ryori */
+.display,.titulo{font-family:var(--mincho);text-transform:none;font-weight:500;letter-spacing:-.01em}
+.display{font-size:clamp(40px,5vw,72px);line-height:1.04}
+.titulo{font-size:clamp(30px,3.2vw,44px);line-height:1.08}
+.corrido{font-size:clamp(18px,1.6vw,22px);line-height:1.45}
+.opcao b{font-family:var(--mincho);text-transform:none;font-weight:500}

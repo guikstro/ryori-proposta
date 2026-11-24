@@ -38,7 +38,7 @@
 @media (max-width:900px){.abre .lockup{left:16px;right:16px;bottom:48px}}
 
 /* sala escura: título, objeto, texto */
-.sala{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr minmax(280px,40%) 1fr;align-items:center;gap:var(--g);padding:130px 28px 100px}
+.sala{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr minmax(280px,38%) 1fr;align-items:center;gap:56px;padding:150px 28px 120px}
 .sala>*{min-width:0}
 .sala .obj{position:relative;aspect-ratio:1;width:100%}
 .sala .obj canvas{width:100%!important;height:100%!important}
@@ -49,7 +49,7 @@
 @media (max-width:900px){.divisa{margin:0 16px}}
 
 /* cozinha: abas, uma foto por vez */
-.cozinha{padding:120px 28px 100px}
+.cozinha{padding:150px 28px 120px}
 .cab{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);align-items:end}
 .abas{display:flex;gap:24px;flex-wrap:wrap;margin-top:44px}
 .abas button{font-size:12px;padding:6px 0;border-bottom:1px dashed transparent;color:var(--creme-3);transition:color .3s}
@@ -60,7 +60,7 @@
 .prato-g .quadro::after{content:'';position:absolute;inset:-7px;border:1px dashed var(--cortica);border-radius:20px;pointer-events:none}
 .prato-g .foto{display:block;aspect-ratio:4/5;width:100%;object-fit:cover;border-radius:var(--r-cartao)}
 .prato-g .titulo{margin-bottom:14px}
-.prato-g .preco{font-size:24px}
+.prato-g .preco{font:500 30px var(--mincho)}
 .cardapio-todo{margin-top:56px}
 .cardapio-todo summary{list-style:none;cursor:pointer;display:inline-flex}
 .cardapio-todo summary::-webkit-details-marker{display:none}
@@ -85,7 +85,7 @@
 .precos div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px dashed var(--cortica);font-size:13px}
 
 /* reserva */
-.balcao{padding:120px 28px 100px}
+.balcao{padding:150px 28px 120px}
 @media (max-width:900px){.balcao{padding:96px 16px 80px}}
 
 /* casas */
@@ -94,7 +94,7 @@
 .casa>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .casa::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,14,.15),rgba(20,17,14,.92))}
 .casa .info{position:relative;z-index:1;width:100%;max-width:420px}
-.casa h3{font-weight:500;font-size:44px;line-height:.9}
+.casa h3{font:500 52px/1 var(--mincho);text-transform:none}
 .casa .end{margin-top:10px}
 .casa .acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
 .casa .horas{margin-top:14px;font-size:11.5px;color:var(--creme-2);line-height:1.7}
