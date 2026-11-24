@@ -23,8 +23,8 @@ window.MARCA={
      mapa:'https://www.google.com/maps/search/?api=1&query=Ryori+Iguatemi+Fortaleza',zap:'',tel:'(85) 3241-4683',trip:['4,9','1.337','','4.9','1,337','']}
   ],
   exemplos:[
-    {k:1,h:20,m:0,casa:'buganvilia',pessoas:2,ocasiao:'Jantar a dois',pedidos:['Lugar no balcão do sushiman'],obs:'',nome:'Exemplo: Luana',zap:'(85) 9 0000-0001',status:'aguardando',motivos:['lugar no balcão do sushiman']},
-    {k:1,h:12,m:30,casa:'iguatemi',pessoas:4,ocasiao:'Negócios',pedidos:[],obs:'',nome:'Exemplo: Daniel',zap:'(85) 9 0000-0002',status:'confirmada',motivos:[]},
-    {k:2,h:19,m:30,casa:'buganvilia',pessoas:7,ocasiao:'Aniversário',pedidos:['Mesa na varanda (Buganvília)'],obs:'Uma pessoa alérgica a camarão',nome:'Exemplo: Bianca',zap:'(85) 9 0000-0003',status:'aguardando',motivos:['grupo de 7','mesa na varanda (buganvília)','observação']}
+    {k:1,h:20,m:0,casa:'buganvilia',pessoas:2,ocasiao:'Jantar a dois',pedidos:['Lugar no balcão do sushiman'],lugar:'b4',lugarPar:'b5',obs:'',nome:'Exemplo: Luana',zap:'(85) 9 0000-0001',status:'aguardando',motivos:['lugar no balcão do sushiman']},
+    {k:1,h:12,m:30,casa:'iguatemi',pessoas:4,ocasiao:'Negócios',pedidos:[],lugar:'m3',obs:'',nome:'Exemplo: Daniel',zap:'(85) 9 0000-0002',status:'confirmada',motivos:[]},
+    {k:2,h:19,m:30,casa:'buganvilia',pessoas:7,ocasiao:'Aniversário',pedidos:['Mesa na varanda (Buganvília)'],lugar:'v4',obs:'Uma pessoa alérgica a camarão',nome:'Exemplo: Bianca',zap:'(85) 9 0000-0003',status:'aguardando',motivos:['grupo de 7','mesa na varanda (buganvília)','observação']}
   ]
 };
