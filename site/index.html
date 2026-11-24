@@ -391,6 +391,8 @@ function aplicaLang(){const bl=document.getElementById('lang');bl.textContent=la
 document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
 const bR=document.getElementById('b-revisao');bR.addEventListener('click',()=>{const on=document.body.classList.toggle('revisao');bR.setAttribute('aria-pressed',on);});
 aplicaLang();setInterval(estados,60000);
+// quem chega com #balcao (vindo da bio) vai direto à seção, depois que a página monta o conteúdo
+if(location.hash){const alvo=document.querySelector(location.hash);if(alvo)requestAnimationFrame(()=>setTimeout(()=>alvo.scrollIntoView({behavior:'instant',block:'start'}),60));}
 </script>
 <!-- Prévia do cardápio 3D: um nigiri de salmão desenhado com three.js. Ilustrativo; a versão final usa o prato real escaneado. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

@@ -14,146 +14,211 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* Ryori, link da bio. Direção: a noite no balcão.
-   Abre com o vídeo real da cozinha; uma folha cor de pedra sobe por cima, como a toalha do balcão.
-   Tudo é imagem com texto por cima: nada de caixa de texto. Cobre é o único brilho.
-   Mincho para o que é nome, Gothic para o que é ação. */
+   O vídeo real da cozinha abre a página; uma folha cor de pedra sobe por cima, como a toalha do balcão.
+   Tudo é imagem com texto por cima. Os botões são vidro (liquid glass) sobre a imagem; o cobre é o único brilho.
+   Reserva, sushiman e pratos abrem em folhas dentro da própria bio: ninguém sai da página para decidir. */
 :root{
-  --noite:#14110E;--noite-2:#1F1A16;--pedra:#ECEAE4;--pedra-2:#E0DDD5;--sumi:#1D1A17;--sumi-2:#5C574F;
-  --cobre:#B9824F;--cobre-2:#D9AE7E;--branco:#F6F2EA;--linha:rgba(29,26,23,.12);
+  --noite:#14110E;--noite-2:#1F1A16;--pedra:#ECEAE4;--pedra-2:#E2DFD8;--sumi:#1D1A17;--sumi-2:#5C574F;
+  --cobre:#B9824F;--cobre-2:#DDB384;--branco:#F6F2EA;--linha:rgba(29,26,23,.1);
   --mincho:'Shippori Mincho',serif;--gothic:'Zen Kaku Gothic New',system-ui,sans-serif;
-  --raio:22px;--ease:cubic-bezier(.2,.7,.1,1)}
+  --raio:24px;--ease:cubic-bezier(.2,.7,.1,1);
+  --chao:#221D18;--cozinha:#2C2620;--vidro:rgba(160,190,200,.25);--vidro-borda:#5d6f74;--planta:#4f5d43}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{background:var(--noite)}
 body{background:var(--noite);color:var(--sumi);font:400 15px/1.5 var(--gothic);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button,input{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
 img,video{display:block;max-width:100%}
-:focus-visible{outline:2px solid var(--cobre-2);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid var(--cobre-2);outline-offset:3px;border-radius:10px}
 .pg{max-width:440px;margin:0 auto;position:relative}
 svg.ic{width:20px;height:20px;flex:none}
 
+/* ---------- vidro: o botão como uma lâmina de vidro sobre a imagem ---------- */
+.vidro{position:relative;isolation:isolate;color:var(--branco);
+  background:linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.07) 45%,rgba(255,255,255,.12));
+  backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.18),0 12px 30px -14px rgba(0,0,0,.55)}
+.vidro::after{content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 70% at 30% 0%,rgba(255,255,255,.35),transparent 55%)}
+.vidro.cobre{color:#24170C;background:linear-gradient(140deg,rgba(233,196,152,.92),rgba(196,140,86,.82) 55%,rgba(222,178,128,.9));
+  box-shadow:inset 0 1px 0 rgba(255,246,232,.9),inset 0 -2px 6px rgba(120,70,30,.25),inset 0 0 0 1px rgba(255,240,220,.35),0 16px 34px -14px rgba(185,130,79,.75)}
+.vidro.escuro{color:var(--sumi);background:linear-gradient(140deg,rgba(255,255,255,.75),rgba(255,255,255,.35));
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(29,26,23,.08),0 10px 24px -14px rgba(29,26,23,.4)}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;height:54px;border-radius:99px;font:700 15px var(--gothic);letter-spacing:.02em;transition:transform .25s var(--ease)}
+.btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.redondo{width:54px;flex:none;padding:0}
+
 /* ---------- abertura: o vídeo da cozinha ---------- */
-.abre{position:relative;height:min(86svh,760px);min-height:600px;overflow:hidden;color:var(--branco)}
-.abre video,.abre .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 2.4s var(--ease)}
+.abre{position:relative;height:100svh;max-height:880px;min-height:620px;overflow:hidden;color:var(--branco)}
+.abre video,.abre .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 2.6s var(--ease)}
 .abre.pronto video{transform:scale(1)}
-.abre::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,14,.55) 0%,rgba(20,17,14,0) 22%,rgba(20,17,14,.1) 45%,rgba(20,17,14,.86) 78%,var(--noite) 100%)}
-.topo{position:absolute;z-index:3;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 18px 0}
-.topo img{height:34px;width:auto;filter:brightness(0) invert(1)}
-.topo button{height:34px;padding:0 14px;border-radius:99px;background:rgba(246,242,234,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:700 12px var(--gothic);letter-spacing:.08em;color:var(--branco)}
-.kanji{position:absolute;z-index:2;right:14px;top:84px;writing-mode:vertical-rl;font:800 58px/1 var(--mincho);color:var(--cobre-2);opacity:.92;letter-spacing:.06em;text-shadow:0 6px 30px rgba(0,0,0,.35)}
-.capa{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 20px 58px}
-.capa h1{font:600 62px/.95 var(--mincho);letter-spacing:-.01em}
-.capa p{font:400 15px/1.45 var(--gothic);color:rgba(246,242,234,.82);margin-top:10px;max-width:28ch}
-.nota{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:rgba(246,242,234,.8)}
-.nota .est{display:flex;gap:2px;color:var(--cobre-2)}
-.nota .est svg{width:13px;height:13px}
-.nota b{font-weight:700;color:var(--branco)}
-.acoes{display:flex;gap:10px;margin-top:20px}
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;height:54px;border-radius:99px;font:700 15.5px var(--gothic);letter-spacing:.01em;transition:transform .2s var(--ease),background .2s}
-.btn:active{transform:scale(.97)}
-.btn.cobre{flex:1;background:linear-gradient(180deg,var(--cobre-2),var(--cobre));color:#1A120B;box-shadow:0 10px 30px -10px rgba(185,130,79,.7)}
-.btn.vidro{width:54px;flex:none;background:rgba(246,242,234,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--branco)}
-.entra>*{opacity:0;transform:translateY(14px);animation:entra .9s var(--ease) forwards}
-.entra>*:nth-child(2){animation-delay:.12s}.entra>*:nth-child(3){animation-delay:.22s}.entra>*:nth-child(4){animation-delay:.32s}
-@keyframes entra{to{opacity:1;transform:none}}
+.abre::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.18;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E")}
+.abre::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 60% at 50% 35%,transparent 40%,rgba(20,17,14,.55)),linear-gradient(180deg,rgba(20,17,14,.6) 0%,rgba(20,17,14,0) 20%,rgba(20,17,14,0) 42%,rgba(20,17,14,.88) 80%,var(--noite) 100%)}
+.topo{position:absolute;z-index:3;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 18px 0}
+.topo img{height:36px;width:auto;filter:brightness(0) invert(1);opacity:.95}
+.topo .lang{height:36px;padding:0 15px;border-radius:99px;font:700 11.5px var(--gothic);letter-spacing:.12em}
+.kanji{position:absolute;z-index:2;right:16px;top:96px;writing-mode:vertical-rl;font:700 54px/1 var(--mincho);letter-spacing:.08em;
+  background:linear-gradient(180deg,#F1CFA4,#B9824F);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 24px rgba(0,0,0,.4))}
+.capa{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 22px 64px}
+.capa .sobre{font:500 12px var(--gothic);letter-spacing:.16em;color:var(--cobre-2)}
+.capa h1{font:500 60px/.95 var(--mincho);letter-spacing:.01em;margin-top:10px}
+.capa p{font:400 15px/1.5 var(--gothic);color:rgba(246,242,234,.78);margin-top:12px;max-width:27ch}
+.acoes{display:flex;gap:10px;margin-top:24px}
+.acoes .principal{flex:1}
+.entra>*{opacity:0;transform:translateY(16px);filter:blur(6px);animation:entra 1.1s var(--ease) forwards}
+.entra>*:nth-child(2){animation-delay:.12s}.entra>*:nth-child(3){animation-delay:.24s}.entra>*:nth-child(4){animation-delay:.36s}
+@keyframes entra{to{opacity:1;transform:none;filter:none}}
+.rola{position:absolute;z-index:2;left:50%;bottom:22px;width:1px;height:26px;background:rgba(246,242,234,.25);overflow:hidden}
+.rola::after{content:'';position:absolute;left:0;top:-26px;width:1px;height:26px;background:var(--cobre-2);animation:rola 2.4s var(--ease) infinite}
+@keyframes rola{to{top:26px}}
 
 /* ---------- a folha cor de pedra ---------- */
-.folha{position:relative;z-index:4;margin-top:-30px;background:var(--pedra);border-radius:28px 28px 0 0;padding:12px 16px 110px;min-height:60vh}
-.folha::before{content:'';display:block;width:38px;height:4px;border-radius:4px;background:rgba(29,26,23,.18);margin:0 auto 16px}
-.casas{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:99px;background:var(--pedra-2);position:relative}
-.casas .marca-sel{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:99px;background:var(--sumi);transition:transform .4s var(--ease)}
-.casas[data-i="1"] .marca-sel{transform:translateX(100%)}
-.casas button{position:relative;z-index:1;height:46px;border-radius:99px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;transition:color .3s}
-.casas button b{font:600 15px var(--mincho)}
-.casas button small{font-size:11px;opacity:.7;display:flex;align-items:center;gap:5px}
-.casas button small i{width:6px;height:6px;border-radius:50%;background:#7a756c}
-.casas button small i.on{background:#5FA16F}
+.folha{position:relative;z-index:4;margin-top:-34px;background:var(--pedra);border-radius:30px 30px 0 0;padding:12px 16px 120px}
+.folha::before{content:'';display:block;width:38px;height:4px;border-radius:4px;background:rgba(29,26,23,.16);margin:0 auto 18px}
+.casas{display:grid;grid-template-columns:1fr 1fr;padding:5px;border-radius:99px;position:relative;
+  background:linear-gradient(140deg,rgba(29,26,23,.06),rgba(29,26,23,.03));box-shadow:inset 0 1px 2px rgba(29,26,23,.08),inset 0 0 0 1px rgba(29,26,23,.05)}
+.casas .sel{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:99px;transition:transform .5s var(--ease);
+  background:linear-gradient(140deg,#2A2520,#14110E);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 18px -8px rgba(20,17,14,.6)}
+.casas[data-i="1"] .sel{transform:translateX(100%)}
+.casas button{position:relative;z-index:1;height:48px;border-radius:99px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;transition:color .35s}
+.casas button b{font:600 15.5px var(--mincho)}
+.casas button small{font-size:11px;opacity:.65;display:flex;align-items:center;gap:5px;margin-top:1px}
+.casas button small i{width:6px;height:6px;border-radius:50%;background:#8b857b}
+.casas button small i.on{background:#5FA16F;box-shadow:0 0 0 3px rgba(95,161,111,.18)}
 .casas button[aria-pressed=true]{color:var(--branco)}
-h2{font:600 24px/1.15 var(--mincho);letter-spacing:-.005em}
-.secao{margin-top:30px}
-.secao .cab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;padding:0 2px}
-.secao .cab a{font:700 13px var(--gothic);color:var(--cobre)}
+h2{font:600 23px/1.15 var(--mincho)}
+.secao{margin-top:28px}
+.secao .cab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;padding:0 4px}
+.secao .cab a{font:700 12.5px var(--gothic);letter-spacing:.04em;color:var(--cobre)}
 
-/* cartão de imagem: o texto sempre por cima da foto */
-.cartao{position:relative;display:block;overflow:hidden;border-radius:var(--raio);background:var(--noite-2) center/cover no-repeat;color:var(--branco);isolation:isolate;transform-style:preserve-3d;transition:transform .5s var(--ease)}
-.cartao img,.cartao video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--ease)}
-.cartao::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,17,14,0) 38%,rgba(20,17,14,.82))}
-.cartao:hover img{transform:scale(1.04)}
-.cartao .t{position:absolute;left:16px;right:16px;bottom:15px}
+/* cartão de imagem */
+.cartao{position:relative;display:block;width:100%;text-align:left;overflow:hidden;border-radius:var(--raio);background:var(--noite-2);color:var(--branco);isolation:isolate;transition:transform .6s var(--ease)}
+.cartao>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.4s var(--ease)}
+.cartao::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,17,14,0) 40%,rgba(20,17,14,.85))}
+.cartao:hover>img{transform:scale(1.05)}
+.cartao .t{position:absolute;left:18px;right:18px;bottom:16px}
 .cartao .t b{display:block;font:600 21px/1.15 var(--mincho)}
-.cartao .t span{display:block;font-size:12.5px;color:rgba(246,242,234,.78);margin-top:3px}
-.cartao .seta{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(246,242,234,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center}
-.cartao .seta svg{width:16px;height:16px}
+.cartao .t span{display:block;font-size:12.5px;color:rgba(246,242,234,.78);margin-top:4px}
+.cartao .ico{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.cartao .ico svg{width:16px;height:16px}
+.revela{opacity:0;transform:translateY(24px) scale(.98);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.revela.vista{opacity:1;transform:none}
 
-/* a Sequência: o cartão grande */
-.seq{height:440px}
-.seq .t b{font-size:32px}
-.seq .tempos{display:flex;gap:6px;margin-top:14px;max-width:260px}
-.seq .tempos i{display:block;flex:1;height:2px;background:rgba(246,242,234,.28);border-radius:2px;overflow:hidden;position:relative}
+.seq{height:460px}
+.seq .t b{font-size:33px}
+.seq .tempos{display:flex;gap:6px;margin-top:14px;max-width:250px}
+.seq .tempos i{display:block;flex:1;height:2px;background:rgba(246,242,234,.25);border-radius:2px;overflow:hidden;position:relative}
 .seq .tempos i::after{content:'';position:absolute;inset:0;background:var(--cobre-2);transform:scaleX(0);transform-origin:left;animation:tempo 8s linear infinite}
 .seq .tempos i:nth-child(2)::after{animation-delay:1s}.seq .tempos i:nth-child(3)::after{animation-delay:2s}.seq .tempos i:nth-child(4)::after{animation-delay:3s}
 .seq .tempos i:nth-child(5)::after{animation-delay:4s}.seq .tempos i:nth-child(6)::after{animation-delay:5s}.seq .tempos i:nth-child(7)::after{animation-delay:6s}.seq .tempos i:nth-child(8)::after{animation-delay:7s}
-@keyframes tempo{0%{transform:scaleX(0)}12%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:.9}}
-.seq .t>span{display:block}
+@keyframes tempo{0%{transform:scaleX(0)}12%{transform:scaleX(1)}100%{transform:scaleX(1)}}
 .seq .preco{display:flex;align-items:baseline;gap:8px;margin-top:12px}
 .seq .preco strong{font:600 28px var(--mincho);color:var(--cobre-2)}
 .seq .preco small{font-size:12.5px;color:rgba(246,242,234,.75)}
 
-/* grade de cartões */
 .grade{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grade .cartao{height:208px}
+.grade .cartao{height:212px}
 .grade .alto{grid-row:span 2;height:auto}
-.grade .t b{font-size:18px}
-.tres-d{background:radial-gradient(circle at 50% 42%,#3a312a,#14110E 72%)}
+.grade .t b{font-size:18.5px}
+.tres-d{background:radial-gradient(circle at 50% 40%,#3a312a,#14110E 72%)}
 .tres-d canvas{position:absolute;inset:0;width:100%!important;height:100%!important;z-index:-2}
 .tres-d::after{background:linear-gradient(180deg,rgba(20,17,14,0) 55%,rgba(20,17,14,.8))}
 
-/* da cozinha: carrossel de pratos */
-.pratos{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 4px;scroll-padding:0 16px;scrollbar-width:none}
+.pratos{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px;scroll-padding:0 16px;scrollbar-width:none}
 .pratos::-webkit-scrollbar{display:none}
-.pratos .cartao{flex:0 0 74%;height:340px;scroll-snap-align:start}
+.pratos .cartao{flex:0 0 74%;height:350px;scroll-snap-align:start}
 .pratos .preco{display:inline-block;margin-top:8px;font:600 17px var(--mincho);color:var(--cobre-2)}
 
-/* WhatsApp, como no balcão: falar direto com a casa */
-.fale{margin-top:30px;border-radius:var(--raio);overflow:hidden;position:relative;color:var(--branco);background:var(--noite) url(../fotos/washi.jpg) center/cover;padding:22px 18px 18px}
+.fale{margin-top:28px;border-radius:var(--raio);overflow:hidden;position:relative;color:var(--branco);background:var(--noite) url(../fotos/washi.jpg) center/cover;padding:24px 18px 18px}
 .fale h2{color:var(--branco)}
 .fale p{color:rgba(246,242,234,.72);font-size:13.5px;margin-top:6px;max-width:30ch}
-.fale .acoes{margin-top:16px}
-.fale .btn.verde{flex:1;background:#E9E4DA;color:var(--sumi)}
-.fale .btn.verde svg{color:#1F8F4E}
-.prova{display:flex;justify-content:space-between;margin-top:26px;padding:16px 4px;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
-.prova div{text-align:center;flex:1}
-.prova div+div{border-left:1px solid var(--linha)}
-.prova b{display:block;font:600 24px var(--mincho)}
-.prova span{font-size:11.5px;color:var(--sumi-2)}
-.redes{display:flex;justify-content:center;gap:14px;margin-top:24px}
-.redes a{width:48px;height:48px;border-radius:50%;background:var(--pedra-2);display:grid;place-items:center;color:var(--sumi);transition:background .2s}
-.redes a:hover{background:var(--sumi);color:var(--branco)}
+.fale .acoes{margin-top:18px}
+.redes{display:flex;justify-content:center;gap:14px;margin-top:28px}
+.redes a{width:50px;height:50px;border-radius:50%;display:grid;place-items:center}
 .rodape{text-align:center;font-size:11.5px;color:var(--sumi-2);margin-top:22px;line-height:1.6}
 
-/* doca fixa */
-.doca{position:fixed;z-index:30;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(408px,calc(100% - 24px));transform:translate(-50%,140%);display:flex;gap:8px;padding:6px;border-radius:99px;background:rgba(20,17,14,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 18px 40px -16px rgba(0,0,0,.6);transition:transform .5s var(--ease)}
+.doca{position:fixed;z-index:30;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(408px,calc(100% - 24px));transform:translate(-50%,150%);display:flex;gap:8px;padding:6px;border-radius:99px;transition:transform .55s var(--ease)}
 .doca.on{transform:translate(-50%,0)}
-.doca .btn{height:48px}
-.doca .btn.vidro{width:48px}
+.doca .btn{height:48px}.doca .btn.redondo{width:48px}
+.doca.vidro{background:linear-gradient(140deg,rgba(40,34,28,.72),rgba(20,17,14,.62))}
 
-/* ---------- a Sequência aberta: folha em tela cheia ---------- */
-.modal{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(10,8,6,.6);opacity:0;pointer-events:none;transition:opacity .35s}
-.modal.on{opacity:1;pointer-events:auto}
-.modal .caixa{width:min(440px,100%);height:min(92svh,820px);border-radius:28px 28px 0 0;overflow:hidden;background:var(--noite) url(../fotos/washi.jpg) center/cover;color:var(--branco);transform:translateY(100%);transition:transform .55s var(--ease);display:flex;flex-direction:column}
-.modal.on .caixa{transform:none}
-.modal .cab-m{display:flex;justify-content:space-between;align-items:center;padding:18px 18px 8px}
-.modal .cab-m b{font:600 14px var(--gothic);letter-spacing:.06em;color:var(--cobre-2)}
-.modal .fechar{width:38px;height:38px;border-radius:50%;background:rgba(246,242,234,.12);display:grid;place-items:center}
-.barra-t{display:flex;gap:5px;padding:0 18px}
-.barra-t i{flex:1;height:2px;border-radius:2px;background:rgba(246,242,234,.2);transition:background .3s}
-.barra-t i.feito{background:var(--cobre-2)}
-.tempos-m{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+/* ---------- folhas que sobem: reserva, sushiman, prato, Sequência ---------- */
+.folha-m{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(10,8,6,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .35s}
+.folha-m.on{opacity:1;pointer-events:auto}
+.folha-m .caixa{width:min(440px,100%);height:94svh;border-radius:30px 30px 0 0;overflow:hidden;background:var(--noite) url(../fotos/washi.jpg) center/cover;color:var(--branco);transform:translateY(100%);transition:transform .6s var(--ease);display:flex;flex-direction:column}
+.folha-m.on .caixa{transform:none}
+.cab-m{display:flex;justify-content:space-between;align-items:center;padding:16px 18px 10px;flex:none}
+.cab-m b{font:600 19px var(--mincho)}
+.cab-m .fechar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center}
+.corpo-m{flex:1;overflow-y:auto;padding:4px 18px 20px;overscroll-behavior:contain}
+.pe-m{flex:none;display:flex;gap:10px;padding:12px 18px calc(16px + env(safe-area-inset-bottom,0px))}
+.pe-m .btn{flex:1}
+[hidden]{display:none!important}
+.rotulo{font:500 12px var(--gothic);letter-spacing:.14em;color:var(--cobre-2);margin:18px 0 10px}
+.fichas{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px 6px}
+.fichas::-webkit-scrollbar{display:none}
+.fichas button{flex:none;min-width:54px;height:46px;padding:0 15px;border-radius:99px;font:700 14px var(--gothic);line-height:1.1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.fichas button small{font-weight:400;font-size:10.5px;opacity:.75}
+.fichas button[aria-pressed=true]{color:#24170C;background:linear-gradient(140deg,rgba(233,196,152,.95),rgba(196,140,86,.85));box-shadow:inset 0 1px 0 rgba(255,246,232,.9),0 10px 22px -12px rgba(185,130,79,.8)}
+.fichas button:disabled{opacity:.3;cursor:not-allowed}
+.planta-m{--sumi:#9C9184;margin-top:6px;border-radius:18px;overflow:hidden;overflow-x:auto;background:var(--chao)}
+.planta-m svg{display:block;width:100%;min-width:520px;height:auto}
+.pl-rot{font:500 13px var(--gothic);fill:rgba(246,242,234,.55)}
+.pl-assento{fill:#3A332C;stroke:rgba(246,242,234,.55);stroke-width:1.4}
+.pl-cadeira{fill:#3A332C;stroke:rgba(246,242,234,.3);stroke-width:1}
+.pl-num{font:500 12px var(--gothic);fill:rgba(246,242,234,.85);pointer-events:none}
+.pl-lugar.livre{cursor:pointer}
+.pl-lugar.livre:hover .pl-assento{fill:#5a4a39}
+.pl-lugar:focus-visible .pl-assento{stroke:var(--cobre-2);stroke-width:3}
+.pl-lugar.ocupado .pl-assento,.pl-lugar.ocupado .pl-cadeira{fill:#26211c;stroke:rgba(246,242,234,.12)}
+.pl-lugar.ocupado .pl-num{fill:rgba(246,242,234,.25)}
+.pl-lugar.fora{opacity:.25}
+.pl-lugar.meu .pl-assento,.pl-lugar.meu .pl-cadeira{fill:var(--cobre-2);stroke:#fff}
+.pl-lugar.meu .pl-num{fill:#24170C;font-weight:700}
+.escolha{font:500 17px/1.4 var(--mincho);margin-top:12px;min-height:2.8em;color:rgba(246,242,234,.9)}
+.campo{display:block;margin-top:10px;border-radius:16px;padding:10px 16px 8px}
+.campo span{display:block;font-size:11px;letter-spacing:.1em;color:rgba(246,242,234,.6)}
+.campo input{width:100%;font:500 17px var(--gothic);color:var(--branco);padding:4px 0;outline:none}
+.campo input::placeholder{color:rgba(246,242,234,.35)}
+.campo:focus-within{box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 0 0 1.5px var(--cobre-2)}
+.erro{font-size:12.5px;color:#F0B48A;min-height:1.3em;margin-top:6px}
+.nota-m{font-size:12px;color:rgba(246,242,234,.5);margin-top:12px;line-height:1.5}
+.placa{width:100px;min-height:224px;margin:46px auto 0;position:relative;padding:32px 0 14px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#1D1A17;
+  background:repeating-linear-gradient(90deg,rgba(120,80,40,.07) 0 2px,transparent 2px 8px),linear-gradient(180deg,#E2CBA4,#C9AA7C);
+  box-shadow:0 18px 28px -16px rgba(0,0,0,.7);animation:pendura .9s cubic-bezier(.3,1.5,.5,1) both;transform-origin:50% -24px}
+.placa::before{content:'';position:absolute;top:12px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#14110E}
+.placa::after{content:'';position:absolute;top:-34px;left:50%;width:2px;height:46px;background:var(--cobre-2)}
+.placa b{font:700 46px/1 var(--mincho)}
+.placa span{writing-mode:vertical-rl;font:600 16px var(--mincho)}
+.placa small{font-size:10.5px;color:#5a4630}
+@keyframes pendura{0%{transform:rotate(-16deg)}60%{transform:rotate(6deg)}100%{transform:rotate(0)}}
+.feito h3{font:600 26px/1.2 var(--mincho);text-align:center;margin-top:22px}
+.feito p{text-align:center;color:rgba(246,242,234,.75);margin-top:6px}
+.feito .msg{white-space:pre-line;text-align:left;font-size:12.5px;color:rgba(246,242,234,.6);border-top:1px solid rgba(246,242,234,.12);margin-top:18px;padding-top:12px}
+.palco{height:300px;border-radius:22px;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 45%,#3a312a,#14110E 72%);touch-action:pan-y;cursor:grab}
+.palco canvas{width:100%!important;height:100%!important;display:block}
+.palco p{position:absolute;left:14px;right:14px;bottom:10px;font-size:11.5px;color:rgba(246,242,234,.5)}
+.lista-m{margin-top:14px}
+.lista-m div{display:grid;grid-template-columns:30px 1fr auto;gap:10px;padding:11px 0;border-top:1px solid rgba(246,242,234,.1);align-items:baseline}
+.lista-m em{font:700 16px var(--mincho);color:var(--cobre-2);font-style:normal}
+.lista-m b{font:600 16px var(--mincho);display:block}
+.lista-m small{display:block;font-size:12px;color:rgba(246,242,234,.55)}
+.total-m{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1px solid rgba(246,242,234,.2)}
+.total-m b{font:600 30px var(--mincho);color:var(--cobre-2)}
+.total-m span{font-size:12.5px;color:rgba(246,242,234,.65)}
+.prato-m img{width:100%;height:380px;object-fit:cover;border-radius:22px}
+.prato-m h3{font:600 30px/1.1 var(--mincho);margin-top:18px}
+.prato-m p{color:rgba(246,242,234,.78);margin-top:8px}
+.prato-m .pr{font:600 24px var(--mincho);color:var(--cobre-2);margin-top:12px}
+.tempos-m{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;height:100%}
 .tempos-m::-webkit-scrollbar{display:none}
-.tempo{flex:0 0 100%;scroll-snap-align:start;padding:26px 24px;display:flex;flex-direction:column;justify-content:center}
-.tempo .n{font:800 120px/0.9 var(--mincho);color:var(--cobre-2);opacity:.9}
+.tempo{flex:0 0 100%;scroll-snap-align:start;padding:20px 6px;display:flex;flex-direction:column;justify-content:center}
+.tempo .n{font:800 118px/.9 var(--mincho);background:linear-gradient(180deg,#F1CFA4,#B9824F);-webkit-background-clip:text;background-clip:text;color:transparent}
 .tempo h3{font:600 34px/1.1 var(--mincho);margin-top:6px}
-.tempo .jp{font:500 15px var(--mincho);color:rgba(246,242,234,.55);margin-top:4px}
+.tempo .jp{font:500 15px var(--mincho);color:rgba(246,242,234,.5);margin-top:4px}
 .tempo ul{list-style:none;margin-top:22px}
 .tempo li{font-size:15.5px;padding:9px 0;border-top:1px solid rgba(246,242,234,.12);color:rgba(246,242,234,.9)}
 .tempo .q{font-size:12.5px;color:rgba(246,242,234,.55);margin-top:12px}
@@ -162,10 +227,12 @@ h2{font:600 24px/1.15 var(--mincho);letter-spacing:-.005em}
 .tempo.fim .precos b{font:600 19px var(--mincho)}
 .tempo.fim .precos span{display:block;font-size:13.5px;color:rgba(246,242,234,.75);margin-top:4px}
 .tempo.fim .precos strong{font:600 22px var(--mincho);color:var(--cobre-2)}
-.modal .pe{display:flex;gap:10px;padding:12px 18px calc(16px + env(safe-area-inset-bottom,0px))}
-.modal .pe .vidro{width:54px}
-.demo{position:fixed;z-index:60;top:0;left:0;right:0;font:500 10.5px var(--gothic);letter-spacing:.03em;text-align:center;padding:4px 10px;background:rgba(20,17,14,.75);color:rgba(246,242,234,.75);pointer-events:none}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.entra>*{opacity:1;transform:none}}
+.barra-t{display:flex;gap:5px;padding:0 18px;flex:none}
+.barra-t i{flex:1;height:2px;border-radius:2px;background:rgba(246,242,234,.2);transition:background .3s}
+.barra-t i.feito{background:var(--cobre-2)}
+#seq-m .corpo-m{overflow:hidden;padding:0 18px}
+.demo{position:fixed;z-index:60;top:0;left:0;right:0;font:500 10px var(--gothic);letter-spacing:.03em;text-align:center;padding:4px 10px;background:rgba(20,17,14,.7);color:rgba(246,242,234,.7);pointer-events:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.entra>*,.revela{opacity:1;transform:none;filter:none}}
 @media (min-width:600px){body{background:radial-gradient(circle at 50% 0%,#2a221b,var(--noite) 60%)}.pg{box-shadow:0 0 0 1px rgba(246,242,234,.06),0 40px 120px -40px #000}}
 </style>
 </head>
@@ -177,7 +244,6 @@ h2{font:600 24px/1.15 var(--mincho);letter-spacing:-.005em}
   <symbol id="i-pino" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Zm0-9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></symbol>
   <symbol id="i-seta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
-  <symbol id="i-est" viewBox="0 0 24 24"><path fill="currentColor" d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
   <symbol id="i-insta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm4.5 13.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4ZM17.4 6.7h.01"/></symbol>
   <symbol id="i-livro" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13Zm16 0A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></symbol>
 </svg>
@@ -185,94 +251,136 @@ h2{font:600 24px/1.15 var(--mincho);letter-spacing:-.005em}
 <div class="pg">
   <header class="abre" id="abre">
     <img class="poster" src="../fotos/abertura.jpg" alt="" aria-hidden="true">
-    <video id="vid" autoplay muted loop playsinline preload="metadata" poster="../fotos/abertura.jpg" aria-label="O ramen do Ryori sendo montado na cozinha"><source src="../fotos/abertura.mp4" type="video/mp4"></video>
-    <div class="topo"><img src="https://static.wixstatic.com/media/404bb8_7d5670b5bc4c471db1008a3949596d86~mv2.png/v1/fill/w_600,h_440,al_c,q_85/ryori.png" alt="Ryori" width="46" height="34"><button type="button" id="lang" aria-label="Ver em inglês">EN</button></div>
+    <video id="vid" autoplay muted loop playsinline preload="metadata" poster="../fotos/abertura.jpg" aria-label="O chef do Ryori servindo o ramen"><source src="../fotos/abertura.mp4" type="video/mp4"></video>
+    <div class="topo"><img src="https://static.wixstatic.com/media/404bb8_7d5670b5bc4c471db1008a3949596d86~mv2.png/v1/fill/w_600,h_440,al_c,q_85/ryori.png" alt="Ryori" width="49" height="36"><button type="button" class="lang vidro" id="lang" aria-label="Ver em inglês">EN</button></div>
     <div class="kanji" lang="ja" aria-hidden="true">料理</div>
     <div class="capa entra">
+      <span class="sobre" data-t="sobre">Buganvília e Iguatemi</span>
       <h1>Ryori</h1>
       <p data-t="sub">Cozinha japonesa contemporânea, em Fortaleza.</p>
-      <div class="nota"><span class="est" aria-hidden="true"><svg><use href="#i-est"/></svg><svg><use href="#i-est"/></svg><svg><use href="#i-est"/></svg><svg><use href="#i-est"/></svg><svg><use href="#i-est"/></svg></span><b>4,9</b><span data-t="trip">no Tripadvisor, 1.337 avaliações</span></div>
       <div class="acoes">
-        <a class="btn cobre" id="reservar" href="../#balcao"><span data-t="res">Reservar lugar</span></a>
-        <a class="btn vidro" id="zap-topo" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a>
-        <a class="btn vidro" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener" aria-label="Pedir delivery no iFood"><svg class="ic"><use href="#i-sacola"/></svg></a>
+        <button type="button" class="btn vidro cobre principal" data-abre="reserva"><span data-t="res">Reservar lugar</span></button>
+        <a class="btn vidro redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a>
+        <a class="btn vidro redondo" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener" aria-label="Pedir delivery no iFood"><svg class="ic"><use href="#i-sacola"/></svg></a>
       </div>
     </div>
+    <span class="rola" aria-hidden="true"></span>
   </header>
 
   <main class="folha">
-    <div class="casas" id="casas" role="group" aria-label="Escolha a casa"><span class="marca-sel" aria-hidden="true"></span></div>
+    <div class="casas" id="casas" role="group" aria-label="Escolha a casa"><span class="sel" aria-hidden="true"></span></div>
 
-    <section class="secao">
-      <button type="button" class="cartao seq" id="abre-seq" style="width:100%;text-align:left">
-        <img src="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_900,h_1000,al_c,q_80,enc_auto/ryori.jpg" alt="Barco de sashimi do Ryori" width="440" height="440">
-        <span class="seta" aria-hidden="true"><svg><use href="#i-seta"/></svg></span>
+    <section class="secao revela">
+      <button type="button" class="cartao seq" data-abre="seq-m">
+        <img src="https://static.wixstatic.com/media/404bb8_2f331f542dbc48598bda50682508a97d~mv2.jpg/v1/fill/w_900,h_1000,al_c,q_80,enc_auto/ryori.jpg" alt="Barco de sashimi do Ryori" width="440" height="460">
+        <span class="ico vidro" aria-hidden="true"><svg><use href="#i-seta"/></svg></span>
         <span class="t"><b data-t="seqT">Sequência Japonesa</b><span data-t="seqL">Oito tempos servidos à mesa, do sunomono à sobremesa.</span>
           <span class="tempos" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
           <span class="preco"><strong>R$ 159</strong><small data-t="seqP">por pessoa, no jantar</small></span></span>
       </button>
     </section>
 
-    <section class="secao">
+    <section class="secao revela">
       <div class="grade">
-        <a class="cartao alto" href="../#cardapio"><img style="object-position:62% 62%" src="../fotos/fishtaco.jpg" alt="Fish taco do Ryori" loading="lazy" width="215" height="426"><span class="seta" aria-hidden="true"><svg><use href="#i-seta"/></svg></span><span class="t"><b data-t="g1">Cardápio</b><span data-t="g1s">Sushibar, cozinha quente, executivo</span></span></a>
-        <a class="cartao tres-d" href="../#mesa" id="tile-3d"><span class="seta" aria-hidden="true"><svg><use href="#i-seta"/></svg></span><span class="t"><b data-t="g2">O sushiman sugere</b><span data-t="g2s">Monte a mesa em 3D</span></span></a>
-        <a class="cartao" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><img src="../fotos/box.jpg" alt="Ryori Box com arroz e ingredientes" loading="lazy" width="215" height="208"><span class="seta" aria-hidden="true"><svg><use href="#i-sacola"/></svg></span><span class="t"><b>Delivery</b><span data-t="g3s">Pelo iFood</span></span></a>
+        <a class="cartao alto" href="../#cardapio"><img style="object-position:62% 62%" src="../fotos/fishtaco.jpg" alt="Fish taco do Ryori" loading="lazy" width="215" height="434"><span class="ico vidro" aria-hidden="true"><svg><use href="#i-seta"/></svg></span><span class="t"><b data-t="g1">Cardápio</b><span data-t="g1s">Sushibar, cozinha quente, executivo</span></span></a>
+        <button type="button" class="cartao tres-d" id="tile-3d" data-abre="sushiman"><span class="ico vidro" aria-hidden="true"><svg><use href="#i-seta"/></svg></span><span class="t"><b data-t="g2">O sushiman sugere</b><span data-t="g2s">Monte a mesa e veja em 3D</span></span></button>
+        <a class="cartao" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><img src="../fotos/box.jpg" alt="Ryori Box com arroz e ingredientes" loading="lazy" width="215" height="212"><span class="ico vidro" aria-hidden="true"><svg><use href="#i-sacola"/></svg></span><span class="t"><b>Delivery</b><span data-t="g3s">Pelo iFood</span></span></a>
       </div>
     </section>
 
-    <section class="secao">
+    <section class="secao revela">
       <div class="cab"><h2 data-t="cozT">Da cozinha</h2><a href="../#cardapio" data-t="verTudo">Ver tudo</a></div>
-      <div class="pratos">
-        <a class="cartao" href="../#cardapio"><img src="../fotos/wagyu.jpg" alt="Wagyu Stone, wagyu na pedra quente" loading="lazy" width="326" height="340"><span class="t"><b>Wagyu Stone</b><span data-t="p1">Gergelim e ponzu, finalizado na pedra quente</span><span class="preco">R$ 98</span></span></a>
-        <a class="cartao" href="../#cardapio"><img src="../fotos/fishtaco.jpg" alt="Fish taco com salmão e ovas" loading="lazy" width="326" height="340"><span class="t"><b>Fish taco</b><span data-t="p2">Massa gyoza crocante, salmão, wasabi e ovas</span><span class="preco">R$ 44</span></span></a>
-        <a class="cartao" href="../#cardapio"><img src="../fotos/cheesecake.jpg" alt="Cheesecake gelado com caramelo de missô" loading="lazy" width="326" height="340"><span class="t"><b>Cheesecake gelado</b><span data-t="p3">Caramelo de missô e geleias da casa</span></span></a>
-        <a class="cartao" href="https://www.instagram.com/p/Dfz8HGhFLSB/" target="_blank" rel="noopener"><img src="../fotos/box.jpg" alt="Ryori Box" loading="lazy" width="326" height="340"><span class="t"><b>Ryori Box</b><span data-t="p4">Para montar em casa. Pedidos limitados</span></span></a>
-      </div>
+      <div class="pratos" id="pratos"></div>
     </section>
 
-    <section class="secao">
-      <a class="cartao" href="../#casas" style="height:200px" id="cartao-casa"><img src="../fotos/experiencia.jpg" alt="Salão do Ryori" loading="lazy" width="408" height="200"><span class="seta" aria-hidden="true"><svg><use href="#i-pino"/></svg></span><span class="t"><b id="casa-nome">Buganvília</b><span id="casa-end"></span></span></a>
+    <section class="secao revela">
+      <a class="cartao" id="cartao-casa" href="#" target="_blank" rel="noopener" style="height:210px"><img src="../fotos/experiencia.jpg" alt="Salão do Ryori" loading="lazy" width="408" height="210"><span class="ico vidro" aria-hidden="true"><svg><use href="#i-pino"/></svg></span><span class="t"><b id="casa-nome">Ryori</b><span id="casa-end"></span></span></a>
     </section>
 
-    <section class="fale">
+    <section class="fale revela">
       <h2 data-t="faleT">Fale com a casa</h2>
       <p data-t="faleL">Eventos, grupos, aniversários ou uma dúvida sobre o cardápio. A equipe responde no WhatsApp.</p>
-      <div class="acoes"><a class="btn verde" id="zap" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-zap"/></svg><span data-t="faleB">Conversar no WhatsApp</span></a></div>
+      <div class="acoes"><a class="btn vidro principal" data-zap href="#" target="_blank" rel="noopener" style="flex:1"><svg class="ic"><use href="#i-zap"/></svg><span data-t="faleB">Conversar no WhatsApp</span></a></div>
     </section>
 
-    <div class="prova">
-      <div><b>4,9</b><span>Iguatemi no Tripadvisor</span></div>
-      <div><b>4,8</b><span>Buganvília no Tripadvisor</span></div>
-      <div><b>53 mil</b><span data-t="seg">no Instagram</span></div>
-    </div>
-
     <nav class="redes" aria-label="Mais">
-      <a href="https://www.instagram.com/restauranteryori/" target="_blank" rel="noopener" aria-label="Instagram do Ryori"><svg class="ic"><use href="#i-insta"/></svg></a>
-      <a href="../?lang=en#cardapio" aria-label="English menu"><svg class="ic"><use href="#i-livro"/></svg></a>
-      <a id="mapa" href="#" target="_blank" rel="noopener" aria-label="Como chegar"><svg class="ic"><use href="#i-pino"/></svg></a>
-      <a href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener" aria-label="Delivery no iFood"><svg class="ic"><use href="#i-sacola"/></svg></a>
+      <a class="vidro escuro" href="https://www.instagram.com/restauranteryori/" target="_blank" rel="noopener" aria-label="Instagram do Ryori"><svg class="ic"><use href="#i-insta"/></svg></a>
+      <a class="vidro escuro" href="../?lang=en#cardapio" aria-label="English menu"><svg class="ic"><use href="#i-livro"/></svg></a>
+      <a class="vidro escuro" data-mapa href="#" target="_blank" rel="noopener" aria-label="Como chegar"><svg class="ic"><use href="#i-pino"/></svg></a>
+      <a class="vidro escuro" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener" aria-label="Delivery no iFood"><svg class="ic"><use href="#i-sacola"/></svg></a>
     </nav>
     <p class="rodape">Ryori, do Grupo Social Clube<br><span id="rod-casa"></span></p>
   </main>
 </div>
 
-<div class="doca" id="doca"><a class="btn cobre" id="reservar-doca" href="../#balcao"><span data-t="res">Reservar lugar</span></a><a class="btn vidro" id="zap-doca" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a></div>
+<div class="doca vidro" id="doca"><button type="button" class="btn vidro cobre" data-abre="reserva" style="flex:1"><span data-t="res">Reservar lugar</span></button><a class="btn vidro redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a></div>
 
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-t" aria-hidden="true">
+<div class="folha-m" id="reserva" role="dialog" aria-modal="true" aria-labelledby="res-t" aria-hidden="true">
   <div class="caixa">
-    <div class="cab-m"><b id="m-t" data-t="seqT">Sequência Japonesa</b><button type="button" class="fechar" id="fechar" aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="cab-m"><b id="res-t" data-t="resT">Reservar lugar</b><button type="button" class="fechar vidro" data-fecha aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="corpo-m" id="res-corpo">
+      <div id="res-form">
+        <p class="rotulo" data-t="rCasa">Casa</p><div class="fichas" id="r-casa"></div>
+        <p class="rotulo" data-t="rDia">Dia</p><div class="fichas" id="r-dia"></div>
+        <p class="rotulo" data-t="rHora">Horário</p><div class="fichas" id="r-hora"></div>
+        <p class="rotulo" data-t="rPes">Pessoas</p><div class="fichas" id="r-pes"></div>
+        <p class="rotulo" data-t="rLugar">Seu lugar</p>
+        <div class="planta-m"><svg id="r-planta" role="group" aria-label="Planta do Ryori: balcão, salão e varanda"></svg></div>
+        <p class="escolha" id="r-escolha" aria-live="polite"></p>
+        <label class="campo vidro"><span data-t="rNome">Nome</span><input id="r-nome" autocomplete="name"></label>
+        <label class="campo vidro"><span>WhatsApp</span><input id="r-zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 9 0000-0000" aria-describedby="r-erro"></label>
+        <p class="erro" id="r-erro"></p>
+        <p class="nota-m" data-t="rNota">Planta ilustrativa: na versão final, os lugares livres vêm da agenda da casa.</p>
+      </div>
+      <div class="feito" id="res-feito" hidden></div>
+    </div>
+    <div class="pe-m" id="res-pe"><button type="button" class="btn vidro cobre" id="r-ok" disabled><span data-t="rOk">Confirmar reserva</span></button></div>
+  </div>
+</div>
+
+<div class="folha-m" id="sushiman" role="dialog" aria-modal="true" aria-labelledby="su-t" aria-hidden="true">
+  <div class="caixa">
+    <div class="cab-m"><b id="su-t" data-t="g2">O sushiman sugere</b><button type="button" class="fechar vidro" data-fecha aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="corpo-m">
+      <div class="palco" id="palco"><p data-t="palco">Arraste para girar. Prévia ilustrativa: os pratos da casa entram escaneados.</p></div>
+      <p class="rotulo" data-t="rPes">Pessoas</p><div class="fichas" id="s-pes"></div>
+      <p class="rotulo" data-t="sFome">Fome</p><div class="fichas" id="s-fome"></div>
+      <div class="lista-m" id="s-lista" aria-live="polite"></div>
+      <div class="total-m" id="s-total"></div>
+    </div>
+    <div class="pe-m"><button type="button" class="btn vidro cobre" id="s-reservar"><span data-t="sRes">Reservar com essa mesa</span></button></div>
+  </div>
+</div>
+
+<div class="folha-m" id="prato" role="dialog" aria-modal="true" aria-labelledby="pr-t" aria-hidden="true">
+  <div class="caixa">
+    <div class="cab-m"><b data-t="cozT">Da cozinha</b><button type="button" class="fechar vidro" data-fecha aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="corpo-m prato-m" id="pr-corpo"></div>
+    <div class="pe-m"><a class="btn vidro cobre" href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener"><svg class="ic"><use href="#i-sacola"/></svg><span data-t="pDel">Pedir no delivery</span></a><button type="button" class="btn vidro" data-abre="reserva"><span data-t="res">Reservar lugar</span></button></div>
+  </div>
+</div>
+
+<div class="folha-m" id="seq-m" role="dialog" aria-modal="true" aria-labelledby="sq-t" aria-hidden="true">
+  <div class="caixa">
+    <div class="cab-m"><b id="sq-t" data-t="seqT">Sequência Japonesa</b><button type="button" class="fechar vidro" data-fecha aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button></div>
     <div class="barra-t" id="barra" aria-hidden="true"></div>
-    <div class="tempos-m" id="tempos" tabindex="0" aria-label="Os tempos da Sequência, deslize para o lado"></div>
-    <div class="pe"><a class="btn cobre" id="reservar-seq" href="../#balcao" style="flex:1"><span data-t="resSeq">Reservar para a Sequência</span></a><a class="btn vidro" id="zap-seq" href="#" target="_blank" rel="noopener" aria-label="Tirar dúvida no WhatsApp"><svg class="ic"><use href="#i-zap"/></svg></a></div>
+    <div class="corpo-m"><div class="tempos-m" id="tempos" tabindex="0" aria-label="Os tempos da Sequência, deslize para o lado"></div></div>
+    <div class="pe-m"><button type="button" class="btn vidro cobre" data-abre="reserva"><span data-t="resSeq">Reservar para a Sequência</span></button><a class="btn vidro redondo" data-zap href="#" target="_blank" rel="noopener" aria-label="Tirar dúvida no WhatsApp" style="flex:none"><svg class="ic"><use href="#i-zap"/></svg></a></div>
   </div>
 </div>
 
 <script src="../marca.js"></script>
 <script src="../comum.js"></script>
+<script src="../cardapio.js"></script>
+<script src="../planta.js"></script>
 <script>
 // WhatsApp de cada casa: os links que o próprio Ryori publica no Linktree (24/11/2026). Confirmar com a casa antes de publicar.
 const ZAP={buganvilia:'5585996032405',iguatemi:'558532414683'};
+const PRATOS=[
+ {f:'wagyu',n:'Wagyu Stone',d:['Wagyu com molho de gergelim e ponzu, finalizado na pedra quente, na mesa.','Wagyu with sesame sauce and ponzu, finished on a hot stone at the table.'],p:98},
+ {f:'fishtaco',n:'Fish taco',d:['Massa gyoza crocante, salmão ao molho de wasabi, ovas, furikake e cebolinha. Duas unidades.','Crispy gyoza shell, salmon in wasabi sauce, roe, furikake and scallion. Two pieces.'],p:44},
+ {f:'cheesecake',n:'Cheesecake gelado',d:['Cheesecake gelado com caramelo de missô, geleia de frutas vermelhas e de maracujá.','Chilled cheesecake with miso caramel, red berry and passion fruit jams.']},
+ {f:'box',n:'Ryori Box',d:['Ingredientes do Ryori para montar as suas combinações em casa. Pedidos limitados.','Ryori ingredients to build your own combinations at home. Limited orders.']}];
 const SEQ=[
  ['Entradas','前菜',['Sunomono','Missoshiro','Ceviche e orange fish','Ebishin e lula crok','Harumaki, tartar de atum, korokke'],'1 porção por pessoa'],
  ['Carpaccio','カルパッチョ',['Ussuzukuri shiromi, leche de tigre','Salmão truffle','Tuna tatak missô spicy'],'1 porção por pessoa'],
@@ -282,88 +390,169 @@ const SEQ=[
  ['Duplas especiais','二貫',['Jou e jou ebiten','Sushi salmão scallops','Maguro tartufo','Sushi peixe branco ponzu'],'3 porções por pessoa'],
  ['Makis especiais','巻物',['Hot pepper e hot sukimaki','Cold and hot','Uramaki shakê brie','Tuna tost'],'3 porções por pessoa'],
  ['Sobremesa','甘味',['Mousse de chocolate com yuzu','Cheesecake'],'1 porção por pessoa']];
-const EN={sub:'Contemporary Japanese cooking, in Fortaleza.',trip:'on Tripadvisor, 1,337 reviews',res:'Book a seat',seqT:'Japanese tasting sequence',seqL:'Eight courses served to the table, from sunomono to dessert.',seqP:'per person, at dinner',
- g1:'Menu',g1s:'Sushi bar, hot kitchen, lunch',g2:'Chef’s suggestion',g2s:'Build your table in 3D',g3s:'On iFood',cozT:'From the kitchen',verTudo:'See all',
- p1:'Sesame and ponzu, finished on the hot stone',p2:'Crispy gyoza shell, salmon, wasabi and roe',p3:'Miso caramel and house jams',p4:'Build it at home. Limited orders',
- faleT:'Talk to the restaurant',faleL:'Events, groups, birthdays or a question about the menu. The team answers on WhatsApp.',faleB:'Chat on WhatsApp',seg:'on Instagram',resSeq:'Book for the sequence'};
+const EN={sobre:'Buganvília and Iguatemi',sub:'Contemporary Japanese cooking, in Fortaleza.',res:'Book a seat',seqT:'Japanese tasting sequence',seqL:'Eight courses served to the table, from sunomono to dessert.',seqP:'per person, at dinner',
+ g1:'Menu',g1s:'Sushi bar, hot kitchen, lunch',g2:'Chef’s suggestion',g2s:'Build your table, see it in 3D',g3s:'On iFood',cozT:'From the kitchen',verTudo:'See all',
+ faleT:'Talk to the restaurant',faleL:'Events, groups, birthdays or a question about the menu. The team answers on WhatsApp.',faleB:'Chat on WhatsApp',resSeq:'Book for the sequence',
+ resT:'Book a seat',rCasa:'House',rDia:'Day',rHora:'Time',rPes:'Guests',rLugar:'Your seat',rNome:'Name',rOk:'Confirm booking',rNota:'Illustrative floor plan: in the final version, free seats come from the restaurant’s book.',
+ palco:'Drag to rotate. Illustrative preview: the house dishes will be scanned.',sFome:'Appetite',sRes:'Book with this table',pDel:'Order delivery'};
 const PT={};document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
+const brl=n=>'R$ '+n.toLocaleString('pt-BR');
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const CH=MARCA.id+'-casa';
 let casa=(()=>{try{return localStorage.getItem(CH)}catch(e){return null}})();
 if(!unidade(casa))casa=MARCA.unidades[0].id;
-const zap=u=>`https://wa.me/${ZAP[u.id]}?text=${encodeURIComponent(L(`Olá! Vim pelo link da bio e queria falar com o Ryori ${u.nome}.`,`Hello! I came from the bio link and would like to talk to Ryori ${u.nome}.`))}`;
+const zapUrl=u=>`https://wa.me/${ZAP[u.id]}?text=${encodeURIComponent(L(`Olá! Vim pelo link da bio e queria falar com o Ryori ${u.nome}.`,`Hello! I came from the bio link and would like to talk to Ryori ${u.nome}.`))}`;
 
+/* ---------- página ---------- */
 function pinta(){
-  const u=unidade(casa),i=MARCA.unidades.indexOf(u);
-  const c=document.getElementById('casas');c.dataset.i=i;
+  const u=unidade(casa),c=document.getElementById('casas');c.dataset.i=MARCA.unidades.indexOf(u);
   c.querySelectorAll('button').forEach(b=>b.remove());
-  MARCA.unidades.forEach(x=>{const s=estadoUnidade(x),on=s.k==='aberta';const b=document.createElement('button');b.type='button';b.dataset.c=x.id;b.setAttribute('aria-pressed',x.id===casa);
+  MARCA.unidades.forEach(x=>{const s=estadoUnidade(x),on=s.k==='aberta',b=document.createElement('button');b.type='button';b.dataset.c=x.id;b.setAttribute('aria-pressed',x.id===casa);
     b.innerHTML=`<b>${x.nome}</b><small><i class="${on?'on':''}"></i>${on?L(`até ${hm(s.ate)}`,`until ${hm(s.ate)}`):L(`abre ${hm(s.abre)}`,`opens ${hm(s.abre)}`)}</small>`;c.appendChild(b);});
-  const alvo=`../?casa=${u.id}#balcao`;
-  ['reservar','reservar-doca','reservar-seq'].forEach(id=>document.getElementById(id).href=alvo);
-  ['zap','zap-topo','zap-doca','zap-seq'].forEach(id=>document.getElementById(id).href=zap(u));
-  document.getElementById('mapa').href=u.mapa;document.getElementById('cartao-casa').href=u.mapa;
-  document.getElementById('casa-nome').textContent=`Ryori ${u.nome}`;
-  document.getElementById('casa-end').textContent=u.end;
+  document.querySelectorAll('[data-zap]').forEach(a=>a.href=zapUrl(u));
+  document.querySelectorAll('[data-mapa]').forEach(a=>a.href=u.mapa);
+  document.getElementById('cartao-casa').href=u.mapa;
+  document.getElementById('casa-nome').textContent=`Ryori ${u.nome}`;document.getElementById('casa-end').textContent=u.end;
   document.getElementById('rod-casa').textContent=`${u.nome}: ${u.end}`;
+  document.getElementById('pratos').innerHTML=PRATOS.map((p,i)=>`<button type="button" class="cartao" data-prato="${i}"><img src="../fotos/${p.f}.jpg" alt="${p.n}" loading="lazy" width="326" height="350"><span class="t"><b>${p.n}</b><span>${L(...p.d).split('.')[0]}</span>${p.p?`<span class="preco">${brl(p.p)}</span>`:''}</span></button>`).join('');
 }
-document.getElementById('casas').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;casa=b.dataset.c;try{localStorage.setItem(CH,casa)}catch(e){}pinta();});
+document.getElementById('casas').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;casa=b.dataset.c;R.casa=casa;try{localStorage.setItem(CH,casa)}catch(e){}pinta();});
 
-// a Sequência aberta: um tempo por tela, deslizando
+/* ---------- folhas ---------- */
+let ultimoFoco=null;
+function abre(id){const m=document.getElementById(id);if(!m.classList.contains('on'))ultimoFoco=document.activeElement;
+  document.querySelectorAll('.folha-m.on').forEach(x=>{if(x!==m){x.classList.remove('on');x.setAttribute('aria-hidden','true');}});
+  m.classList.add('on');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>m.querySelector('[data-fecha]').focus(),60);
+  if(id==='reserva')reservaAbre();
+  if(id==='seq-m'){const T=document.getElementById('tempos');T.scrollLeft=0;T.dispatchEvent(new Event('scroll'));}
+  if(id==='sushiman')Nigiri.liga('palco');}
+function fecha(m){m.classList.remove('on');m.setAttribute('aria-hidden','true');document.body.style.overflow='';if(ultimoFoco&&ultimoFoco.focus)ultimoFoco.focus();}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-abre]');if(a){e.preventDefault();abre(a.dataset.abre);return;}
+  const f=e.target.closest('[data-fecha]');if(f){fecha(f.closest('.folha-m'));return;}
+  const p=e.target.closest('[data-prato]');if(p){mostraPrato(+p.dataset.prato);return;}
+  if(e.target.classList&&e.target.classList.contains('folha-m'))fecha(e.target);});
+addEventListener('keydown',e=>{const m=document.querySelector('.folha-m.on');if(m&&e.key==='Escape')fecha(m);});
+function mostraPrato(i){const p=PRATOS[i];document.getElementById('pr-corpo').innerHTML=`<img src="../fotos/${p.f}.jpg" alt="${p.n}"><h3 id="pr-t">${p.n}</h3><p>${L(...p.d)}</p>${p.p?`<p class="pr">${brl(p.p)}</p>`:''}`;abre('prato');}
+
+/* ---------- a Sequência ---------- */
 function tempos(){
   const pre=[['Buganvília',L('Jantar, domingo a quarta','Dinner, Sunday to Wednesday'),159,L('Almoço, todos os dias, sem sashimi','Lunch, every day, no sashimi'),129],['Iguatemi',L('Jantar, domingo a quarta','Dinner, Sunday to Wednesday'),159]];
   document.getElementById('tempos').innerHTML=SEQ.map(([n,jp,it,q],k)=>`<section class="tempo"><span class="n">${k+1}</span><h3>${n}</h3><span class="jp" lang="ja">${jp}</span><ul>${it.map(x=>`<li>${x}</li>`).join('')}</ul><p class="q">${q}</p></section>`).join('')+
    `<section class="tempo fim"><h3>${L('O valor, por pessoa','The price, per person')}</h3><div class="precos">${pre.map(p=>`<div><b>${p[0]}</b><span>${p[1]}: <strong>R$ ${p[2]}</strong></span>${p[3]?`<span>${p[3]}: <strong>R$ ${p[4]}</strong></span>`:''}</div>`).join('')}</div><p class="q">${L('Do cardápio da Sequência publicado pela casa, conferido em 24/11/2026.','From the sequence menu published by the restaurant, checked on 24 Nov 2026.')}</p></section>`;
   document.getElementById('barra').innerHTML=SEQ.map(()=>'<i></i>').join('')+'<i></i>';
 }
-const T=document.getElementById('tempos'),M=document.getElementById('modal');
-T.addEventListener('scroll',()=>{const k=Math.round(T.scrollLeft/T.clientWidth);document.querySelectorAll('#barra i').forEach((x,j)=>x.classList.toggle('feito',j<=k));},{passive:true});
-function abre(){M.classList.add('on');M.setAttribute('aria-hidden','false');T.scrollLeft=0;T.dispatchEvent(new Event('scroll'));document.getElementById('fechar').focus();document.body.style.overflow='hidden';}
-function fecha(){M.classList.remove('on');M.setAttribute('aria-hidden','true');document.body.style.overflow='';document.getElementById('abre-seq').focus();}
-document.getElementById('abre-seq').addEventListener('click',abre);
-document.getElementById('fechar').addEventListener('click',fecha);
-M.addEventListener('click',e=>{if(e.target===M)fecha();});
-addEventListener('keydown',e=>{if(!M.classList.contains('on'))return;if(e.key==='Escape')fecha();if(e.key==='ArrowRight')T.scrollBy({left:T.clientWidth,behavior:'smooth'});if(e.key==='ArrowLeft')T.scrollBy({left:-T.clientWidth,behavior:'smooth'});});
+const TM=document.getElementById('tempos');
+TM.addEventListener('scroll',()=>{const k=Math.round(TM.scrollLeft/TM.clientWidth);document.querySelectorAll('#barra i').forEach((x,j)=>x.classList.toggle('feito',j<=k));},{passive:true});
 
-// idioma
+/* ---------- reservar lugar: casa, dia, horário, pessoas e o lugar na planta ---------- */
+const R={casa,dia:null,hora:null,pessoas:2,lugar:null,mesa:'',mesaSug:''};
+function dias(){const {d}=agoraFortaleza(),h=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Fortaleza'}));return [...Array(10)].map((_,k)=>{const dt=new Date(h);dt.setDate(h.getDate()+k);return {k,wd:(d+k)%7,dt};});}
+const fmtDia=x=>`${(lang==='en'?DAYS:DIAS)[x.wd]}, ${x.dt.getDate()}/${x.dt.getMonth()+1}`;
+function horas(x){const {m}=agoraFortaleza(),o=[];unidade(R.casa).hor[x.wd].forEach(([a,b])=>{for(let t=a;t<=b-60;t+=30){if(x.k===0&&t<m+30)continue;o.push(t);}});return o;}
+function ocupado(id){const s=`${R.casa}|${R.dia}|${R.hora}|${id}`;let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h%10<4;}
+const par=()=>R.lugar&&R.lugar[0]==='b'&&R.pessoas===2?'b'+(+R.lugar.slice(1)+1):null;
+function est(id){const pronto=R.dia!==null&&R.hora!==null,n=R.pessoas;
+  if(id===R.lugar||id===par())return {k:'meu'};
+  if(!pronto||ocupado(id))return {k:pronto?'ocupado':'fora'};
+  if(id[0]==='b'){if(n>2)return {k:'fora'};if(n===2){const i=+id.slice(1);if(i===10||ocupado('b'+(i+1)))return {k:'fora'};}return {k:'livre'};}
+  const c=Planta.CAP[id];return c<n||c>n+2?{k:'fora'}:{k:'livre'};}
+const zapOk=()=>{const d=document.getElementById('r-zap').value.replace(/\D/g,'').replace(/^55(?=\d{11}$)/,'');return d.length===11&&d[2]==='9';};
+function reservaPinta(){
+  const ds=dias(),pronto=R.dia!==null&&R.hora!==null;
+  document.getElementById('r-casa').innerHTML=MARCA.unidades.map(u=>`<button type="button" class="vidro" data-v="${u.id}" aria-pressed="${R.casa===u.id}">${u.nome}</button>`).join('');
+  document.getElementById('r-dia').innerHTML=ds.map(x=>{const v=!horas(x).length;return `<button type="button" class="vidro" data-v="${x.k}" aria-pressed="${R.dia===x.k}" ${v?'disabled':''}>${x.k===0?L('Hoje','Today'):(lang==='en'?DAYS:DIAS)[x.wd].slice(0,3)}<small>${x.dt.getDate()}/${x.dt.getMonth()+1}</small></button>`;}).join('');
+  document.getElementById('r-hora').innerHTML=R.dia===null?`<span class="nota-m" style="margin:0">${L('Escolha o dia','Pick a day')}</span>`:horas(ds[R.dia]).map(h=>`<button type="button" class="vidro" data-v="${h}" aria-pressed="${R.hora===h}">${hm(h)}</button>`).join('');
+  document.getElementById('r-pes').innerHTML=[1,2,3,4,5,6,7,8].map(n=>`<button type="button" class="vidro" data-v="${n}" aria-pressed="${R.pessoas===n}">${n}</button>`).join('');
+  Planta.desenha(document.getElementById('r-planta'),{varanda:R.casa==='buganvilia',L,estado:est,aoTocar:id=>{if(est(id).k==='livre'){R.lugar=id;reservaPinta();}}});
+  document.getElementById('r-escolha').textContent=!pronto?L('Escolha o dia e o horário para ver os lugares livres.','Pick a day and time to see the free seats.'):R.lugar?(Planta.nome(R.lugar,L)+(par()?L(' e o vizinho',' and the next one'):'')):R.pessoas>2?L(`Para ${R.pessoas}, toque numa mesa.`,`For ${R.pessoas}, tap a table.`):L('Toque num banquinho do balcão ou numa mesa.','Tap a counter stool or a table.');
+  pode();
+}
+function pode(){document.getElementById('r-ok').disabled=!(R.lugar&&document.getElementById('r-nome').value.trim().length>1&&zapOk());}
+function reservaAbre(){R.casa=casa;if(R.dia===null&&horas(dias()[0]).length)R.dia=0;document.getElementById('res-form').hidden=false;document.getElementById('res-feito').hidden=true;document.getElementById('res-pe').hidden=false;reservaPinta();}
+document.getElementById('res-form').addEventListener('click',e=>{const b=e.target.closest('.fichas button');if(!b||b.disabled)return;const g=b.parentNode.id,v=b.dataset.v;
+  if(g==='r-casa'){R.casa=v;R.hora=null;R.lugar=null;if(R.dia!==null&&!horas(dias()[R.dia]).length)R.dia=null;}
+  if(g==='r-dia'){R.dia=+v;R.hora=null;R.lugar=null;}if(g==='r-hora'){R.hora=+v;R.lugar=null;}if(g==='r-pes'){R.pessoas=+v;R.lugar=null;}
+  reservaPinta();});
+document.getElementById('res-form').addEventListener('input',()=>{document.getElementById('r-erro').textContent=document.getElementById('r-zap').value&&!zapOk()?L('Use o celular com DDD: (85) 9 0000-0000.','Use a mobile number with area code.'):'';pode();});
+document.getElementById('r-ok').addEventListener('click',()=>{
+  const x=dias()[R.dia],u=unidade(R.casa),nome=document.getElementById('r-nome').value.trim(),zap=document.getElementById('r-zap').value,balcao=R.lugar[0]==='b';
+  const codigo=MARCA.prefixo+'-'+u.sigla+String(x.dt.getDate()).padStart(2,'0')+String(R.hora/30|0).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,5).toUpperCase();
+  const ini=new Date(x.dt);ini.setHours(R.hora/60|0,R.hora%60,0,0);
+  const lugar=Planta.nome(R.lugar),motivos=[];if(balcao)motivos.push('lugar no balcão do sushiman');if(R.pessoas>=6)motivos.push(`grupo de ${R.pessoas}`);
+  Reservas.nova({codigo,casa:u.id,criada:new Date().toISOString(),inicio:ini.toISOString(),dia:fmtDia(x),hora:hm(R.hora),pessoas:R.pessoas,ocasiao:'',pedidos:[lugar],lugar:R.lugar,lugarPar:par(),mesa:R.mesa,obs:'',nome,zap,status:motivos.length?'aguardando':'confirmada',motivos});
+  const num=R.lugar.slice(1)+(par()?'·'+par().slice(1):''),tipo=R.lugar[0]==='b'?L('balcão','counter'):R.lugar[0]==='v'?L('varanda','deck'):L('mesa','table');
+  const msg=[`Olá! Reserva no Ryori ${u.nome}.`,`Dia: ${fmtDia(x)}`,`Horário: ${hm(R.hora)}`,`Pessoas: ${R.pessoas}`,`Lugar: ${lugar}`,R.mesa?`Pedido sugerido: ${R.mesa}`:'',`Nome: ${nome}`,`Código: ${codigo}`].filter(Boolean).join('\n');
+  const f=document.getElementById('res-feito');
+  f.innerHTML=`<div class="placa" aria-hidden="true"><b>${num}</b><span>${tipo}</span><small>${codigo}</small></div>
+   <h3>${motivos.length?L('Pedido recebido','Request received'):L('Seu lugar está guardado','Your seat is saved')}</h3>
+   <p>Ryori ${esc(u.nome)}, ${fmtDia(x)}, ${hm(R.hora)}${motivos.length?L('. A equipe confirma pelo WhatsApp.','. The team confirms on WhatsApp.'):'.'}</p>
+   <p class="msg">${L('Reserva de demonstração: nada foi enviado. A ficha apareceu no painel da equipe, neste navegador. Na versão final, a casa recebe:','Demo booking: nothing was sent. On the live site, the restaurant gets:')}\n\n${esc(msg)}</p>`;
+  document.getElementById('res-form').hidden=true;f.hidden=false;document.getElementById('res-pe').hidden=true;document.getElementById('res-corpo').scrollTop=0;
+  R.lugar=null;R.mesa='';
+});
+
+/* ---------- o sushiman sugere ---------- */
+const S={pessoas:2,fome:'normal'};
+function sugere(){
+  const f={leve:.75,normal:1,fome:1.35}[S.fome],n=S.pessoas;
+  const todos=CARDAPIO.filter(g=>['starters','veg','sushibar'].includes(g.id)).flatMap(g=>g.itens.map(i=>({...i,grupo:g.id})));
+  const ord=l=>[...l].sort((a,b)=>a.sug-b.sug),ent=ord(todos.filter(i=>i.grupo!=='sushibar')),bar=ord(todos.filter(i=>i.grupo==='sushibar'));
+  const m=new Map(),pega=(l,q)=>{for(let k=0;k<q&&l.length;k++){const i=l[k%l.length];m.set(i.n,{i,q:(m.get(i.n)?.q||0)+1});}};
+  pega(ent,Math.max(1,Math.round(n*.8*f)));pega(bar,Math.max(1,Math.round(n*f)));
+  const linhas=[...m.values()],total=linhas.reduce((s,x)=>s+x.i.p*x.q,0);
+  document.getElementById('s-pes').innerHTML=[1,2,3,4,5,6].map(k=>`<button type="button" class="vidro" data-p="${k}" aria-pressed="${S.pessoas===k}">${k}</button>`).join('');
+  document.getElementById('s-fome').innerHTML=[['leve','Leve','Light'],['normal','Normal','Normal'],['fome','Com fome','Hungry']].map(([k,p,e])=>`<button type="button" class="vidro" data-f="${k}" aria-pressed="${S.fome===k}">${lang==='en'?e:p}</button>`).join('');
+  document.getElementById('s-lista').innerHTML=linhas.map(({i,q})=>`<div><em>${q}×</em><span><b>${lang==='en'?i.en[0]:i.n}</b><small>${lang==='en'?i.en[1]:i.d}</small></span><span>${brl(i.p*q)}</span></div>`).join('');
+  document.getElementById('s-total').innerHTML=`<b>${brl(total)}</b><span>${L(`cerca de ${brl(Math.round(total/n))} por pessoa`,`about ${brl(Math.round(total/n))} per person`)}</span>`;
+  R.mesaSug=linhas.map(({i,q})=>`${q}× ${i.n}`).join(', ')+` · ${brl(total)}`;
+}
+document.getElementById('sushiman').addEventListener('click',e=>{const b=e.target.closest('.fichas button');if(!b)return;if(b.dataset.p)S.pessoas=+b.dataset.p;if(b.dataset.f)S.fome=b.dataset.f;sugere();});
+document.getElementById('s-reservar').addEventListener('click',()=>{R.mesa=R.mesaSug;R.pessoas=Math.min(8,S.pessoas);R.lugar=null;abre('reserva');});
+
+/* ---------- idioma, doca, vídeo, entradas ---------- */
 function aplicaLang(){const bl=document.getElementById('lang');bl.textContent=lang==='en'?'PT':'EN';bl.setAttribute('aria-label',lang==='en'?'Ver em português':'Ver em inglês');document.documentElement.lang=lang==='en'?'en':'pt-BR';
-  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});pinta();tempos();}
+  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});pinta();tempos();sugere();}
 document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
-
-// a doca aparece quando o botão da abertura sai da tela
 const doca=document.getElementById('doca');
-new IntersectionObserver(([e])=>doca.classList.toggle('on',!e.isIntersecting&&e.boundingClientRect.top<0)).observe(document.getElementById('reservar'));
-// o vídeo da abertura: começa ampliado e assenta; se o vídeo não tocar, fica a foto
+new IntersectionObserver(([e])=>doca.classList.toggle('on',!e.isIntersecting&&e.boundingClientRect.top<0)).observe(document.querySelector('.capa .acoes'));
 const vid=document.getElementById('vid');vid.addEventListener('playing',()=>document.getElementById('abre').classList.add('pronto'),{once:true});
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){vid.removeAttribute('autoplay');vid.pause();}
-// cartões inclinam levemente sob o dedo ou o mouse
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vista');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.revela').forEach(x=>io.observe(x));
 document.querySelectorAll('.grade .cartao,.seq').forEach(c=>{c.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*6}deg) rotateX(${-y*6}deg)`;});c.addEventListener('pointerleave',()=>c.style.transform='');});
 aplicaLang();setInterval(pinta,60000);
 </script>
-<!-- o nigiri em 3D no cartão do sushiman: prévia ilustrativa, que vai ganhar os pratos reais escaneados -->
+<!-- o nigiri em 3D: no cartão do sushiman e, maior, dentro da folha. Prévia ilustrativa, que vai ganhar os pratos reais escaneados -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-(function(){
- const box=document.getElementById('tile-3d');if(!window.THREE||!box)return;
- const r=new THREE.WebGLRenderer({antialias:true,alpha:true});r.setPixelRatio(Math.min(2,devicePixelRatio));box.prepend(r.domElement);
- const cena=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,1,.1,100);cam.position.set(0,3.4,9.6);cam.lookAt(0,-.15,0);
- cena.add(new THREE.HemisphereLight(0xfff1df,0x241c16,.85));const sol=new THREE.DirectionalLight(0xffe2c2,1.05);sol.position.set(2.5,5,3);cena.add(sol);
- const rim=new THREE.DirectionalLight(0xd9ae7e,.6);rim.position.set(-3,2,-3);cena.add(rim);
- const g=new THREE.Group();cena.add(g);
- const cv=document.createElement('canvas');cv.width=cv.height=256;const c=cv.getContext('2d');c.fillStyle='#f3efe6';c.fillRect(0,0,256,256);
- for(let i=0;i<900;i++){c.fillStyle=`rgba(${205+Math.random()*40|0},${200+Math.random()*40|0},${188+Math.random()*40|0},.85)`;c.beginPath();c.ellipse(Math.random()*256,Math.random()*256,5,2.2,Math.random()*3,0,7);c.fill();}
- const arroz=new THREE.Mesh(new THREE.SphereGeometry(1,48,32),new THREE.MeshStandardMaterial({map:new THREE.CanvasTexture(cv),roughness:.95}));arroz.scale.set(1.5,.6,.82);g.add(arroz);
- const cs=document.createElement('canvas');cs.width=512;cs.height=128;const s=cs.getContext('2d');const gr=s.createLinearGradient(0,0,0,128);gr.addColorStop(0,'#e4552a');gr.addColorStop(1,'#f37a44');s.fillStyle=gr;s.fillRect(0,0,512,128);
- for(let x=-60;x<560;x+=34){s.strokeStyle='rgba(255,226,206,.7)';s.lineWidth=3.5;s.beginPath();s.moveTo(x,0);s.quadraticCurveTo(x+30,64,x+10,128);s.stroke();}
- const geo=new THREE.BoxGeometry(3.3,.24,1.5,48,1,12),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),z=p.getZ(i);p.setY(i,p.getY(i)-.15*x*x-.1*z*z+.64);}geo.computeVertexNormals();
- g.add(new THREE.Mesh(geo,new THREE.MeshPhysicalMaterial({map:new THREE.CanvasTexture(cs),roughness:.35,clearcoat:.6,clearcoatRoughness:.3})));
- const prato=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.35,.14,64),new THREE.MeshStandardMaterial({color:0x2a2622,roughness:.55,metalness:.1}));prato.position.y=-.62;g.add(prato);
- g.rotation.y=-.6;
- function tam(){const w=box.clientWidth,h=box.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}tam();addEventListener('resize',tam);
- let arr=null,vel=.006,vis=true;const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
- box.addEventListener('pointerdown',e=>{arr=e.clientX;});box.addEventListener('pointermove',e=>{if(arr===null)return;g.rotation.y+=(e.clientX-arr)*.012;arr=e.clientX;});addEventListener('pointerup',()=>arr=null);
- new IntersectionObserver(([e])=>vis=e.isIntersecting).observe(box);
- (function loop(){if(vis){if(!reduz)g.rotation.y+=vel;g.position.y=Math.sin(performance.now()/900)*.04;r.render(cena,cam);}requestAnimationFrame(loop);})();
+window.Nigiri=(function(){
+ const vivos={};
+ function cria(box,{zoom,auto}){
+  if(!window.THREE||!box||vivos[box.id])return;
+  const r=new THREE.WebGLRenderer({antialias:true,alpha:true});r.setPixelRatio(Math.min(2,devicePixelRatio));box.prepend(r.domElement);
+  const cena=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,1,.1,100);cam.position.set(0,zoom?2.6:3.4,zoom?7.2:9.6);cam.lookAt(0,zoom?.1:-.15,0);
+  cena.add(new THREE.HemisphereLight(0xfff1df,0x241c16,.85));const sol=new THREE.DirectionalLight(0xffe2c2,1.05);sol.position.set(2.5,5,3);cena.add(sol);
+  const rim=new THREE.DirectionalLight(0xddb384,.7);rim.position.set(-3,2,-3);cena.add(rim);
+  const g=new THREE.Group();cena.add(g);
+  const cv=document.createElement('canvas');cv.width=cv.height=256;const c=cv.getContext('2d');c.fillStyle='#f3efe6';c.fillRect(0,0,256,256);
+  for(let i=0;i<900;i++){c.fillStyle=`rgba(${205+Math.random()*40|0},${200+Math.random()*40|0},${188+Math.random()*40|0},.85)`;c.beginPath();c.ellipse(Math.random()*256,Math.random()*256,5,2.2,Math.random()*3,0,7);c.fill();}
+  const arroz=new THREE.Mesh(new THREE.SphereGeometry(1,48,32),new THREE.MeshStandardMaterial({map:new THREE.CanvasTexture(cv),roughness:.95}));arroz.scale.set(1.5,.6,.82);g.add(arroz);
+  const cs=document.createElement('canvas');cs.width=512;cs.height=128;const s=cs.getContext('2d');const gr=s.createLinearGradient(0,0,0,128);gr.addColorStop(0,'#e4552a');gr.addColorStop(1,'#f37a44');s.fillStyle=gr;s.fillRect(0,0,512,128);
+  for(let x=-60;x<560;x+=34){s.strokeStyle='rgba(255,226,206,.7)';s.lineWidth=3.5;s.beginPath();s.moveTo(x,0);s.quadraticCurveTo(x+30,64,x+10,128);s.stroke();}
+  const geo=new THREE.BoxGeometry(3.3,.24,1.5,48,1,12),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),z=p.getZ(i);p.setY(i,p.getY(i)-.15*x*x-.1*z*z+.64);}geo.computeVertexNormals();
+  g.add(new THREE.Mesh(geo,new THREE.MeshPhysicalMaterial({map:new THREE.CanvasTexture(cs),roughness:.35,clearcoat:.6,clearcoatRoughness:.3})));
+  const prato=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.35,.14,64),new THREE.MeshStandardMaterial({color:0x2a2622,roughness:.55,metalness:.1}));prato.position.y=-.62;g.add(prato);
+  g.rotation.y=-.6;
+  const tam=()=>{const w=box.clientWidth,h=box.clientHeight;if(!w||!h)return;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();};tam();addEventListener('resize',tam);
+  let arr=null,vis=true;const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  box.addEventListener('pointerdown',e=>{arr=e.clientX;});box.addEventListener('pointermove',e=>{if(arr===null)return;g.rotation.y+=(e.clientX-arr)*.012;arr=e.clientX;});addEventListener('pointerup',()=>arr=null);
+  new IntersectionObserver(([e])=>vis=e.isIntersecting).observe(box);
+  (function loop(){if(vis){if(!reduz&&auto)g.rotation.y+=.006;g.position.y=Math.sin(performance.now()/900)*.04;r.render(cena,cam);}requestAnimationFrame(loop);})();
+  vivos[box.id]={tam};
+ }
+ return {cria,liga(id){const b=document.getElementById(id);if(vivos[id]){setTimeout(vivos[id].tam,80);return;}setTimeout(()=>cria(b,{zoom:true,auto:true}),140);}};
 })();
+Nigiri.cria(document.getElementById('tile-3d'),{zoom:false,auto:true});
 </script>
 </body>
 </html>
