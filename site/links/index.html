@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../estilo.css">
 <style>
 /* Bio do Ryori. Lógica do PróLINK (reconhecer em vez de ler) com a pele do ORYZO (sala escura, creme, caixa-alta).
@@ -56,14 +56,14 @@
 .acoes .btn{flex:1}
 
 /* 2. cartão forte */
-.cartao-seq{display:block;width:calc(100% - 32px);margin:22px 16px 0;padding:22px;border-radius:var(--r-cartao);background:var(--casca);text-align:left}
+.cartao-seq{display:block;width:calc(100% - 32px);margin:22px 16px 0;padding:22px;border-radius:var(--r-cartao);background:var(--noite-2);border:1px solid var(--casca);text-align:left}
 .cartao-seq .linha{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .cartao-seq h3{font-weight:500;font-size:28px;line-height:.92}
 .cartao-seq .jp{font-size:22px;color:var(--creme-3);writing-mode:vertical-rl;line-height:1}
 .cartao-seq .corrido-p{color:var(--creme-2);margin-top:12px;font-size:15px}
 .cartao-seq hr{margin:16px 0 14px;border-top-color:var(--madeira)}
 .cartao-seq .preco{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.cartao-seq .preco b{font-weight:500;font-size:30px;line-height:1}
+.cartao-seq .preco b{font-weight:500;font-size:30px;line-height:1;color:var(--brasa)}
 .cartao-seq .preco small{display:block;font-size:10px;color:var(--creme-2);margin-top:4px}
 .tempos{display:flex;gap:4px;margin-top:14px}
 .tempos i{flex:1;height:2px;background:rgba(255,237,215,.2)}
@@ -131,9 +131,9 @@
 .passo{display:none}.passo.on{display:block}
 .rotulo{font-size:10.5px;color:var(--creme-2);margin:20px 0 10px}
 .escolha{font-size:14px;line-height:1.3;margin-top:12px;min-height:2.6em}
-.resumo{margin-top:16px;padding:16px;border-radius:var(--r-cartao);background:var(--casca);font-size:13px;line-height:1.5}
+.resumo{margin-top:16px;padding:16px;border-radius:var(--r-cartao);background:var(--noite-2);border:1px dashed var(--cortica);font-size:13px;line-height:1.5}
 .resumo b{display:block;font-weight:500;font-size:20px;margin-bottom:4px}
-.feito h3{font-weight:500;font-size:34px;line-height:.92;margin-top:26px}
+.feito h3{font-weight:500;font-size:34px;line-height:.92;margin-top:14px;text-align:center}
 .feito .num{font-size:110px;line-height:.8;margin-top:30px}
 .feito .msg{text-transform:none;white-space:pre-line;margin-top:18px;padding-top:14px;border-top:1px dashed var(--cortica);font-size:12px;color:var(--creme-3)}
 #palco{height:330px;cursor:grab;touch-action:pan-y;border-radius:var(--r-cartao);background:#150d07}
@@ -187,7 +187,7 @@
   <section class="stories" id="stories" aria-roledescription="carrossel" aria-label="Destaques do Ryori">
     <div class="barras" id="barras" aria-hidden="true"></div>
     <div class="topo">
-      <span class="marca">Ryori</span>
+      <span class="logo" style="--w:52px" role="img" aria-label="Ryori"></span>
       <div class="dir"><button type="button" class="casa-chip" id="casa-chip" aria-label="Trocar de casa"></button><button type="button" class="lang" id="lang" aria-label="Ver em inglês">EN</button></div>
     </div>
     <div class="st on" data-i="0">
@@ -431,7 +431,7 @@ document.getElementById('r-ok').addEventListener('click',()=>{
   const num=R.lugar.slice(1)+(par()?'·'+par().slice(1):''),tipo=R.lugar[0]==='b'?L('Balcão','Counter'):R.lugar[0]==='v'?L('Varanda','Deck'):L('Mesa','Table');
   const msg=[`Olá! Reserva no Ryori ${u.nome}.`,`Dia: ${fmtDia(x)}`,`Horário: ${hm(R.hora)}`,`Pessoas: ${R.pessoas}`,`Lugar: ${lugar}`,R.mesa?`Pedido sugerido: ${R.mesa}`:'',`Nome: ${nome}`,`Código: ${codigo}`].filter(Boolean).join('\n');
   const f=document.getElementById('res-feito');
-  f.innerHTML=`<p class="rot" style="margin-top:24px;color:var(--creme-2)">${tipo} · Ryori ${esc(u.nome)}</p><p class="num">${num}</p>
+  f.innerHTML=`<div class="placa" aria-hidden="true"><b>${num}</b><span>${tipo}</span><small>${codigo}</small></div><p class="rot" style="margin-top:26px;color:var(--creme-2);text-align:center">${tipo} · Ryori ${esc(u.nome)}</p>
    <h3>${motivos.length?L('Pedido recebido.','Request received.'):L('Seu lugar está guardado.','Your seat is saved.')}</h3>
    <p class="corrido-p" style="margin-top:12px">${fmtDia(x)}, ${hm(R.hora)}.${motivos.length?L(' A equipe confirma pelo WhatsApp.',' The team confirms on WhatsApp.'):''}</p>
    <p class="msg">${L('Reserva de demonstração: nada foi enviado. A ficha apareceu no painel da equipe, neste navegador. No ar, a casa recebe:','Demo booking: nothing was sent. On the live site, the restaurant gets:')}\n\n${esc(msg)}</p>`;

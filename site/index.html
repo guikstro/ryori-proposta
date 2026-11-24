@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 <style>
 /* Site do Ryori. Duas formas de tela, como no ORYZO:
@@ -112,7 +112,9 @@
 .balcao-g .passos p.rot{margin:0 0 10px;color:var(--creme-2)}
 .balcao-g .passos .fichas{margin-bottom:22px}
 .escolha{font-size:15px;line-height:1.3;margin-top:16px;min-height:2.6em}
-.feito{margin-top:26px;padding:24px;border-radius:var(--r-cartao);background:var(--casca)}
+.feito{margin-top:26px;padding:24px;border-radius:var(--r-cartao);background:var(--noite-2);border:1px dashed var(--cortica)}
+.feito .par{display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:start}
+.feito .placa{margin:30px 0 0}
 .feito h3{font-weight:500;font-size:22px;line-height:1}
 .feito p{margin-top:10px}
 .feito .msg{text-transform:none;white-space:pre-line;margin-top:16px;padding-top:14px;border-top:1px dashed var(--madeira);font-size:12px;color:var(--creme-2)}
@@ -165,7 +167,7 @@ footer p,footer a{display:block;font-size:12px;line-height:1.7}
 </svg>
 
 <header class="nav" id="nav">
-  <a class="marca" href="#topo">Ryori</a>
+  <a class="marca" href="#topo" aria-label="Ryori, início"><span class="logo" style="--w:52px" aria-hidden="true"></span></a>
   <nav aria-label="Seções">
     <a href="#sobre" data-t="n1">Sobre</a><a href="#cozinha" data-t="n2">Cozinha</a><a href="#sequencia" data-t="n3">Sequência</a><a href="#casas" data-t="n4">Casas</a><a href="#antes" data-t="n5">Antes de vir</a>
   </nav>
@@ -178,7 +180,7 @@ footer p,footer a{display:block;font-size:12px;line-height:1.7}
 <section class="abre" id="topo">
   <img class="poster" src="fotos/abertura.jpg" alt="" aria-hidden="true">
   <video id="vid" autoplay muted loop playsinline preload="metadata" poster="fotos/abertura.jpg" aria-label="O chef do Ryori servindo o ramen"><source src="fotos/abertura.mp4" type="video/mp4"></video>
-  <div class="lockup"><p class="rot" data-t="tag">Cozinha japonesa contemporânea, em Fortaleza.</p><h1>Ryori</h1></div>
+  <div class="lockup"><p class="rot" data-t="tag">Cozinha japonesa contemporânea, em Fortaleza.</p><h1><span class="logo" style="--w:min(64vw,520px)" role="img" aria-label="Ryori"></span></h1></div>
   <div class="info">
     <p class="rot" data-t="infoT">Duas casas: Buganvília e Iguatemi.</p>
     <hr class="traco claro">
@@ -266,7 +268,7 @@ footer p,footer a{display:block;font-size:12px;line-height:1.7}
 </main>
 
 <footer>
-  <div class="marca-g">Ryori</div>
+  <div class="marca-g"><span class="logo" style="--w:min(60vw,260px)" role="img" aria-label="Ryori"></span></div>
   <div><h4 data-t="fCasas">Casas</h4><div id="f-casas"></div></div>
   <div><h4 data-t="fMais">Mais</h4><a href="links/" data-t="fBio">Link da bio</a><a href="https://www.instagram.com/restauranteryori/" target="_blank" rel="noopener">Instagram</a><a href="https://ifoodbr.onelink.me/F4X4/Ryorisushi" target="_blank" rel="noopener">Delivery iFood</a><a href="../painel/" data-t="fPainel">Painel da equipe</a></div>
   <div><h4 data-t="fCred">Créditos</h4><p class="destaque" data-t="fProt">Protótipo da Timeless</p><p data-t="fFotos">Vídeo e fotos do Instagram do Ryori e do site do Grupo Social Clube. Horários da bio do Instagram, 24/11/2026.</p></div>
@@ -372,10 +374,11 @@ document.getElementById('p-ok').addEventListener('click',()=>{
   const msg=[`Olá! Reserva no Ryori ${u.nome}.`,`Dia: ${fmtDia(x)}`,`Horário: ${hm(B.hora)}`,`Pessoas: ${B.pessoas}`,`Lugar: ${lugar}`,B.mesa?`Pedido sugerido: ${B.mesa}`:'',`Nome: ${nome}`,`Código: ${codigo}`].filter(Boolean).join('\n');
   const fimH=new Date(ini.getTime()+2*3600e3),fz=d=>`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}00`;
   const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Ryori//PT\r\nBEGIN:VEVENT\r\nUID:${codigo}@ryori\r\nDTSTART;TZID=America/Fortaleza:${fz(ini)}\r\nDTEND;TZID=America/Fortaleza:${fz(fimH)}\r\nSUMMARY:Ryori ${u.nome}, ${lugar}\r\nLOCATION:${u.end}, Fortaleza\r\nEND:VEVENT\r\nEND:VCALENDAR`;
-  document.getElementById('feito').innerHTML=`<div class="feito"><h3>${motivos.length?L('Pedido recebido.','Request received.'):L('Seu lugar está guardado.','Your seat is saved.')}</h3>
+  const num=B.lugar.slice(1)+(par()?'·'+par().slice(1):''),tipo=B.lugar[0]==='b'?L('balcão','counter'):B.lugar[0]==='v'?L('varanda','deck'):L('mesa','table');
+  document.getElementById('feito').innerHTML=`<div class="feito"><div class="par"><div class="placa" aria-hidden="true"><b>${num}</b><span>${tipo}</span><small>${codigo}</small></div><div><h3>${motivos.length?L('Pedido recebido.','Request received.'):L('Seu lugar está guardado.','Your seat is saved.')}</h3>
    <p class="corrido-p">Ryori ${esc(u.nome)}, ${fmtDia(x)}, ${hm(B.hora)}. ${esc(Planta.nome(B.lugar,L))}.${motivos.length?L(' A equipe confirma pelo WhatsApp.',' The team confirms on WhatsApp.'):''}</p>
    <div class="acoes"><a class="fantasma" download="ryori.ics" href="data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}"><svg class="ic"><use href="#i-cal"/></svg>${L('Pôr na agenda','Add to calendar')}</a><a class="fantasma" href="${u.mapa}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pino"/></svg>${L('Como chegar','Directions')}</a></div>
-   <p class="msg">${L('Reserva de demonstração: nada foi enviado. A ficha apareceu no painel da equipe, neste navegador. No ar, a casa recebe:','Demo booking: nothing was sent. On the live site, the restaurant gets:')}\n\n${esc(msg)}</p></div>`;
+   </div></div><p class="msg">${L('Reserva de demonstração: nada foi enviado. A ficha apareceu no painel da equipe, neste navegador. No ar, a casa recebe:','Demo booking: nothing was sent. On the live site, the restaurant gets:')}\n\n${esc(msg)}</p></div>`;
   document.getElementById('p-ok').disabled=true;B.lugar=null;B.mesa='';});
 
 /* ---------- casas, perguntas e rodapé ---------- */
